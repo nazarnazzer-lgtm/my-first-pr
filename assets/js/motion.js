@@ -85,6 +85,33 @@
         w.style.transitionDelay = (i * 0.03 * MOTION.speed).toFixed(3) + 's';
       });
       el.__words = words;
+
+      /* The name goes one level further: letter by letter, each with its
+         own colour, so it can cascade on arrival and answer the cursor. */
+      if (el.classList.contains('hero-name')) {
+        var n = 0;
+        words.forEach(function (w) {
+          var text = w.textContent;
+          w.textContent = '';
+          text.split('').forEach(function (ch) {
+            var l = document.createElement('span');
+            l.className = 'ltr';
+            l.textContent = ch;
+            l.style.setProperty('--lc', 'var(--c' + ((n % 4) + 1) + ')');
+            l.style.transitionDelay = (n * 0.035).toFixed(3) + 's';
+            w.appendChild(l);
+            n++;
+          });
+        });
+        var letters = el.querySelectorAll('.ltr');
+        // one pass of colour on arrival, then it settles to ink
+        setTimeout(function () {
+          letters.forEach(function (l) { l.classList.add('lit'); });
+          setTimeout(function () {
+            letters.forEach(function (l) { l.classList.remove('lit'); });
+          }, 900 + letters.length * 35);
+        }, 420);
+      }
     });
   }
 

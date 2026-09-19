@@ -15,6 +15,9 @@
   --ink:        #14130F;          /* warm off-black text             */
   --accent:     #FF3B14;          /* signal colour. Change me first. */
 
+  /* Letter colours for the name. Curated, not a rainbow. */
+  --c1:#FF3B14; --c2:#0F6E7A; --c3:#7A6FF0; --c4:#2F7D5B;
+
   /* DARK (inactive. Swap the comment markers to use)
   --paper:      #0C0C0B;
   --ink:        #EDEAE2;
@@ -412,7 +415,9 @@ ul,ol{list-style:none;}
 /* Word masks for headings */
 .motion-ready .wm{
   display:inline-block;overflow:hidden;vertical-align:bottom;
-  padding-bottom:.14em;margin-bottom:-.14em;   /* room for descenders */
+  /* The display sizes run a line-height below 1, so the mask has to be
+     opened top and bottom or it crops the caps and the descenders. */
+  padding-block:.16em .22em;margin-block:-.16em -.22em;
 }
 .motion-ready .wi{
   display:inline-block;transform:translateY(112%);
@@ -534,12 +539,21 @@ ul,ol{list-style:none;}
 .stat__note b{color:var(--ink);font-weight:500;}
 @media (max-width:700px){.stat{grid-template-columns:1fr;gap:.9rem;}}
 
-/* Pairs sit slightly out of step so a page built largely from two-ups does
-   not read as a grid. Where a photograph is paired with a specification
-   card the card is the one that drops: image leads, document follows. */
-.figure--two.stag-b > :nth-child(2){margin-top:clamp(26px,4.5vw,76px);}
-.figure--two.stag-a > :nth-child(1){margin-top:clamp(26px,4.5vw,76px);}
-@media (max-width:700px){
-  .figure--two.stag-b > :nth-child(2),
-  .figure--two.stag-a > :nth-child(1){margin-top:0;}
+
+
+/* ---- 20. THE NAME ---------------------------------------
+   Letters carry their own colour, cascade through it once on
+   arrival, and light up again on hover. Everything is gated on
+   .motion-ready, so with JS off the name is simply ink.
+   --------------------------------------------------------- */
+.motion-ready .hero-name .ltr{
+  display:inline-block;color:var(--ink);
+  transition:color .5s var(--ease), transform .5s var(--ease);
+}
+.motion-ready .hero-name .ltr.lit{color:var(--lc);}
+.motion-ready .hero-name:hover .ltr{color:var(--lc);transform:translateY(-.04em);}
+@media (hover:none){.motion-ready .hero-name:hover .ltr{color:var(--ink);transform:none;}}
+@media (prefers-reduced-motion:reduce){
+  .motion-ready .hero-name .ltr,
+  .motion-ready .hero-name:hover .ltr{color:var(--ink)!important;transform:none!important;}
 }
