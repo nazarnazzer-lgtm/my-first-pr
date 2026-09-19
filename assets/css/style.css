@@ -850,3 +850,27 @@ p,.prose p,dd,li{text-wrap:pretty;}
 .gallery--uniform .card--tall .card__media,
 .card--tall:nth-child(6n+2) .card__media,
 .card--tall:nth-child(6n+3) .card__media{aspect-ratio:4/5;}
+
+/* ---- 32. DARK HERO ----------------------------------------
+   Same token flip as .on-dark, but the hero sits inside .wrap,
+   which is capped at --maxw, so a negative margin would stop
+   short of the viewport edge on a wide screen. The band is
+   painted by a pseudo-element at 100vw instead. It starts below
+   the fixed header, so the header keeps the paper ground and
+   the black reads as a deliberate band rather than a theme.
+   ----------------------------------------------------------- */
+.hero--dark{
+  --paper:#0C0C0B;
+  --ink:#EDEAE2;
+  --accent:#FF4A26;
+  color:var(--ink);
+  position:relative;
+  padding-bottom:clamp(30px,5vh,58px);
+}
+.hero--dark::before{
+  content:"";position:absolute;z-index:-1;
+  top:var(--nav-h);bottom:0;left:50%;
+  width:100vw;transform:translateX(-50%);
+  background:var(--paper);
+}
+.hero--dark .hero-foot{border-top-color:var(--line);}
