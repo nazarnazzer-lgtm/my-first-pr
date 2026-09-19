@@ -402,15 +402,33 @@ ul,ol{list-style:none;}
 .foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--line-2);}
 
 /* ---- 15. PRINT (resume → clean PDF via Cmd+P) ------------ */
+/* Print. The screen rhythm is built on vh units and clamp(), which on a
+   printed page resolve against the sheet and blow the resume out to four
+   pages. Everything vertical is restated here in points, the display face
+   drops to its normal width, and the mono labels lose most of their
+   tracking, which is what was making them twice as wide as they need to
+   be. Target is two pages. */
 @media print{
   .site-head,.site-foot,.marquee,.no-print{display:none!important;}
-  body{background:#fff;color:#000;font-size:10.5pt;}
-  .page-head{padding-top:0;}
-  .col2{grid-template-columns:11rem 1fr;page-break-inside:avoid;border-color:#ccc;}
-  .col2__label{position:static;}
-  .job{page-break-inside:avoid;}
-  a{text-decoration:none;color:#000;}
   :root{--gutter:0;}
+  body{background:#fff;color:#000;font-size:9.6pt;line-height:1.36;}
+  main{padding:0!important;}
+  .wrap{padding:0!important;max-width:none;}
+  .page-head{padding:0 0 10pt!important;margin:0!important;}
+  .page-title{font-size:21pt;font-stretch:100%;letter-spacing:-.02em;line-height:1;margin:0;}
+  .meta{letter-spacing:.05em;font-size:6.8pt;}
+  .col2{grid-template-columns:7.8rem 1fr;gap:9pt;page-break-inside:avoid;
+    border-color:#ccc;padding-block:7pt!important;margin:0!important;}
+  .col2__label{position:static;}
+  .prose p,.lead{margin-block:0 4pt;}
+  .lead{font-size:11pt;line-height:1.3;}
+  .job{page-break-inside:avoid;margin:0 0 7pt!important;padding:0!important;}
+  .job__role{font-size:10.6pt;font-stretch:100%;letter-spacing:-.015em;}
+  .job__bullets{margin:2pt 0 0;}
+  .job__bullets li{margin:0 0 1.5pt;}
+  .list-2{gap:2pt 14pt!important;}
+  .list-2 li{margin:0;}
+  a{text-decoration:none;color:#000;}
 }
 
 /* ---- 16. MOTION ------------------------------------------
@@ -758,8 +776,8 @@ p,.prose p,dd,li{text-wrap:pretty;}
 .marks{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));
   gap:clamp(10px,1.4vw,20px);margin-block:clamp(28px,5vh,60px);}
 .mark{position:relative;background:#fff;border:1px solid var(--line);
-  aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
-  padding:clamp(12px,1.8vw,26px);overflow:hidden;}
+  aspect-ratio:5/4;display:flex;align-items:center;justify-content:center;
+  padding:clamp(14px,1.5vw,22px);overflow:hidden;}
 .mark img{width:100%;height:100%;object-fit:contain;}
 .mark__id{position:absolute;top:.55rem;left:.75rem;opacity:.4;}
 @media (max-width:520px){.marks{grid-template-columns:1fr 1fr;}}
