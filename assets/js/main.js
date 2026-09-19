@@ -7,18 +7,7 @@
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---- 1. Theme toggle (light / dark) -------------------- */
-  var root = document.documentElement;
-  var themeBtn = document.querySelector('[data-theme-toggle]');
-  if (themeBtn) {
-    themeBtn.addEventListener('click', function () {
-      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', next);
-      try { localStorage.setItem('theme', next); } catch (e) {}
-    });
-  }
-
-  /* ---- 2. Sticky header hairline ------------------------- */
+  /* ---- 1. Sticky header hairline ------------------------- */
   var head = document.querySelector('.site-head');
   if (head) {
     var onScroll = function () {
@@ -28,7 +17,7 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  /* ---- 3. Mobile nav ------------------------------------- */
+  /* ---- 2. Mobile nav ------------------------------------- */
   var navToggle = document.querySelector('.nav-toggle');
   var nav = document.querySelector('.nav');
   if (navToggle && nav) {
@@ -46,7 +35,7 @@
     });
   }
 
-  /* ---- 4. Reveal on scroll ------------------------------- */
+  /* ---- 3. Reveal on scroll ------------------------------- */
   var revealables = document.querySelectorAll('[data-reveal]');
   if (reduced || !('IntersectionObserver' in window)) {
     revealables.forEach(function (el) { el.classList.add('is-in'); });
@@ -63,7 +52,7 @@
     revealables.forEach(function (el) { io.observe(el); });
   }
 
-  /* ---- 5. Work page: filter + view toggle ---------------- */
+  /* ---- 4. Work page: filter + view toggle ---------------- */
   var filterBtns = document.querySelectorAll('[data-filter]');
   var items = document.querySelectorAll('[data-tags]');
   var countEl = document.querySelector('[data-count]');
@@ -100,13 +89,13 @@
     });
   });
 
-  /* ---- 6. Cursor-follow preview on the index list -------- */
+  /* ---- 5. Cursor-follow preview on the index list -------- */
   var rows = document.querySelectorAll('[data-preview]');
   var canHover = window.matchMedia('(hover: hover) and (min-width: 901px)').matches;
   if (rows.length && canHover && !reduced) {
     var pv = document.createElement('div');
     pv.className = 'hover-preview';
-    pv.innerHTML = '<img alt="">';
+    pv.innerHTML = '<img alt="" src="' + rows[0].getAttribute('data-preview') + '">';
     document.body.appendChild(pv);
     var pvImg = pv.querySelector('img');
     var x = 0, y = 0, raf = null;
@@ -130,7 +119,7 @@
     }, { passive: true });
   }
 
-  /* ---- 7. Footer year ------------------------------------ */
+  /* ---- 6. Footer year ------------------------------------ */
   var yearEl = document.querySelector('[data-year]');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 })();

@@ -11,7 +11,7 @@ resume.html     Editorial résumé (Cmd+P prints clean to PDF)
 project.html    Case-study template — duplicate once per project
 assets/css/style.css   All styling. Design tokens at the top.
 assets/css/fonts.css   Self-hosted webfonts
-assets/js/main.js      Theme toggle, filters, scroll reveals, hover preview
+assets/js/main.js      Filters, scroll reveals, hover preview
 assets/img/            Placeholder images — replace these
 ```
 
@@ -100,9 +100,8 @@ Everything lives in the `:root` block at the top of `assets/css/style.css`.
 --accent: #FF3B14;   /* the one signal colour — change this first */
 ```
 
-Dark mode values are in the `[data-theme="dark"]` block right below.
-To make the site dark by default, change `data-theme="light"` to
-`data-theme="dark"` in the `<html>` tag of each page.
+The site is a single light palette by design — one background means every
+image you upload only has to be colour-corrected once.
 
 To drop the asymmetric gallery rhythm on the landing page, add
 `gallery--uniform` to the `<div class="gallery">` — the same class the

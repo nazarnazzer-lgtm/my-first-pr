@@ -5,10 +5,21 @@
 
 /* ---- 1. TOKENS ------------------------------------------- */
 :root{
-  /* Palette — light (default) */
+  /* ---- PALETTE ------------------------------------------
+     The site runs ONE palette. To flip the whole thing dark,
+     comment out the three light lines and uncomment the dark
+     three below. Nothing else needs to change. -------------- */
+
+  /* LIGHT (active) */
   --paper:      #F2F0EA;          /* warm off-white background       */
   --ink:        #14130F;          /* warm off-black text             */
   --accent:     #FF3B14;          /* signal colour. Change me first. */
+
+  /* DARK (inactive — swap the comment markers to use)
+  --paper:      #0C0C0B;
+  --ink:        #EDEAE2;
+  --accent:     #FF4A26;
+  */
 
   /* Derived — don't edit, they follow --ink / --paper */
   --muted:  color-mix(in srgb, var(--ink) 52%, var(--paper));
@@ -36,12 +47,6 @@
   --ease:   cubic-bezier(.22,.61,.36,1);
 }
 
-[data-theme="dark"]{
-  --paper: #0C0C0B;
-  --ink:   #EDEAE2;
-  --accent:#FF4A26;
-}
-
 /* ---- 2. RESET -------------------------------------------- */
 *,*::before,*::after{box-sizing:border-box;}
 *{margin:0;padding:0;}
@@ -60,7 +65,6 @@ body{
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
   overflow-x:hidden;
-  transition:background .4s var(--ease), color .4s var(--ease);
 }
 img,svg,video{display:block;max-width:100%;height:auto;}
 a{color:inherit;text-decoration:none;}
@@ -111,16 +115,6 @@ ul,ol{list-style:none;}
 .nav a{font-size:.875rem;font-weight:450;letter-spacing:-.01em;color:var(--muted);transition:color .25s var(--ease);}
 .nav a:hover,.nav a[aria-current="page"]{color:var(--ink);}
 .nav a[aria-current="page"]{font-weight:600;}
-
-.theme-btn{
-  width:32px;height:32px;border:1px solid var(--line);border-radius:50%;
-  display:grid;place-items:center;transition:border-color .25s,transform .25s;
-}
-.theme-btn:hover{border-color:var(--ink);transform:rotate(25deg);}
-.theme-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6;}
-[data-theme="dark"] .icon-sun{display:none;}
-.icon-moon{display:none;}
-[data-theme="dark"] .icon-moon{display:block;}
 
 /* Mobile nav */
 .nav-toggle{display:none;}
@@ -392,7 +386,7 @@ ul,ol{list-style:none;}
 
 /* ---- 15. PRINT (resume → clean PDF via Cmd+P) ------------ */
 @media print{
-  .site-head,.site-foot,.marquee,.theme-btn,.no-print{display:none!important;}
+  .site-head,.site-foot,.marquee,.no-print{display:none!important;}
   body{background:#fff;color:#000;font-size:10.5pt;}
   .page-head{padding-top:0;}
   .col2{grid-template-columns:11rem 1fr;page-break-inside:avoid;border-color:#ccc;}
