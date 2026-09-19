@@ -16,6 +16,29 @@
     speed:        1       // 1 = as tuned. 1.4 = slower, 0.7 = snappier
   };
 
+  /* ---- Widows ------------------------------------------- 
+     Binds the last two words of a block so one can never be left alone
+     on a final line. Runs before anything else, and before the word
+     splitting below, which would otherwise defeat text-wrap: balance. */
+  (function () {
+    function noWidow(el) {
+      var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+      var nodes = [], n;
+      while ((n = walker.nextNode())) { if (n.textContent.trim()) nodes.push(n); }
+      for (var k = nodes.length - 1; k >= 0; k--) {
+        var t = nodes[k].textContent.replace(/\s+$/, '');
+        var i = t.lastIndexOf(' ');
+        if (i > 0) {                       // bind here and stop
+          nodes[k].textContent = t.slice(0, i) + '\u00A0' + t.slice(i + 1);
+          return;
+        }
+      }
+    }
+    document.querySelectorAll(
+      'p, li, .lead, h1, h2, h3, figcaption, dd, .card__idea, .stat__note, .case-idea, .index-row__title'
+    ).forEach(noWidow);
+  })();
+
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   if (reduced) return;                       // nothing below runs

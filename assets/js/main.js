@@ -181,7 +181,30 @@
     });
   });
 
-  /* ---- 7. Footer year ------------------------------------ */
+  /* ---- 7. Cycling card previews -------------------------- */
+  // Advances only while the card is on screen, so nothing runs in the
+  // background, and stands still under reduced motion.
+  var shows = document.querySelectorAll('[data-slideshow]');
+  if (shows.length && 'IntersectionObserver' in window &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    shows.forEach(function (el) {
+      var frames = el.querySelectorAll('img'), i = 0, timer = null;
+      if (frames.length < 2) return;
+      var step = function () {
+        frames[i].classList.remove('on');
+        i = (i + 1) % frames.length;
+        frames[i].classList.add('on');
+      };
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && !timer) { timer = setInterval(step, 2200); }
+          else if (!e.isIntersecting && timer) { clearInterval(timer); timer = null; }
+        });
+      }, { threshold: 0.35 }).observe(el);
+    });
+  }
+
+  /* ---- 8. Footer year ------------------------------------ */
   var yearEl = document.querySelector('[data-year]');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 })();

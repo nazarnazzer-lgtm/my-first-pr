@@ -15,8 +15,12 @@
   --ink:        #14130F;          /* warm off-black text             */
   --accent:     #FF3B14;          /* signal colour. Change me first. */
 
-  /* Letter colours for the name. Curated, not a rainbow. */
-  --c1:#FF3B14; --c2:#0F6E7A; --c3:#7A6FF0; --c4:#2F7D5B;
+  /* Letter colours for the name. Kept dark and close to the ink so the
+     cascade reads as a tonal shift rather than a rainbow. */
+  --c1:#8A6A22;   /* antique gold  */
+  --c2:#3A434E;   /* gunmetal      */
+  --c3:#6E1F26;   /* oxblood       */
+  --c4:#1E3A33;   /* deep pine     */
 
   /* DARK (inactive. Swap the comment markers to use)
   --paper:      #0C0C0B;
@@ -573,3 +577,32 @@ ul,ol{list-style:none;}
   .wall > *:hover img{filter:none;}
 }
 @media (max-width:640px){.wall{grid-template-columns:repeat(auto-fill,minmax(132px,1fr));}}
+
+/* ---- 22. LINE BREAKING ----------------------------------- */
+/* balance evens the lines of short blocks so a heading never ends on a
+   lone word; pretty stops a paragraph dropping one word to its last
+   line. Both are ignored by browsers that do not support them. */
+h1,h2,h3,.lead,.case-idea,.page-lede,.hero-statement,.stat__note,
+.card__idea,.card__title,.job__role,figcaption,.kpi dd,.pair-note,
+.chapter h2,.sec-title,.foot-cta{text-wrap:balance;}
+p,.prose p,dd,li{text-wrap:pretty;}
+
+/* Three across, for showing a few posters at once without the density
+   of the wall. */
+.figure--three{display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(12px,2vw,28px);margin-block:clamp(28px,5vh,64px);}
+.figure--three img{width:100%;height:auto;}
+@media (max-width:760px){.figure--three{grid-template-columns:1fr;}}
+
+/* ---- 23. CYCLING CARD PREVIEW ---------------------------- */
+/* A card that turns over a few frames of the work instead of holding
+   one still, so a season reads as a season from the gallery. */
+.slides{position:relative;width:100%;height:100%;}
+.slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .85s var(--ease);}
+.slides img.on{opacity:1;}
+@media (prefers-reduced-motion:reduce){
+  .slides img{transition:none;}
+  .slides img:first-child{opacity:1;}
+  .slides img:not(:first-child){opacity:0;}
+}
