@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200" role="img" aria-label="Placeholder image">
+  <rect width="1600" height="1200" fill="#E8E3D9"/>
+  <circle cx="800.0" cy="600.0" r="144" fill="none" stroke="#14130F" stroke-width="1.5" opacity="0.90"/>
+  <circle cx="800.0" cy="600.0" r="246" fill="none" stroke="#14130F" stroke-width="1.5" opacity="0.77"/>
+  <circle cx="800.0" cy="600.0" r="348" fill="none" stroke="#14130F" stroke-width="1.5" opacity="0.64"/>
+  <circle cx="800.0" cy="600.0" r="450" fill="none" stroke="#14130F" stroke-width="1.5" opacity="0.51"/>
+  <circle cx="800.0" cy="600.0" r="552" fill="none" stroke="#14130F" stroke-width="1.5" opacity="0.38"/>
+  <circle cx="800.0" cy="600.0" r="84" fill="#FF3B14"/>
+  <text x="64" y="1146" fill="#14130F" opacity="0.55"
+        font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="34"
+        letter-spacing="2">PLACEHOLDER 01 — REPLACE</text>
+</svg>

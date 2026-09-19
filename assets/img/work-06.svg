@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" width="1200" height="1500" role="img" aria-label="Placeholder image">
+  <rect width="1200" height="1500" fill="#E3E7EA"/>
+  <rect x="168" y="270" width="528" height="660" fill="none" stroke="#12222E" stroke-width="2"/>
+  <rect x="432" y="540" width="528" height="660" fill="#0F6E7A" opacity="0.92"/>
+  <line x1="168" y1="1290" x2="1032" y2="1290" stroke="#12222E" stroke-width="1.5"/>
+  <text x="48" y="1432" fill="#12222E" opacity="0.55"
+        font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="42"
+        letter-spacing="2">PLACEHOLDER 06 — REPLACE</text>
+</svg>

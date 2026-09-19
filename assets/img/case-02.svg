@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" width="900" height="1100" role="img" aria-label="Placeholder image">
+  <rect width="900" height="1100" fill="#14130F"/>
+  <rect x="108" y="220" width="252" height="60" fill="#E8E3D9" opacity="0.82"/>
+  <rect x="108" y="323" width="439" height="60" fill="#E8E3D9" opacity="0.82"/>
+  <rect x="108" y="426" width="626" height="60" fill="#E8E3D9" opacity="0.82"/>
+  <rect x="108" y="529" width="299" height="60" fill="#FF3B14" opacity="1"/>
+  <rect x="108" y="631" width="486" height="60" fill="#E8E3D9" opacity="0.82"/>
+  <rect x="108" y="734" width="673" height="60" fill="#E8E3D9" opacity="0.82"/>
+  <rect x="108" y="837" width="346" height="60" fill="#E8E3D9" opacity="0.82"/>
+  <text x="36" y="1050" fill="#E8E3D9" opacity="0.55"
+        font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="31"
+        letter-spacing="2">CASE IMAGE 02 — REPLACE</text>
+</svg>

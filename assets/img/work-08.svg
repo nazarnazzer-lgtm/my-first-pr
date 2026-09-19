@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200" role="img" aria-label="Placeholder image">
+  <rect width="1600" height="1200" fill="#241C1C"/>
+  <rect x="192" y="240" width="448" height="66" fill="#F0E4DC" opacity="0.82"/>
+  <rect x="192" y="352" width="781" height="66" fill="#F0E4DC" opacity="0.82"/>
+  <rect x="192" y="464" width="1114" height="66" fill="#F0E4DC" opacity="0.82"/>
+  <rect x="192" y="577" width="531" height="66" fill="#D8642F" opacity="1"/>
+  <rect x="192" y="689" width="864" height="66" fill="#F0E4DC" opacity="0.82"/>
+  <rect x="192" y="801" width="1197" height="66" fill="#F0E4DC" opacity="0.82"/>
+  <rect x="192" y="913" width="614" height="66" fill="#F0E4DC" opacity="0.82"/>
+  <text x="64" y="1146" fill="#F0E4DC" opacity="0.55"
+        font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="34"
+        letter-spacing="2">PLACEHOLDER 08 — REPLACE</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1250" width="1000" height="1250" role="img" aria-label="Placeholder image">
+  <rect width="1000" height="1250" fill="#E8E3D9"/>
+  <circle cx="500.0" cy="625.0" r="120" fill="none" stroke="#14130F" stroke-width="1.5" opacity="0.90"/>
+  <circle cx="500.0" cy="625.0" r="205" fill="none" stroke="#14130F" stroke-width="1.5" opacity="0.77"/>
+  <circle cx="500.0" cy="625.0" r="290" fill="none" stroke="#14130F" stroke-width="1.5" opacity="0.64"/>
+  <circle cx="500.0" cy="625.0" r="375" fill="none" stroke="#14130F" stroke-width="1.5" opacity="0.51"/>
+  <circle cx="500.0" cy="625.0" r="460" fill="none" stroke="#14130F" stroke-width="1.5" opacity="0.38"/>
+  <circle cx="500.0" cy="625.0" r="70" fill="#FF3B14"/>
+  <text x="40" y="1194" fill="#14130F" opacity="0.55"
+        font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="35"
+        letter-spacing="2">PORTRAIT — REPLACE</text>
+</svg>
