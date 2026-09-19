@@ -84,9 +84,7 @@ isn't finished yet.
 2. Fill in the brief / insight / idea / execution sections
 3. **Fill in the `My role` field honestly**, at agency level they will ask
    what you actually did. "Art Director, social campaign" beats a vague credit.
-4. If you have no results numbers, **delete the `.results` block.** An empty
-   metric is worse than no metric; craft carries a junior book fine.
-5. Link to it from `index.html` and `work.html` (`href="project-grammys.html"`)
+4. Link to it from `index.html` and `work.html` (`href="project-grammys.html"`)
 
 ---
 

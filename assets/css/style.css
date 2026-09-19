@@ -376,10 +376,6 @@ ul,ol{list-style:none;}
 .figure--bleed{margin-inline:calc(var(--gutter) * -1);}
 .figure--two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,28px);}
 @media (max-width:700px){.figure--two{grid-template-columns:1fr;}}
-.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.5rem;
-  padding-block:clamp(26px,4vh,48px);border-block:1px solid var(--line);}
-.results b{display:block;font-size:clamp(2rem,5vw,3.6rem);font-weight:600;letter-spacing:-.045em;line-height:1;}
-.results p{margin-top:.4rem;}
 
 /* ---- 14. FOOTER ------------------------------------------ */
 .site-foot{padding-block:clamp(56px,11vh,140px) 2rem;border-top:1px solid var(--line);margin-top:clamp(64px,12vh,150px);}

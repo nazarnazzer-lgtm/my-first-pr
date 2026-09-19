@@ -7,6 +7,22 @@
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---- 0. Always open a page at the top ----------------- */
+  // html has scroll-behavior:smooth for in-page anchors, so the jump is
+  // made with it temporarily off, otherwise it animates on arrival.
+  function jumpTop() {
+    if (location.hash) return;          // respect deep links like #work
+    var root = document.documentElement;
+    var prev = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    root.style.scrollBehavior = prev;
+  }
+  jumpTop();
+  // pageshow also fires when a page comes back from the back/forward cache,
+  // where a plain load handler would not run at all.
+  window.addEventListener('pageshow', jumpTop);
+
   /* ---- 1. Sticky header hairline ------------------------- */
   var head = document.querySelector('.site-head');
   if (head) {
