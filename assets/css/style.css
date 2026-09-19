@@ -557,3 +557,19 @@ ul,ol{list-style:none;}
   .motion-ready .hero-name .ltr,
   .motion-ready .hero-name:hover .ltr{color:var(--ink)!important;transform:none!important;}
 }
+
+/* ---- 21. POSTER WALL ------------------------------------- */
+/* A season of shows with nothing in common but the room, shown
+   together so the system is visible in one view. */
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:clamp(8px,1vw,16px);margin-block:clamp(28px,5vh,60px);}
+.wall a,.wall div{display:block;overflow:hidden;background:var(--panel);
+  transition:transform .5s var(--ease);}
+.wall img{width:100%;height:auto;display:block;transition:transform .8s var(--ease),filter .5s var(--ease);}
+.wall > *:hover{transform:translateY(-6px);}
+.wall > *:hover img{transform:scale(1.04);}
+@media (hover:hover){
+  .wall:hover img{filter:grayscale(.45) contrast(.92);}
+  .wall > *:hover img{filter:none;}
+}
+@media (max-width:640px){.wall{grid-template-columns:repeat(auto-fill,minmax(132px,1fr));}}
