@@ -841,3 +841,12 @@ p,.prose p,dd,li{text-wrap:pretty;}
   .hero-lockup{font-size:min(12vw,3.2rem);padding-block:clamp(40px,8vh,90px);}
   .hero-bottom{flex-direction:column;align-items:flex-start;}
 }
+
+/* The festival posts are 4:5. In the default 4:3 card frame a cover crop
+   takes the headline off the top and the logos off the bottom, which is
+   most of what the post is. This card keeps their shape, in both the
+   home grid and the uniform work grid. */
+.card--tall .card__media,
+.gallery--uniform .card--tall .card__media,
+.card--tall:nth-child(6n+2) .card__media,
+.card--tall:nth-child(6n+3) .card__media{aspect-ratio:4/5;}
