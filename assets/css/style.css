@@ -815,8 +815,8 @@ p,.prose p,dd,li{text-wrap:pretty;}
 }
 .hero-reel{
   display:inline-block;flex:none;
-  width:.92em;aspect-ratio:1/1;overflow:hidden;
-  background:var(--panel);margin-inline:.14em;
+  height:.92em;aspect-ratio:3/2;overflow:hidden;
+  background:var(--panel);margin-inline:.16em;
   transform:translateY(.02em);
 }
 .hero-reel video{width:100%;height:100%;object-fit:cover;display:block;}
