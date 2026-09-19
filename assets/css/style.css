@@ -1,5 +1,5 @@
 /* ============================================================
-   PORTFOLIO — Art Director
+   PORTFOLIO. Art Director
    Design system. Edit tokens below to restyle the whole site.
    ============================================================ */
 
@@ -15,13 +15,13 @@
   --ink:        #14130F;          /* warm off-black text             */
   --accent:     #FF3B14;          /* signal colour. Change me first. */
 
-  /* DARK (inactive — swap the comment markers to use)
+  /* DARK (inactive. Swap the comment markers to use)
   --paper:      #0C0C0B;
   --ink:        #EDEAE2;
   --accent:     #FF4A26;
   */
 
-  /* Derived — don't edit, they follow --ink / --paper */
+  /* Derived. Do not edit, they follow --ink / --paper */
   --muted:  color-mix(in srgb, var(--ink) 52%, var(--paper));
   --faint:  color-mix(in srgb, var(--ink) 34%, var(--paper));
   --line:   color-mix(in srgb, var(--ink) 15%, transparent);
@@ -196,7 +196,7 @@ ul,ol{list-style:none;}
 }
 .card{grid-column:span 6;display:flex;flex-direction:column;}
 /* Asymmetric rhythm on the landing page.
-   .gallery--uniform (work archive) opts out — see below. */
+   .gallery--uniform (work archive) opts out, see below. */
 .card:nth-child(6n+1){grid-column:span 7;}
 .card:nth-child(6n+2){grid-column:span 5;align-self:end;}
 .card:nth-child(6n+3){grid-column:span 5;}
@@ -223,7 +223,7 @@ ul,ol{list-style:none;}
   transition:color .3s var(--ease);
 }
 .card:hover .card__title{color:var(--accent);}
-/* The idea line — this is what gets you the interview */
+/* The idea line. This is what gets you the interview */
 .card__idea{
   font-size:clamp(.98rem,1.15vw,1.1rem);font-weight:400;
   line-height:1.4;letter-spacing:-.012em;color:var(--muted);max-width:46ch;
@@ -234,7 +234,7 @@ ul,ol{list-style:none;}
   border:1px solid var(--line);border-radius:100px;padding:.28rem .62rem;color:var(--muted);
 }
 
-/* Uniform archive grid — 3 up, equal ratio, easy to scan */
+/* Uniform archive grid: 3 up, equal ratio, easy to scan */
 .gallery--uniform .card,
 .gallery--uniform .card:nth-child(6n+1),
 .gallery--uniform .card:nth-child(6n+2),
@@ -346,7 +346,7 @@ ul,ol{list-style:none;}
 .job__org{color:var(--muted);font-size:.95rem;margin-top:.15rem;}
 .job__bullets{margin-top:.8rem;display:grid;gap:.45rem;}
 .job__bullets li{position:relative;padding-left:1.1rem;color:var(--muted);font-size:.95rem;}
-.job__bullets li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:1px;background:var(--accent);}
+.job__bullets li::before{content:"";position:absolute;left:1px;top:.55em;width:4px;height:4px;border-radius:50%;background:var(--accent);}
 
 .btn{
   display:inline-flex;align-items:center;gap:.6rem;

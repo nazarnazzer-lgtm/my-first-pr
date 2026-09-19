@@ -1,5 +1,5 @@
 /* ==========================================================
-   PORTFOLIO — behaviour
+   PORTFOLIO. Behaviour
    Vanilla JS, no dependencies, no build step.
    ========================================================== */
 (function () {
@@ -63,7 +63,7 @@
       var tags = (item.getAttribute('data-tags') || '').toLowerCase();
       var match = key === 'all' || tags.indexOf(key) !== -1;
       item.classList.toggle('is-hidden', !match);
-      // Grid cards and index rows both carry data-tags — count one set only,
+      // Grid cards and index rows both carry data-tags. Count one set only,
       // or every project is counted twice.
       if (match && item.classList.contains('card')) shown++;
     });

@@ -1,18 +1,18 @@
-# Nazar Sementsov — Art Director Portfolio
+# Nazar Sementsov, Art Director Portfolio
 
 Static site. No build step, no framework, no npm install. Open the `.html`
 files in any editor, change the text, save, refresh the browser.
 
 ```
-index.html      Gallery landing — hero, credibility strip, selected work
-work.html       Full archive — filters + grid/index view toggle
+index.html      Gallery landing, hero, credibility strip, selected work
+work.html       Full archive, filters + grid/index view toggle
 about.html      Bio, capabilities, clients, recognition
 resume.html     Editorial résumé (Cmd+P prints clean to PDF)
-project.html    Case-study template — duplicate once per project
+project.html    Case-study template, duplicate once per project
 assets/css/style.css   All styling. Design tokens at the top.
 assets/css/fonts.css   Self-hosted webfonts
 assets/js/main.js      Filters, scroll reveals, hover preview
-assets/img/            Placeholder images — replace these
+assets/img/            Placeholder images, replace these
 ```
 
 ## Run it locally
@@ -33,7 +33,7 @@ Every placeholder is a literal string you can find-and-replace across all files.
 | `Campaign Title Here` / `Project Title Here` | Real project names |
 | `The one-line idea, in plain English.` | **The actual idea. See below.** |
 | `Client Name` | Real client |
-| `yourhandle` | Your LinkedIn / Instagram / Behance handles |
+| `yourhandle` | Your LinkedIn and Instagram handles |
 
 Your name, email and phone are already filled in from your résumé.
 
@@ -54,12 +54,12 @@ Drop your files into `assets/img/` and either use the same filenames
 
 ### Link preview image
 Add `assets/img/og-image.jpg` at **1200×630**. This is the card that shows
-when someone pastes your URL into Slack or iMessage — for a recruiter
+when someone pastes your URL into Slack or iMessage, for a recruiter
 forwarding you to a creative director, it is your first impression.
 
 ### Résumé PDF
 Drop your PDF at `assets/Nazar-Sementsov-Resume.pdf` and the Download button
-on `resume.html` works. Or just print that page to PDF — it has a print
+on `resume.html` works. Or just print that page to PDF, it has a print
 stylesheet that strips the nav and footer.
 
 ---
@@ -82,7 +82,7 @@ isn't finished yet.
 
 1. Copy `project.html` → `project-grammys.html`
 2. Fill in the brief / insight / idea / execution sections
-3. **Fill in the `My role` field honestly** — at agency level they will ask
+3. **Fill in the `My role` field honestly**, at agency level they will ask
    what you actually did. "Art Director, social campaign" beats a vague credit.
 4. If you have no results numbers, **delete the `.results` block.** An empty
    metric is worse than no metric; craft carries a junior book fine.
@@ -97,14 +97,14 @@ Everything lives in the `:root` block at the top of `assets/css/style.css`.
 ```css
 --paper:  #F2F0EA;   /* background     */
 --ink:    #14130F;   /* text           */
---accent: #FF3B14;   /* the one signal colour — change this first */
+--accent: #FF3B14;   /* the one signal colour, change this first */
 ```
 
-The site is a single light palette by design — one background means every
+The site is a single light palette by design, one background means every
 image you upload only has to be colour-corrected once.
 
 To drop the asymmetric gallery rhythm on the landing page, add
-`gallery--uniform` to the `<div class="gallery">` — the same class the
+`gallery--uniform` to the `<div class="gallery">`, the same class the
 work archive uses.
 
 ---
@@ -113,12 +113,12 @@ work archive uses.
 
 The site is fully self-contained (fonts included), so any static host works.
 
-**Netlify / Vercel** — drag the folder onto their dashboard. Done.
+**Netlify / Vercel**, drag the folder onto their dashboard. Done.
 
-**GitHub Pages** — Settings → Pages → Deploy from branch → select the branch,
+**GitHub Pages**, Settings → Pages → Deploy from branch → select the branch,
 root folder. The `.nojekyll` file is already there so `assets/` serves correctly.
 
-**Custom domain** — you already own `nazarsementsov.com`. Point it at whichever
+**Custom domain**, you already own `nazarsementsov.com`. Point it at whichever
 host you pick; all three have one-click custom domain setup.
 
 ---
@@ -126,7 +126,7 @@ host you pick; all three have one-click custom domain setup.
 ## Notes on craft
 
 - Fonts are self-hosted (`assets/fonts/`), so there is no third-party request
-  and no font flash. Don't swap them back to a Google Fonts `<link>` — it's
+  and no font flash. Don't swap them back to a Google Fonts `<link>`, it's
   slower.
 - One typeface, Inter Tight, shipping as a single variable font file covering
   every weight. Hierarchy comes from weight and scale, not a second family.
