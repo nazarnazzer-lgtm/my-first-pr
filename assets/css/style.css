@@ -153,6 +153,12 @@ ul,ol{list-style:none;}
   margin-top:clamp(20px,3.2vh,38px);
 }
 .hero-statement strong{color:var(--ink);font-weight:500;}
+.hero-featured{
+  margin-top:clamp(16px,2.4vh,26px);
+  padding-top:.85rem;border-top:1px solid var(--line);
+  display:inline-block;
+}
+.hero-featured .accent{font-weight:500;letter-spacing:.14em;}
 .hero-foot{
   display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;
   gap:1.5rem;margin-top:clamp(24px,4vh,48px);
