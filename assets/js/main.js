@@ -197,7 +197,7 @@
       };
       new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting && !timer) { timer = setInterval(step, 2200); }
+          if (e.isIntersecting && !timer) { timer = setInterval(step, 1600); }
           else if (!e.isIntersecting && timer) { clearInterval(timer); timer = null; }
         });
       }, { threshold: 0.35 }).observe(el);
