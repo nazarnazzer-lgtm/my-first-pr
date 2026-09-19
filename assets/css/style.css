@@ -621,3 +621,7 @@ p,.prose p,dd,li{text-wrap:pretty;}
 .held__line{font-size:clamp(1.3rem,2.6vw,2.1rem);line-height:1.22;letter-spacing:-.02em;
   max-width:26ch;margin:0 0 1.1em;text-wrap:balance;}
 .held__note{opacity:.62;margin:0;}
+
+/* ---- 25. About portraits ---- */
+.about-offset{width:min(46%,420px);margin:clamp(30px,6vh,70px) 0 0 auto;}
+@media (max-width:760px){.about-offset{width:min(78%,340px);margin-inline:auto 0;}}
