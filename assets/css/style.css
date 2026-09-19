@@ -504,7 +504,7 @@ ul,ol{list-style:none;}
 /* Width utilities. Varying the measure is what stops a long page
    reading as one uninterrupted column. */
 .figure--inset,.film--inset{max-width:min(1080px,100%);margin-inline:auto;}
-.figure--two.figure--inset{max-width:min(1080px,100%);}
+.figure--two.figure--inset{max-width:min(940px,100%);margin-inline:auto;}
 
 /* A vertical film sits next to a portrait still without either being cropped */
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,28px);
