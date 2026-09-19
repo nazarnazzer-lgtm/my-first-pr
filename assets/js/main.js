@@ -23,6 +23,22 @@
   // pageshow also fires when a page comes back from the back/forward cache,
   // where a plain load handler would not run at all.
   window.addEventListener('pageshow', jumpTop);
+  window.addEventListener('load', jumpTop);
+
+  // Briefly hold the top after arriving. Some browsers restore a remembered
+  // offset late, after scripts have already run. Any real input from the
+  // reader cancels the hold immediately, so this can never fight a scroll.
+  var readerMoved = false;
+  ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (ev) {
+    window.addEventListener(ev, function () { readerMoved = true; },
+                            { passive: true, once: true });
+  });
+  var holdUntil = Date.now() + 1200;
+  (function hold() {
+    if (readerMoved || location.hash || Date.now() > holdUntil) return;
+    if (window.scrollY !== 0) jumpTop();
+    requestAnimationFrame(hold);
+  })();
 
   /* ---- 1. Sticky header hairline ------------------------- */
   var head = document.querySelector('.site-head');
