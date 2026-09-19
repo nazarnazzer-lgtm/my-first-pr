@@ -512,3 +512,19 @@ ul,ol{list-style:none;}
 .kpi .to{color:var(--accent);font-weight:400;}
 .kpi-note{margin-top:clamp(26px,3.5vh,44px);padding-top:1rem;
   border-top:1px solid var(--line);max-width:56ch;}
+
+/* Single figure set into the flow, so results punctuate the page
+   instead of waiting in a block at the end. */
+.stat{
+  display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);
+  gap:clamp(20px,4vw,60px);align-items:baseline;
+  padding-block:clamp(38px,6.5vh,84px);
+  border-block:1px solid var(--line);
+  margin-block:clamp(30px,5vh,70px);
+}
+.stat__fig{font-size:clamp(3.2rem,8.5vw,7rem);font-weight:600;
+  letter-spacing:-.05em;line-height:.85;white-space:nowrap;}
+.stat__note{font-size:var(--fs-md);line-height:1.34;letter-spacing:-.018em;
+  color:var(--muted);max-width:28ch;}
+.stat__note b{color:var(--ink);font-weight:500;}
+@media (max-width:700px){.stat{grid-template-columns:1fr;gap:.9rem;}}
