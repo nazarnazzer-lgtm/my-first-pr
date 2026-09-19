@@ -36,8 +36,12 @@
   --panel:  color-mix(in srgb, var(--ink) 5%,  var(--paper));
 
   /* Type */
-  --sans: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  /* Three tiers. Display carries the big moments, sans carries the
+     reading, mono carries every label. Hierarchy now comes from the
+     face, not only from weight and scale. */
+  --display: "Archivo", "Inter Tight", system-ui, sans-serif;
+  --sans:    "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   --fs-mega:  clamp(3rem, 11.5vw, 11rem);
   --fs-xl:    clamp(2.4rem, 7vw, 6rem);
@@ -225,7 +229,13 @@ ul,ol{list-style:none;}
   color:var(--paper);mix-blend-mode:difference;
 }
 .card__body{padding-top:1rem;display:flex;flex-direction:column;gap:.35rem;}
-.card__top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;}
+/* The title sits on a flex row with the year. Archivo is wider than
+   Inter Tight at the same size, so the title needs min-width:0 to be
+   allowed to shrink, or it shunts the year off a narrow screen. */
+.card__top{display:flex;justify-content:space-between;align-items:baseline;
+  gap:.35rem 1rem;flex-wrap:wrap;}
+.card__top .card__title{min-width:0;flex:1 1 auto;}
+.card__top .meta{flex:none;}
 .card__title{
   font-size:clamp(1.15rem,1.9vw,1.65rem);font-weight:500;letter-spacing:-.025em;
   transition:color .3s var(--ease);
@@ -625,3 +635,65 @@ p,.prose p,dd,li{text-wrap:pretty;}
 /* ---- 25. About portraits ---- */
 .about-offset{width:min(46%,420px);margin:clamp(30px,6vh,70px) 0 0 auto;}
 @media (max-width:760px){.about-offset{width:min(78%,340px);margin-inline:auto 0;}}
+
+/* ---- 26. DISPLAY TIER -------------------------------------
+   Archivo carries a width axis, so the wide-heavy setting is a
+   variation rather than a second font file. Applied only to the
+   moments that should shout. Everything that gets READ stays on
+   Inter Tight: a 125%-wide face is a headline tool, not a text
+   face, and using it everywhere is how this look goes wrong.
+   Archivo is wider than Inter Tight at the same size, so the
+   negative tracking that suited Inter Tight is eased back here.
+   ----------------------------------------------------------- */
+.hero-name,.page-title,.foot-cta{
+  font-family:var(--display);
+  font-stretch:125%;
+  font-weight:800;
+  letter-spacing:-.022em;
+}
+.sec-title,.chapter h2,.stat__fig,.case-idea,
+.card__title,.index-row__title,.job__role{
+  font-family:var(--display);
+  font-stretch:108%;
+  letter-spacing:-.022em;
+}
+.stat__fig{font-weight:800;font-stretch:118%;letter-spacing:-.03em;}
+.sec-title,.chapter h2{font-weight:700;text-transform:uppercase;font-size:calc(var(--fs-md) * .82);letter-spacing:.005em;}
+.card__title,.index-row__title{font-weight:600;}
+.case-idea{font-weight:700;font-stretch:104%;}
+
+/* ---- 27. DARK SECTIONS ------------------------------------
+   Redefining --ink and --paper on a container is enough: every
+   derived token is a color-mix over those two, resolved at the
+   element, so borders, muted text and panels all follow.
+   Put it on a section when the work wants a black ground.
+   ----------------------------------------------------------- */
+.on-dark{
+  --paper:#0C0C0B;
+  --ink:#EDEAE2;
+  --accent:#FF4A26;
+  background:var(--paper);
+  color:var(--ink);
+  /* Breaks out of .wrap to the viewport edge, then puts the gutter back
+     as padding, so the black runs full width but the content still lines
+     up with everything above it. */
+  margin-inline:calc(var(--gutter) * -1);
+  padding:clamp(40px,7vh,96px) var(--gutter);
+  margin-block:clamp(30px,6vh,72px);
+}
+.on-dark .film--bleed{margin-inline:calc(var(--gutter) * -1);}
+
+/* Ease the display width back on small screens, where a 108%-wide face
+   eats the measure. */
+@media (max-width:640px){
+  .hero-name,.page-title,.foot-cta{font-stretch:112%;}
+  .card__title,.index-row__title,.case-idea{font-stretch:100%;}
+}
+
+/* The split animation wraps each word in .wm and each letter of the name
+   in .ltr, all inline-block, which lets the browser break BETWEEN LETTERS.
+   Inter Tight was narrow enough to hide it; Archivo at 125% is not, and
+   the name broke as SEME / NTSOV. Words are now unbreakable, and the
+   display face gets its own scale since it sets far wider than the sans. */
+.hero-name .wm{white-space:nowrap;}
+.hero-name{font-size:clamp(2.35rem,8.6vw,8.2rem);font-stretch:116%;}
