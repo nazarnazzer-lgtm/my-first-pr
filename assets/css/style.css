@@ -380,7 +380,12 @@ ul,ol{list-style:none;}
 
 /* ---- 14. FOOTER ------------------------------------------ */
 .site-foot{padding-block:clamp(56px,11vh,140px) 2rem;border-top:1px solid var(--line);margin-top:clamp(64px,12vh,150px);}
-.foot-cta{font-size:var(--fs-xl);font-weight:600;letter-spacing:-.04em;line-height:.95;text-transform:uppercase;display:inline-block;}
+/* The email is one unbreakable token. At the shared display size it ran
+   494px wide on a 390px screen, pushing the whole document sideways on
+   every page, so it gets its own scale and a wrapping fallback. */
+.foot-cta{font-size:clamp(1.45rem,6vw,6rem);font-weight:600;letter-spacing:-.04em;
+  line-height:.95;text-transform:uppercase;display:inline-block;
+  max-width:100%;overflow-wrap:anywhere;}
 .foot-cta:hover{color:var(--accent);}
 .foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2rem;margin-top:clamp(40px,7vh,88px);}
 .foot-links{display:flex;flex-wrap:wrap;gap:1.4rem;}
@@ -528,3 +533,13 @@ ul,ol{list-style:none;}
   color:var(--muted);max-width:28ch;}
 .stat__note b{color:var(--ink);font-weight:500;}
 @media (max-width:700px){.stat{grid-template-columns:1fr;gap:.9rem;}}
+
+/* Pairs sit slightly out of step so a page built largely from two-ups does
+   not read as a grid. Where a photograph is paired with a specification
+   card the card is the one that drops: image leads, document follows. */
+.figure--two.stag-b > :nth-child(2){margin-top:clamp(26px,4.5vw,76px);}
+.figure--two.stag-a > :nth-child(1){margin-top:clamp(26px,4.5vw,76px);}
+@media (max-width:700px){
+  .figure--two.stag-b > :nth-child(2),
+  .figure--two.stag-a > :nth-child(1){margin-top:0;}
+}
