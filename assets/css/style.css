@@ -612,3 +612,12 @@ p,.prose p,dd,li{text-wrap:pretty;}
   gap:clamp(10px,1.4vw,20px);margin-block:clamp(28px,5vh,60px);}
 .figure--four img{width:100%;height:auto;}
 @media (max-width:900px){.figure--four{grid-template-columns:repeat(2,1fr);}}
+
+/* ---- 24. Held work (client content not published) ---- */
+.held{border:1px solid var(--line);background:var(--ink);color:var(--paper);
+  padding:clamp(26px,4vw,52px);margin-block:clamp(24px,4vh,48px);}
+.held__tag{color:var(--accent);display:flex;align-items:center;gap:.6em;margin:0 0 1.1em;}
+.held__tag .dot{width:.62em;height:.62em;border-radius:50%;background:var(--accent);flex:none;}
+.held__line{font-size:clamp(1.3rem,2.6vw,2.1rem);line-height:1.22;letter-spacing:-.02em;
+  max-width:26ch;margin:0 0 1.1em;text-wrap:balance;}
+.held__note{opacity:.62;margin:0;}
