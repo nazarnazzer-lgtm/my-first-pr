@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 900" width="1920" height="900" role="img" aria-label="Placeholder image">
-  <rect width="1920" height="900" fill="#EFE7DC"/>
-  <path d="M 307 648 a 653 653 0 0 1 1306 0 z" fill="#2B2118"/>
-  <rect x="307" y="648" width="1306" height="11" fill="#C4703A"/>
-  <circle cx="960" cy="342" r="134" fill="#EFE7DC"/>
-  <text x="77" y="860" fill="#2B2118" opacity="0.55"
+  <rect width="1920" height="900" fill="#f2f0ea"/>
+  <path d="M 307 648 a 653 653 0 0 1 1306 0 z" fill="#1f1d18"/>
+  <rect x="307" y="648" width="1306" height="11" fill="#ff3b14"/>
+  <circle cx="960" cy="342" r="134" fill="#f2f0ea"/>
+  <text x="77" y="860" fill="#1f1d18" opacity="0.55"
         font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="25"
         letter-spacing="2">CASE IMAGE 04 · REPLACE</text>
 </svg>

@@ -1,41 +1,41 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Placeholder image">
-  <rect width="1600" height="1000" fill="#1B1B2A"/>
-  <line x1="256" y1="160" x2="256" y2="840" stroke="#DCD8E8" stroke-width="1" opacity="0.4"/>
-  <line x1="528" y1="160" x2="528" y2="840" stroke="#DCD8E8" stroke-width="1" opacity="0.4"/>
-  <line x1="800" y1="160" x2="800" y2="840" stroke="#DCD8E8" stroke-width="1" opacity="0.4"/>
-  <line x1="1072" y1="160" x2="1072" y2="840" stroke="#DCD8E8" stroke-width="1" opacity="0.4"/>
-  <line x1="1344" y1="160" x2="1344" y2="840" stroke="#DCD8E8" stroke-width="1" opacity="0.4"/>
-  <circle cx="256" cy="220" r="18" fill="#7A6FF0"/>
-  <circle cx="528" cy="220" r="18" fill="#DCD8E8"/>
-  <circle cx="800" cy="220" r="18" fill="#DCD8E8"/>
-  <circle cx="1072" cy="220" r="18" fill="#DCD8E8"/>
-  <circle cx="1344" cy="220" r="18" fill="#7A6FF0"/>
-  <circle cx="256" cy="335" r="18" fill="#DCD8E8"/>
-  <circle cx="528" cy="335" r="18" fill="#DCD8E8"/>
-  <circle cx="800" cy="335" r="18" fill="#DCD8E8"/>
-  <circle cx="1072" cy="335" r="18" fill="#7A6FF0"/>
-  <circle cx="1344" cy="335" r="18" fill="#DCD8E8"/>
-  <circle cx="256" cy="450" r="18" fill="#DCD8E8"/>
-  <circle cx="528" cy="450" r="18" fill="#DCD8E8"/>
-  <circle cx="800" cy="450" r="18" fill="#7A6FF0"/>
-  <circle cx="1072" cy="450" r="18" fill="#DCD8E8"/>
-  <circle cx="1344" cy="450" r="18" fill="#DCD8E8"/>
-  <circle cx="256" cy="565" r="18" fill="#DCD8E8"/>
-  <circle cx="528" cy="565" r="18" fill="#7A6FF0"/>
-  <circle cx="800" cy="565" r="18" fill="#DCD8E8"/>
-  <circle cx="1072" cy="565" r="18" fill="#DCD8E8"/>
-  <circle cx="1344" cy="565" r="18" fill="#DCD8E8"/>
-  <circle cx="256" cy="680" r="18" fill="#7A6FF0"/>
-  <circle cx="528" cy="680" r="18" fill="#DCD8E8"/>
-  <circle cx="800" cy="680" r="18" fill="#DCD8E8"/>
-  <circle cx="1072" cy="680" r="18" fill="#DCD8E8"/>
-  <circle cx="1344" cy="680" r="18" fill="#7A6FF0"/>
-  <circle cx="256" cy="795" r="18" fill="#DCD8E8"/>
-  <circle cx="528" cy="795" r="18" fill="#DCD8E8"/>
-  <circle cx="800" cy="795" r="18" fill="#DCD8E8"/>
-  <circle cx="1072" cy="795" r="18" fill="#7A6FF0"/>
-  <circle cx="1344" cy="795" r="18" fill="#DCD8E8"/>
-  <text x="64" y="955" fill="#DCD8E8" opacity="0.55"
+  <rect width="1600" height="1000" fill="#14130f"/>
+  <line x1="256" y1="160" x2="256" y2="840" stroke="#e4e1d8" stroke-width="1" opacity="0.4"/>
+  <line x1="528" y1="160" x2="528" y2="840" stroke="#e4e1d8" stroke-width="1" opacity="0.4"/>
+  <line x1="800" y1="160" x2="800" y2="840" stroke="#e4e1d8" stroke-width="1" opacity="0.4"/>
+  <line x1="1072" y1="160" x2="1072" y2="840" stroke="#e4e1d8" stroke-width="1" opacity="0.4"/>
+  <line x1="1344" y1="160" x2="1344" y2="840" stroke="#e4e1d8" stroke-width="1" opacity="0.4"/>
+  <circle cx="256" cy="220" r="18" fill="#ff3b14"/>
+  <circle cx="528" cy="220" r="18" fill="#e4e1d8"/>
+  <circle cx="800" cy="220" r="18" fill="#e4e1d8"/>
+  <circle cx="1072" cy="220" r="18" fill="#e4e1d8"/>
+  <circle cx="1344" cy="220" r="18" fill="#ff3b14"/>
+  <circle cx="256" cy="335" r="18" fill="#e4e1d8"/>
+  <circle cx="528" cy="335" r="18" fill="#e4e1d8"/>
+  <circle cx="800" cy="335" r="18" fill="#e4e1d8"/>
+  <circle cx="1072" cy="335" r="18" fill="#ff3b14"/>
+  <circle cx="1344" cy="335" r="18" fill="#e4e1d8"/>
+  <circle cx="256" cy="450" r="18" fill="#e4e1d8"/>
+  <circle cx="528" cy="450" r="18" fill="#e4e1d8"/>
+  <circle cx="800" cy="450" r="18" fill="#ff3b14"/>
+  <circle cx="1072" cy="450" r="18" fill="#e4e1d8"/>
+  <circle cx="1344" cy="450" r="18" fill="#e4e1d8"/>
+  <circle cx="256" cy="565" r="18" fill="#e4e1d8"/>
+  <circle cx="528" cy="565" r="18" fill="#ff3b14"/>
+  <circle cx="800" cy="565" r="18" fill="#e4e1d8"/>
+  <circle cx="1072" cy="565" r="18" fill="#e4e1d8"/>
+  <circle cx="1344" cy="565" r="18" fill="#e4e1d8"/>
+  <circle cx="256" cy="680" r="18" fill="#ff3b14"/>
+  <circle cx="528" cy="680" r="18" fill="#e4e1d8"/>
+  <circle cx="800" cy="680" r="18" fill="#e4e1d8"/>
+  <circle cx="1072" cy="680" r="18" fill="#e4e1d8"/>
+  <circle cx="1344" cy="680" r="18" fill="#ff3b14"/>
+  <circle cx="256" cy="795" r="18" fill="#e4e1d8"/>
+  <circle cx="528" cy="795" r="18" fill="#e4e1d8"/>
+  <circle cx="800" cy="795" r="18" fill="#e4e1d8"/>
+  <circle cx="1072" cy="795" r="18" fill="#ff3b14"/>
+  <circle cx="1344" cy="795" r="18" fill="#e4e1d8"/>
+  <text x="64" y="955" fill="#e4e1d8" opacity="0.55"
         font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="28"
         letter-spacing="2">CASE IMAGE 01 · REPLACE</text>
 </svg>

@@ -15,12 +15,6 @@
   --ink:        #14130F;          /* warm off-black text             */
   --accent:     #FF3B14;          /* signal colour. Change me first. */
 
-  /* Letter colours for the name. Two only: the accent, and one deep
-     petrol that sits opposite it on the wheel and holds against warm
-     paper. Nothing else on the site introduces a third hue. */
-  --c1:#FF3B14;   /* accent orange */
-  --c2:#0E4F5C;   /* deep petrol   */
-
   /* DARK (inactive. Swap the comment markers to use)
   --paper:      #0C0C0B;
   --ink:        #EDEAE2;
@@ -563,8 +557,8 @@ ul,ol{list-style:none;}
   display:inline-block;color:var(--ink);
   transition:color .5s var(--ease), transform .5s var(--ease);
 }
-.motion-ready .hero-name .ltr.lit{color:var(--lc);}
-.motion-ready .hero-name:hover .ltr{color:var(--lc);transform:translateY(-.04em);}
+.motion-ready .hero-name .ltr.lit{color:var(--accent);}
+.motion-ready .hero-name:hover .ltr{color:var(--accent);transform:translateY(-.04em);}
 @media (hover:none){.motion-ready .hero-name:hover .ltr{color:var(--ink);transform:none;}}
 @media (prefers-reduced-motion:reduce){
   .motion-ready .hero-name .ltr,
@@ -721,3 +715,25 @@ p,.prose p,dd,li{text-wrap:pretty;}
    width axis back to 100% buys roughly 14% of the measure, which is what
    makes a single line possible without dropping to a timid size. */
 .foot-cta{font-stretch:100%;font-size:min(5.55vw,5.4rem);letter-spacing:-.035em;}
+
+/* ---- 29. PANNING SHEET PREVIEW ----------------------------
+   The season sheet is one page nearly four times its own width
+   tall, so a still crop shows almost none of it. The card pans
+   the whole sheet instead. Travel is the image height minus the
+   frame height, which 100cqh gives us directly, so the same
+   rule is correct in the 4:5 home card and the 4:3 work card
+   without either knowing the other's shape.
+   ----------------------------------------------------------- */
+.card__media:has(.pan){container-type:size;}
+.pan{position:absolute;inset:0;overflow:hidden;}
+.pan img{position:absolute;top:0;left:0;width:100%;height:auto;
+  transform:translateY(0);}
+.motion-ready .pan img{animation:sheet-pan 30s ease-in-out infinite alternate;}
+@keyframes sheet-pan{
+  from{transform:translateY(0);}
+  to{transform:translateY(calc(100cqh - 100%));}
+}
+.card:hover .pan img{animation-duration:12s;}
+@media (prefers-reduced-motion:reduce){
+  .motion-ready .pan img,.card:hover .pan img{animation:none;}
+}

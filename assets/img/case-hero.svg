@@ -1,21 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080" role="img" aria-label="Placeholder image">
-  <rect width="1920" height="1080" fill="#D9DCD6"/>
-  <line x1="-1080" y1="1080" x2="0" y2="0" stroke="#1B2A24" stroke-width="1" opacity="0.28"/>
-  <line x1="-867" y1="1080" x2="213" y2="0" stroke="#1B2A24" stroke-width="1" opacity="0.28"/>
-  <line x1="-653" y1="1080" x2="427" y2="0" stroke="#1B2A24" stroke-width="1" opacity="0.28"/>
-  <line x1="-440" y1="1080" x2="640" y2="0" stroke="#1B2A24" stroke-width="1" opacity="0.28"/>
-  <line x1="-227" y1="1080" x2="853" y2="0" stroke="#1B2A24" stroke-width="1" opacity="0.28"/>
-  <line x1="-13" y1="1080" x2="1067" y2="0" stroke="#1B2A24" stroke-width="1" opacity="0.28"/>
-  <line x1="200" y1="1080" x2="1280" y2="0" stroke="#1B2A24" stroke-width="1" opacity="0.28"/>
-  <line x1="413" y1="1080" x2="1493" y2="0" stroke="#1B2A24" stroke-width="1" opacity="0.28"/>
-  <line x1="627" y1="1080" x2="1707" y2="0" stroke="#1B2A24" stroke-width="1" opacity="0.28"/>
-  <line x1="840" y1="1080" x2="1920" y2="0" stroke="#1B2A24" stroke-width="1" opacity="0.28"/>
-  <line x1="1053" y1="1080" x2="2133" y2="0" stroke="#1B2A24" stroke-width="1" opacity="0.28"/>
-  <line x1="1267" y1="1080" x2="2347" y2="0" stroke="#1B2A24" stroke-width="1" opacity="0.28"/>
-  <line x1="1480" y1="1080" x2="2560" y2="0" stroke="#1B2A24" stroke-width="1" opacity="0.28"/>
-  <line x1="1693" y1="1080" x2="2773" y2="0" stroke="#1B2A24" stroke-width="1" opacity="0.28"/>
-  <rect x="576" y="324" width="768" height="432" fill="#2F7D5B"/>
-  <text x="77" y="1031" fill="#1B2A24" opacity="0.55"
+  <rect width="1920" height="1080" fill="#e4e1d8"/>
+  <line x1="-1080" y1="1080" x2="0" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
+  <line x1="-867" y1="1080" x2="213" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
+  <line x1="-653" y1="1080" x2="427" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
+  <line x1="-440" y1="1080" x2="640" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
+  <line x1="-227" y1="1080" x2="853" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
+  <line x1="-13" y1="1080" x2="1067" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
+  <line x1="200" y1="1080" x2="1280" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
+  <line x1="413" y1="1080" x2="1493" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
+  <line x1="627" y1="1080" x2="1707" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
+  <line x1="840" y1="1080" x2="1920" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
+  <line x1="1053" y1="1080" x2="2133" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
+  <line x1="1267" y1="1080" x2="2347" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
+  <line x1="1480" y1="1080" x2="2560" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
+  <line x1="1693" y1="1080" x2="2773" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
+  <rect x="576" y="324" width="768" height="432" fill="#ff3b14"/>
+  <text x="77" y="1031" fill="#14130f" opacity="0.55"
         font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="30"
         letter-spacing="2">CASE HERO · REPLACE</text>
 </svg>

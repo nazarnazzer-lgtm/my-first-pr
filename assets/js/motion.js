@@ -109,8 +109,8 @@
       });
       el.__words = words;
 
-      /* The name goes one level further: letter by letter, each with its
-         own colour, so it can cascade on arrival and answer the cursor. */
+      /* The name goes one level further: letter by letter, so the accent
+         can cascade across it on arrival and answer the cursor. */
       if (el.classList.contains('hero-name')) {
         var n = 0;
         words.forEach(function (w) {
@@ -120,7 +120,6 @@
             var l = document.createElement('span');
             l.className = 'ltr';
             l.textContent = ch;
-            l.style.setProperty('--lc', 'var(--c' + ((n % 2) + 1) + ')');
             l.style.transitionDelay = (n * 0.035).toFixed(3) + 's';
             w.appendChild(l);
             n++;
