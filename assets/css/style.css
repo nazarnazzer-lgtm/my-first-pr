@@ -30,7 +30,6 @@
 
   /* Type */
   --sans: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --serif:"Instrument Serif", Georgia, "Times New Roman", serif;
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 
   --fs-mega:  clamp(3rem, 11.5vw, 11rem);
@@ -79,7 +78,7 @@ ul,ol{list-style:none;}
   text-transform:uppercase;letter-spacing:.14em;
   color:var(--muted);font-weight:400;
 }
-.serif-i{font-family:var(--serif);font-style:italic;font-weight:400;}
+.em{color:var(--ink);font-weight:500;}
 .rule{height:1px;background:var(--line);border:0;}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
 .accent{color:var(--accent);}
@@ -226,8 +225,8 @@ ul,ol{list-style:none;}
 .card:hover .card__title{color:var(--accent);}
 /* The idea line — this is what gets you the interview */
 .card__idea{
-  font-family:var(--serif);font-style:italic;font-size:clamp(1rem,1.3vw,1.2rem);
-  line-height:1.35;color:var(--muted);max-width:44ch;
+  font-size:clamp(.98rem,1.15vw,1.1rem);font-weight:400;
+  line-height:1.4;letter-spacing:-.012em;color:var(--muted);max-width:46ch;
 }
 .card__tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem;}
 .tag{
@@ -367,9 +366,9 @@ ul,ol{list-style:none;}
 .case-meta dt{margin-bottom:.35rem;}
 .case-meta dd{font-size:.98rem;letter-spacing:-.01em;}
 .case-idea{
-  font-family:var(--serif);font-style:italic;
-  font-size:var(--fs-lg);line-height:1.18;letter-spacing:-.02em;
-  max-width:22ch;
+  font-size:var(--fs-lg);font-weight:500;
+  line-height:1.08;letter-spacing:-.038em;
+  max-width:20ch;
 }
 .figure{margin-block:clamp(28px,5vh,64px);}
 .figure img{width:100%;background:var(--panel);}

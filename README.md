@@ -128,6 +128,7 @@ host you pick; all three have one-click custom domain setup.
 - Fonts are self-hosted (`assets/fonts/`), so there is no third-party request
   and no font flash. Don't swap them back to a Google Fonts `<link>` — it's
   slower.
-- Inter Tight ships as one variable font file covering every weight.
+- One typeface, Inter Tight, shipping as a single variable font file covering
+  every weight. Hierarchy comes from weight and scale, not a second family.
 - Images use `loading="lazy"` below the fold.
 - All motion respects `prefers-reduced-motion`.
