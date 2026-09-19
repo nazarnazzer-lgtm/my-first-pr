@@ -606,3 +606,9 @@ p,.prose p,dd,li{text-wrap:pretty;}
   .slides img:first-child{opacity:1;}
   .slides img:not(:first-child){opacity:0;}
 }
+/* Four across. The Sawdust posters are 705px wide at source, so display
+   widths are kept under that rather than upscaling them into mush. */
+.figure--four{display:grid;grid-template-columns:repeat(4,1fr);
+  gap:clamp(10px,1.4vw,20px);margin-block:clamp(28px,5vh,60px);}
+.figure--four img{width:100%;height:auto;}
+@media (max-width:900px){.figure--four{grid-template-columns:repeat(2,1fr);}}
