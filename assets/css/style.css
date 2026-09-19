@@ -15,12 +15,11 @@
   --ink:        #14130F;          /* warm off-black text             */
   --accent:     #FF3B14;          /* signal colour. Change me first. */
 
-  /* Letter colours for the name. Kept dark and close to the ink so the
-     cascade reads as a tonal shift rather than a rainbow. */
-  --c1:#8A6A22;   /* antique gold  */
-  --c2:#3A434E;   /* gunmetal      */
-  --c3:#6E1F26;   /* oxblood       */
-  --c4:#1E3A33;   /* deep pine     */
+  /* Letter colours for the name. Two only: the accent, and one deep
+     petrol that sits opposite it on the wheel and holds against warm
+     paper. Nothing else on the site introduces a third hue. */
+  --c1:#FF3B14;   /* accent orange */
+  --c2:#0E4F5C;   /* deep petrol   */
 
   /* DARK (inactive. Swap the comment markers to use)
   --paper:      #0C0C0B;
@@ -697,3 +696,28 @@ p,.prose p,dd,li{text-wrap:pretty;}
    display face gets its own scale since it sets far wider than the sans. */
 .hero-name .wm{white-space:nowrap;}
 .hero-name{font-size:clamp(2.35rem,8.6vw,8.2rem);font-stretch:116%;}
+
+/* ---- 28. HERO, HORIZONTAL ---------------------------------
+   The name runs on one line and the statement sits beside the
+   placement, so the block reads wide instead of as a tall stack
+   and the first project clears the fold sooner. Below 860px
+   there is no room for either, so both revert to stacking.
+   ----------------------------------------------------------- */
+.hero-row{
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;
+  gap:clamp(20px,4vw,72px);margin-top:clamp(20px,3.2vh,38px);
+}
+.hero-row .hero-statement{margin-top:0;flex:1 1 26ch;}
+.hero-row .hero-featured{margin-top:0;flex:0 1 auto;}
+@media (min-width:861px){
+  .hero-name .wm{white-space:nowrap;}
+  .hero-name{white-space:nowrap;font-size:min(7.35vw,7.4rem);font-stretch:118%;}
+}
+@media (max-width:860px){
+  .hero-row{flex-direction:column;align-items:flex-start;gap:clamp(16px,2.6vh,26px);}
+}
+
+/* The email is one unbreakable token and must hold one line. Easing the
+   width axis back to 100% buys roughly 14% of the measure, which is what
+   makes a single line possible without dropping to a timid size. */
+.foot-cta{font-stretch:100%;font-size:min(5.55vw,5.4rem);letter-spacing:-.035em;}

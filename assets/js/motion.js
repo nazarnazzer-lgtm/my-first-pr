@@ -120,7 +120,7 @@
             var l = document.createElement('span');
             l.className = 'ltr';
             l.textContent = ch;
-            l.style.setProperty('--lc', 'var(--c' + ((n % 4) + 1) + ')');
+            l.style.setProperty('--lc', 'var(--c' + ((n % 2) + 1) + ')');
             l.style.transitionDelay = (n * 0.035).toFixed(3) + 's';
             w.appendChild(l);
             n++;
