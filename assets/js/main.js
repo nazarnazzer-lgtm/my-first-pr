@@ -63,10 +63,15 @@
       var tags = (item.getAttribute('data-tags') || '').toLowerCase();
       var match = key === 'all' || tags.indexOf(key) !== -1;
       item.classList.toggle('is-hidden', !match);
-      if (match) shown++;
+      // Grid cards and index rows both carry data-tags — count one set only,
+      // or every project is counted twice.
+      if (match && item.classList.contains('card')) shown++;
     });
     if (countEl) countEl.textContent = String(shown).padStart(2, '0');
   }
+
+  // Derive the count on load so it stays correct as projects are added.
+  if (items.length) applyFilter('all');
 
   filterBtns.forEach(function (btn) {
     btn.addEventListener('click', function () {
