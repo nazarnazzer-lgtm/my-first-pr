@@ -83,10 +83,11 @@ ul,ol{list-style:none;}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
 .accent{color:var(--accent);}
 
-/* Reveal on scroll */
-[data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
-[data-reveal].is-in{opacity:1;transform:none;}
-@media (prefers-reduced-motion:reduce){[data-reveal]{opacity:1;transform:none;}}
+/* Reveal on scroll. Gated on .js (set by an inline script in <head>)
+   so that with JavaScript off the content is simply visible. */
+.js [data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
+.js [data-reveal].is-in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.js [data-reveal]{opacity:1;transform:none;}}
 
 /* Animated underline link */
 .ul-link{position:relative;display:inline-block;}
@@ -395,4 +396,50 @@ ul,ol{list-style:none;}
   .job{page-break-inside:avoid;}
   a{text-decoration:none;color:#000;}
   :root{--gutter:0;}
+}
+
+/* ---- 16. MOTION ------------------------------------------
+   Every rule here is gated on .motion-ready, which motion.js
+   adds to <html>. If JS fails or is off, nothing is hidden and
+   the page renders exactly as it did before.
+   ---------------------------------------------------------- */
+
+/* Word masks for headings */
+.motion-ready .wm{
+  display:inline-block;overflow:hidden;vertical-align:bottom;
+  padding-bottom:.14em;margin-bottom:-.14em;   /* room for descenders */
+}
+.motion-ready .wi{
+  display:inline-block;transform:translateY(112%);
+  transition:transform .95s cubic-bezier(.16,1,.3,1);
+}
+.motion-ready [data-split].m-in .wi{transform:none;}
+
+/* Image wipe. Cards keep their own hover scale, so they get the
+   clip only; everything else also scales in. */
+.motion-ready [data-mask]{
+  clip-path:inset(0 0 100% 0);
+  transition:clip-path 1.15s cubic-bezier(.16,1,.3,1);
+}
+.motion-ready [data-mask].m-in{clip-path:inset(0 0 0 0);}
+.motion-ready [data-mask]:not(.card__media) img{
+  transform:scale(1.08);transition:transform 1.5s cubic-bezier(.16,1,.3,1);
+}
+.motion-ready [data-mask]:not(.card__media).m-in img{transform:none;}
+
+/* Parallax frame: the image is oversized so it can drift inside */
+.motion-ready [data-parallax]{overflow:hidden;}
+.motion-ready [data-parallax] img{will-change:transform;}
+
+/* Magnetic buttons need a transform transition to spring back */
+.btn,.filter,.view-btn{
+  transition:transform .4s cubic-bezier(.16,1,.3,1),
+             background .3s var(--ease),color .3s var(--ease),
+             border-color .25s var(--ease);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .motion-ready .wi,
+  .motion-ready [data-mask],
+  .motion-ready [data-mask] img{transform:none!important;clip-path:none!important;}
 }

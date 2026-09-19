@@ -107,7 +107,53 @@ work archive uses.
 
 ---
 
-## 5. Deploying
+## 5. Motion
+
+All motion lives in `assets/js/motion.js`. Settings are at the top of that file:
+
+```js
+var MOTION = {
+  smoothScroll: true,   // weighted, inertial scrolling
+  textReveal:   true,   // headings rise word by word from a mask
+  imageReveal:  true,   // images wipe open instead of appearing
+  parallax:     true,   // large editorial images drift as you scroll
+  magnetic:     true,   // buttons lean toward the cursor
+  speed:        1       // 1 = as tuned. 1.4 = slower, 0.7 = snappier
+};
+```
+
+Flip any of them to `false`. To remove motion entirely, delete these two
+lines from each page:
+
+```html
+<script src="assets/js/lenis.min.js"></script>
+<script src="assets/js/motion.js"></script>
+```
+
+The site works without them, just static.
+
+### Which elements animate
+Add or remove these attributes in the HTML to control it per element:
+
+| Attribute | Effect |
+|---|---|
+| `data-split` | Text rises word by word out of a mask |
+| `data-mask` | Element wipes open from the top |
+| `data-parallax` | Image drifts slower than the page inside its frame |
+| `data-reveal` | Simple fade and lift |
+
+Two rules worth knowing if you edit this. Never put `data-mask` and
+`data-parallax` on the same element, they both drive transforms and will
+fight. And a masked element is watched through its parent, because an
+element clipped to nothing reports no on-screen area and would never
+un-clip itself.
+
+Motion is skipped entirely for visitors who have reduced motion turned on
+at the OS level, and nothing is hidden if JavaScript fails.
+
+---
+
+## 6. Deploying
 
 The site is fully self-contained (fonts included), so any static host works.
 

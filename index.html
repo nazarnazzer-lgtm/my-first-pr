@@ -17,7 +17,7 @@
 <link rel="preload" href="assets/fonts/InterTight-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/style.css">
-<script>if("scrollRestoration" in history)history.scrollRestoration="manual";</script>
+<script>document.documentElement.classList.add("js");if("scrollRestoration" in history)history.scrollRestoration="manual";</script>
 </head>
 <body>
 
@@ -47,9 +47,9 @@
     <span>Brand · Campaign · Art Direction</span>
   </div>
 
-  <h1 class="hero-name" data-reveal data-reveal-delay="60">NAZAR SEMENTSOV</h1>
+  <h1 class="hero-name" data-split>NAZAR SEMENTSOV</h1>
 
-  <p class="hero-statement" data-reveal data-reveal-delay="140">
+  <p class="hero-statement" data-split>
     I build brand systems and <strong>campaigns designed to earn
     attention</strong>, not buy it.
   </p>
@@ -94,7 +94,7 @@
          is the hook: say the idea in plain English, not design-speak. -->
     <article class="card" data-reveal>
       <a href="project.html">
-        <div class="card__media">
+        <div class="card__media" data-mask>
           <span class="card__idx">01</span>
           <img src="assets/img/work-01.svg" alt="Project one cover" loading="eager">
         </div>
@@ -113,7 +113,7 @@
 
     <article class="card" data-reveal data-reveal-delay="80">
       <a href="project.html">
-        <div class="card__media">
+        <div class="card__media" data-mask>
           <span class="card__idx">02</span>
           <img src="assets/img/work-02.svg" alt="Project two cover" loading="eager">
         </div>
@@ -132,7 +132,7 @@
 
     <article class="card" data-reveal>
       <a href="project.html">
-        <div class="card__media">
+        <div class="card__media" data-mask>
           <span class="card__idx">03</span>
           <img src="assets/img/work-03.svg" alt="Project three cover" loading="lazy">
         </div>
@@ -151,7 +151,7 @@
 
     <article class="card" data-reveal data-reveal-delay="80">
       <a href="project.html">
-        <div class="card__media">
+        <div class="card__media" data-mask>
           <span class="card__idx">04</span>
           <img src="assets/img/work-04.svg" alt="Project four cover" loading="lazy">
         </div>
@@ -170,7 +170,7 @@
 
     <article class="card" data-reveal>
       <a href="project.html">
-        <div class="card__media">
+        <div class="card__media" data-mask>
           <span class="card__idx">05</span>
           <img src="assets/img/work-05.svg" alt="Project five cover" loading="lazy">
         </div>
@@ -189,7 +189,7 @@
 
     <article class="card" data-reveal data-reveal-delay="80">
       <a href="project.html">
-        <div class="card__media">
+        <div class="card__media" data-mask>
           <span class="card__idx">06</span>
           <img src="assets/img/work-06.svg" alt="Project six cover" loading="lazy">
         </div>
@@ -215,7 +215,7 @@
 <footer class="site-foot">
   <div class="wrap">
     <p class="meta" data-reveal>Get in touch</p>
-    <a class="foot-cta" href="mailto:nazarnazzer@gmail.com" data-reveal>nazarnazzer@gmail.com</a>
+    <a class="foot-cta" href="mailto:nazarnazzer@gmail.com" data-split>nazarnazzer@gmail.com</a>
     <div class="foot-grid">
       <div class="foot-links meta">
         <a class="ul-link" href="https://linkedin.com/in/yourhandle">LinkedIn</a>
@@ -229,6 +229,8 @@
   </div>
 </footer>
 
+<script src="assets/js/lenis.min.js"></script>
+<script src="assets/js/motion.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

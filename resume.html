@@ -12,7 +12,7 @@
 <link rel="preload" href="assets/fonts/InterTight-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/style.css">
-<script>if("scrollRestoration" in history)history.scrollRestoration="manual";</script>
+<script>document.documentElement.classList.add("js");if("scrollRestoration" in history)history.scrollRestoration="manual";</script>
 </head>
 <body>
 
@@ -35,7 +35,7 @@
 <section class="page-head wrap">
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1.5rem">
     <div>
-      <h1 class="page-title" data-reveal>Résumé</h1>
+      <h1 class="page-title" data-split>Résumé</h1>
       <p class="meta" style="margin-top:1rem" data-reveal>New York City · nazarnazzer@gmail.com · 912-398-8897</p>
     </div>
     <!-- EDIT: drop your PDF at assets/Nazar-Sementsov-Resume.pdf -->
@@ -47,7 +47,7 @@
   <div class="col2">
     <p class="meta col2__label">Profile</p>
     <div class="prose" data-reveal>
-      <p class="lead">Art director building <span class="em">brand systems and
+      <p class="lead" data-split>Art director building <span class="em">brand systems and
       integrated campaigns</span> across culture, fashion and the public sector.
       Concept through final delivery.</p>
       <p><!-- EDIT: 2–3 lines. Tailor this to the agency you're applying to. --></p>
@@ -178,7 +178,7 @@
 <footer class="site-foot">
   <div class="wrap">
     <p class="meta" data-reveal>Get in touch</p>
-    <a class="foot-cta" href="mailto:nazarnazzer@gmail.com" data-reveal>nazarnazzer@gmail.com</a>
+    <a class="foot-cta" href="mailto:nazarnazzer@gmail.com" data-split>nazarnazzer@gmail.com</a>
     <div class="foot-grid">
       <div class="foot-links meta">
         <a class="ul-link" href="https://linkedin.com/in/yourhandle">LinkedIn</a>
@@ -192,6 +192,8 @@
   </div>
 </footer>
 
+<script src="assets/js/lenis.min.js"></script>
+<script src="assets/js/motion.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

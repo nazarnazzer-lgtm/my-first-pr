@@ -12,7 +12,7 @@
 <link rel="preload" href="assets/fonts/InterTight-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/style.css">
-<script>if("scrollRestoration" in history)history.scrollRestoration="manual";</script>
+<script>document.documentElement.classList.add("js");if("scrollRestoration" in history)history.scrollRestoration="manual";</script>
 </head>
 <body>
 
@@ -33,7 +33,7 @@
 
 <main>
 <section class="page-head wrap">
-  <h1 class="page-title" data-reveal>Work</h1>
+  <h1 class="page-title" data-split>Work</h1>
   <p class="page-lede" data-reveal>Selected campaigns, brand systems and art direction.
   <span class="em">Every project lists the role I actually played.</span></p>
   <p class="meta" style="margin-top:1.25rem" data-reveal><span class="accent">Featured at</span> The Grammys · New York SummerStage</p>
@@ -61,7 +61,7 @@
   <div class="gallery gallery--uniform" data-view-grid>
     <article class="card" data-tags="music culture identity campaign branding" data-reveal>
       <a href="project.html">
-        <div class="card__media">
+        <div class="card__media" data-mask>
           <span class="card__idx">01</span>
           <img src="assets/img/work-01.svg" alt="Campaign Title Here cover" loading="lazy">
         </div>
@@ -76,7 +76,7 @@
     </article>
     <article class="card" data-tags="theatre culture campaign advertising" data-reveal>
       <a href="project.html">
-        <div class="card__media">
+        <div class="card__media" data-mask>
           <span class="card__idx">02</span>
           <img src="assets/img/work-02.svg" alt="Campaign Title Here cover" loading="lazy">
         </div>
@@ -91,7 +91,7 @@
     </article>
     <article class="card" data-tags="magnus fashion branding" data-reveal>
       <a href="project.html">
-        <div class="card__media">
+        <div class="card__media" data-mask>
           <span class="card__idx">03</span>
           <img src="assets/img/work-03.svg" alt="Project Title Here cover" loading="lazy">
         </div>
@@ -106,7 +106,7 @@
     </article>
     <article class="card" data-tags="festival culture identity branding digital" data-reveal>
       <a href="project.html">
-        <div class="card__media">
+        <div class="card__media" data-mask>
           <span class="card__idx">04</span>
           <img src="assets/img/work-04.svg" alt="Project Title Here cover" loading="lazy">
         </div>
@@ -121,7 +121,7 @@
     </article>
     <article class="card" data-tags="branding social identity" data-reveal>
       <a href="project.html">
-        <div class="card__media">
+        <div class="card__media" data-mask>
           <span class="card__idx">05</span>
           <img src="assets/img/work-05.svg" alt="Adult Changing Spaces cover" loading="lazy">
         </div>
@@ -136,7 +136,7 @@
     </article>
     <article class="card" data-tags="branding identity" data-reveal>
       <a href="project.html">
-        <div class="card__media">
+        <div class="card__media" data-mask>
           <span class="card__idx">06</span>
           <img src="assets/img/work-06.svg" alt="School System Rebrand cover" loading="lazy">
         </div>
@@ -151,7 +151,7 @@
     </article>
     <article class="card" data-tags="campaign advertising digital" data-reveal>
       <a href="project.html">
-        <div class="card__media">
+        <div class="card__media" data-mask>
           <span class="card__idx">07</span>
           <img src="assets/img/work-07.svg" alt="Enrolment Campaign cover" loading="lazy">
         </div>
@@ -166,7 +166,7 @@
     </article>
     <article class="card" data-tags="advertising campaign" data-reveal>
       <a href="project.html">
-        <div class="card__media">
+        <div class="card__media" data-mask>
           <span class="card__idx">08</span>
           <img src="assets/img/work-08.svg" alt="Project Title Here cover" loading="lazy">
         </div>
@@ -251,7 +251,7 @@
 <footer class="site-foot">
   <div class="wrap">
     <p class="meta" data-reveal>Get in touch</p>
-    <a class="foot-cta" href="mailto:nazarnazzer@gmail.com" data-reveal>nazarnazzer@gmail.com</a>
+    <a class="foot-cta" href="mailto:nazarnazzer@gmail.com" data-split>nazarnazzer@gmail.com</a>
     <div class="foot-grid">
       <div class="foot-links meta">
         <a class="ul-link" href="https://linkedin.com/in/yourhandle">LinkedIn</a>
@@ -265,6 +265,8 @@
   </div>
 </footer>
 
+<script src="assets/js/lenis.min.js"></script>
+<script src="assets/js/motion.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -12,6 +12,7 @@
   // made with it temporarily off, otherwise it animates on arrival.
   function jumpTop() {
     if (location.hash) return;          // respect deep links like #work
+    if (window.__lenis) { window.__lenis.scrollTo(0, { immediate: true }); return; }
     var root = document.documentElement;
     var prev = root.style.scrollBehavior;
     root.style.scrollBehavior = 'auto';

@@ -12,7 +12,7 @@
 <link rel="preload" href="assets/fonts/InterTight-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/style.css">
-<script>if("scrollRestoration" in history)history.scrollRestoration="manual";</script>
+<script>document.documentElement.classList.add("js");if("scrollRestoration" in history)history.scrollRestoration="manual";</script>
 </head>
 <body>
 
@@ -34,11 +34,11 @@
 <main>
 <section class="page-head wrap">
   <p class="meta" data-reveal><a class="ul-link" href="work.html">← All work</a></p>
-  <h1 class="page-title" style="margin-top:1.5rem" data-reveal>Campaign<br>Title Here</h1>
+  <h1 class="page-title" style="margin-top:1.5rem" data-split>Campaign<br>Title Here</h1>
 </section>
 
 <div class="wrap">
-  <div class="case-hero" data-reveal>
+  <div class="case-hero" data-parallax>
     <img src="assets/img/case-hero.svg" alt="Campaign hero image">
   </div>
 
@@ -70,19 +70,19 @@
   <div class="col2">
     <p class="meta col2__label">The idea</p>
     <div data-reveal>
-      <p class="case-idea">State the idea in one sentence a stranger could repeat.</p>
+      <p class="case-idea" data-split>State the idea in one sentence a stranger could repeat.</p>
     </div>
   </div>
 </div>
 
 <div class="wrap">
   <figure class="figure figure--bleed" data-reveal>
-    <img src="assets/img/case-01.svg" alt="Campaign execution">
+    <img src="assets/img/case-01.svg" alt="Campaign execution" data-mask>
   </figure>
 
   <figure class="figure figure--two" data-reveal>
-    <img src="assets/img/case-02.svg" alt="Campaign detail">
-    <img src="assets/img/case-03.svg" alt="Campaign detail">
+    <img src="assets/img/case-02.svg" alt="Campaign detail" data-mask>
+    <img src="assets/img/case-03.svg" alt="Campaign detail" data-mask>
   </figure>
 
   <div class="col2">
@@ -94,7 +94,7 @@
   </div>
 
   <figure class="figure" data-reveal>
-    <img src="assets/img/case-04.svg" alt="Campaign application">
+    <img src="assets/img/case-04.svg" alt="Campaign application" data-mask>
     <figcaption class="meta">Caption. Where this ran, at what scale.</figcaption>
   </figure>
 
@@ -108,7 +108,7 @@
 <footer class="site-foot">
   <div class="wrap">
     <p class="meta" data-reveal>Get in touch</p>
-    <a class="foot-cta" href="mailto:nazarnazzer@gmail.com" data-reveal>nazarnazzer@gmail.com</a>
+    <a class="foot-cta" href="mailto:nazarnazzer@gmail.com" data-split>nazarnazzer@gmail.com</a>
     <div class="foot-grid">
       <div class="foot-links meta">
         <a class="ul-link" href="https://linkedin.com/in/yourhandle">LinkedIn</a>
@@ -122,6 +122,8 @@
   </div>
 </footer>
 
+<script src="assets/js/lenis.min.js"></script>
+<script src="assets/js/motion.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>
