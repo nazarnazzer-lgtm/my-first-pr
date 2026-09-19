@@ -375,8 +375,12 @@ ul,ol{list-style:none;}
 .case-hero img{width:100%;height:100%;object-fit:cover;}
 .case-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1.5rem;
   padding-block:1.5rem;border-block:1px solid var(--line);margin-bottom:clamp(34px,6vh,72px);}
+/* Grid items default to min-width:auto, so a long client name refuses to
+   shrink below its content and pushes the row past the gutter on a phone. */
+.case-meta > div{min-width:0;}
 .case-meta dt{margin-bottom:.35rem;}
-.case-meta dd{font-size:.98rem;letter-spacing:-.01em;}
+.case-meta dd{font-size:.98rem;letter-spacing:-.01em;
+  overflow-wrap:break-word;hyphens:auto;}
 .case-idea{
   font-size:var(--fs-lg);font-weight:500;
   line-height:1.08;letter-spacing:-.038em;
