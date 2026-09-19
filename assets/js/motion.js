@@ -162,6 +162,7 @@
     document.querySelectorAll('[data-split]').forEach(function (el) { watch(el); });
   }
   if (MOTION.imageReveal) {
+    var hs=document.querySelector('.hero-scatter'); if(hs) watch(hs, hs.parentElement||hs);
     document.querySelectorAll('[data-mask]').forEach(function (el) {
       watch(el, el.parentElement || el);
     });
