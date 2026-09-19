@@ -141,7 +141,31 @@
     }, { passive: true });
   }
 
-  /* ---- 6. Footer year ------------------------------------ */
+  /* ---- 6. Video: play in view, pause out, sound toggle --- */
+  // preload="none" keeps the page light with several films on it; the
+  // poster shows until the video is actually scrolled to.
+  var vids = document.querySelectorAll('video[data-autoplay]');
+  if (vids.length && 'IntersectionObserver' in window) {
+    var vio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.play().catch(function () {}); }
+        else { e.target.pause(); }
+      });
+    }, { threshold: 0.25 });
+    vids.forEach(function (v) { vio.observe(v); });
+  }
+
+  document.querySelectorAll('[data-sound]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var v = btn.parentElement.querySelector('video');
+      if (!v) return;
+      v.muted = !v.muted;
+      btn.textContent = v.muted ? 'Sound on' : 'Sound off';
+      if (!v.muted) v.play().catch(function () {});
+    });
+  });
+
+  /* ---- 7. Footer year ------------------------------------ */
   var yearEl = document.querySelector('[data-year]');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 })();

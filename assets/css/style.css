@@ -443,3 +443,37 @@ ul,ol{list-style:none;}
   .motion-ready [data-mask],
   .motion-ready [data-mask] img{transform:none!important;clip-path:none!important;}
 }
+
+/* ---- 17. FILM BLOCKS ------------------------------------- */
+.film{position:relative;margin-block:clamp(28px,5vh,64px);background:var(--panel);overflow:hidden;}
+.film video{width:100%;height:auto;display:block;}
+.film--bleed{margin-inline:calc(var(--gutter) * -1);}
+.film figcaption{margin-top:.7rem;}
+.film--bleed figcaption{margin-inline:var(--gutter);}
+.film-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,28px);
+  margin-block:clamp(28px,5vh,64px);}
+.film-grid .film{margin-block:0;}
+@media (max-width:700px){.film-grid{grid-template-columns:1fr;}}
+
+.sound-btn{
+  position:absolute;right:12px;bottom:12px;z-index:3;
+  font-family:var(--mono);font-size:var(--fs-meta);text-transform:uppercase;letter-spacing:.12em;
+  padding:.45rem .75rem;border-radius:100px;
+  background:color-mix(in srgb, var(--ink) 72%, transparent);color:var(--paper);
+  opacity:0;transition:opacity .3s var(--ease),background .3s var(--ease);
+}
+.film:hover .sound-btn,.sound-btn:focus-visible{opacity:1;}
+.sound-btn:hover{background:var(--accent);}
+@media (hover:none){.sound-btn{opacity:1;}}
+
+/* Pair caption sits under both images, not each */
+.pair-note{margin-top:.7rem;}
+.film--portrait{max-width:min(520px,80vw);margin-inline:auto;}
+.film--hero{margin-top:clamp(18px,3vh,36px);}
+/* Images and video carry width/height so the browser reserves space before
+   they load. These keep them fluid without losing that reserved ratio. */
+.figure img,.film video{width:100%;height:auto;}
+/* Standalone portrait assets. These were made at social crop ratios, so they
+   are held near the width they get in a two-up rather than blown across the
+   full measure. */
+.figure--portrait{max-width:min(760px,88vw);margin-inline:auto;}
