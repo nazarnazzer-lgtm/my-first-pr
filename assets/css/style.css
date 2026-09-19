@@ -728,12 +728,21 @@ p,.prose p,dd,li{text-wrap:pretty;}
 .pan{position:absolute;inset:0;overflow:hidden;}
 .pan img{position:absolute;top:0;left:0;width:100%;height:auto;
   transform:translateY(0);}
-.motion-ready .pan img{animation:sheet-pan 30s ease-in-out infinite alternate;}
+/* Held at the top until the card is actually on screen. A CSS animation
+   otherwise starts at page load, so by the time anyone scrolls down to
+   the card the sheet is already halfway through and the pan looks like
+   it began in the middle. .m-in is set by the reveal observer on the
+   [data-mask] element, which is the card frame itself. Linear, because
+   at this duration an eased curve crawls at both ends. */
+.motion-ready .pan img{
+  animation:sheet-pan 84s linear infinite alternate;
+  animation-play-state:paused;
+}
+.motion-ready .card__media.m-in .pan img{animation-play-state:running;}
 @keyframes sheet-pan{
   from{transform:translateY(0);}
   to{transform:translateY(calc(100cqh - 100%));}
 }
-.card:hover .pan img{animation-duration:12s;}
 @media (prefers-reduced-motion:reduce){
-  .motion-ready .pan img,.card:hover .pan img{animation:none;}
+  .motion-ready .pan img{animation:none;}
 }
