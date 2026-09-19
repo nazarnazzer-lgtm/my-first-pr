@@ -477,3 +477,28 @@ ul,ol{list-style:none;}
    are held near the width they get in a two-up rather than blown across the
    full measure. */
 .figure--portrait{max-width:min(760px,88vw);margin-inline:auto;}
+
+/* ---- 18. LONG CASE STUDY RHYTHM -------------------------- */
+/* Chapter markers. A 16,000px page needs signposts. */
+.chapter{
+  display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
+  padding-top:clamp(44px,8vh,100px);padding-bottom:.9rem;
+  border-bottom:1px solid var(--line);margin-bottom:clamp(20px,3.5vh,40px);
+}
+.chapter h2{font-size:var(--fs-md);font-weight:500;letter-spacing:-.022em;}
+
+/* Width utilities. Varying the measure is what stops a long page
+   reading as one uninterrupted column. */
+.figure--inset,.film--inset{max-width:min(1080px,100%);margin-inline:auto;}
+.figure--two.figure--inset{max-width:min(1080px,100%);}
+
+/* A vertical film sits next to a portrait still without either being cropped */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,28px);
+  align-items:start;margin-block:clamp(28px,5vh,64px);}
+.duo > *{margin-block:0;}
+@media (max-width:700px){.duo{grid-template-columns:1fr;}}
+
+/* Video covers in the gallery tiles */
+.card__media video{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform 1.1s var(--ease);}
+.card:hover .card__media video{transform:scale(1.045);}
