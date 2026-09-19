@@ -735,7 +735,7 @@ p,.prose p,dd,li{text-wrap:pretty;}
    [data-mask] element, which is the card frame itself. Linear, because
    at this duration an eased curve crawls at both ends. */
 .motion-ready .pan img{
-  animation:sheet-pan 84s linear infinite alternate;
+  animation:sheet-pan 76s linear infinite alternate;
   animation-play-state:paused;
 }
 .motion-ready .card__media.m-in .pan img{animation-play-state:running;}
@@ -746,3 +746,20 @@ p,.prose p,dd,li{text-wrap:pretty;}
 @media (prefers-reduced-motion:reduce){
   .motion-ready .pan img{animation:none;}
 }
+
+
+/* ---- 30. MARK OPTIONS BOARD -------------------------------
+   Every direction is shown in each colourway it was drawn in,
+   so the grid reads as a system test rather than a gallery.
+   White tiles because the marks are white-ground artwork; the
+   contrast against the paper is what makes them read as
+   presented work instead of page furniture.
+   ----------------------------------------------------------- */
+.marks{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));
+  gap:clamp(10px,1.4vw,20px);margin-block:clamp(28px,5vh,60px);}
+.mark{position:relative;background:#fff;border:1px solid var(--line);
+  aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
+  padding:clamp(12px,1.8vw,26px);overflow:hidden;}
+.mark img{width:100%;height:100%;object-fit:contain;}
+.mark__id{position:absolute;top:.55rem;left:.75rem;opacity:.4;}
+@media (max-width:520px){.marks{grid-template-columns:1fr 1fr;}}
