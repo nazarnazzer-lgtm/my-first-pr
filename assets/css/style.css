@@ -874,3 +874,15 @@ p,.prose p,dd,li{text-wrap:pretty;}
   background:var(--paper);
 }
 .hero--dark .hero-foot{border-top-color:var(--line);}
+
+/* ---- 33. SHEET PANELS -------------------------------------
+   A long single-page document read across instead of down.
+   The caption spans the row so it does not become a column.
+   ----------------------------------------------------------- */
+.sheet-panels{display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(8px,1.2vw,18px);align-items:start;}
+.sheet-panels img{width:100%;height:auto;display:block;}
+.sheet-panels figcaption{grid-column:1/-1;}
+@media (max-width:520px){
+  .sheet-panels{grid-template-columns:1fr;max-width:340px;margin-inline:auto;}
+}
