@@ -390,6 +390,10 @@ ul,ol{list-style:none;}
 .figure img{width:100%;background:var(--panel);}
 .figure figcaption{margin-top:.7rem;}
 .figure--bleed{margin-inline:calc(var(--gutter) * -1);}
+/* Three stills of one object, read left to right as a sequence. */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.6vw,22px);}
+.trio figcaption{grid-column:1/-1;margin-top:.7rem;}
+@media (max-width:640px){.trio{grid-template-columns:1fr;max-width:420px;margin-inline:auto;}}
 .figure--two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,28px);}
 @media (max-width:700px){.figure--two{grid-template-columns:1fr;}}
 
