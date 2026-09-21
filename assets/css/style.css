@@ -378,6 +378,10 @@ ul,ol{list-style:none;}
 /* Grid items default to min-width:auto, so a long client name refuses to
    shrink below its content and pushes the row past the gutter on a phone. */
 .case-meta > div{min-width:0;}
+/* Contact line on the resume carries real links; they should read as the
+   meta text around them, not as default browser blue. */
+.page-head .meta a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line);}
+.page-head .meta a:hover{border-bottom-color:currentColor;}
 .case-meta dt{margin-bottom:.35rem;}
 .case-meta dd{font-size:.98rem;letter-spacing:-.01em;
   overflow-wrap:break-word;hyphens:auto;}
@@ -420,8 +424,11 @@ ul,ol{list-style:none;}
 @media print{
   .site-head,.site-foot,.marquee,.no-print{display:none!important;}
   :root{--gutter:0;}
-  body{background:#fff;color:#000;font-size:9.2pt;line-height:1.29;}
+  body{background:#fff;color:#000;font-size:9.4pt;line-height:1.33;}
   main{padding:0!important;}
+  /* The profile paragraph repeats what the covering note says and what the work
+     itself shows. It stays on the page and comes off the PDF. */
+  .col2--profile{display:none!important;}
   .wrap{padding:0!important;max-width:none;}
   .page-head{padding:0 0 10pt!important;margin:0!important;}
   .page-title{font-size:21pt;font-stretch:100%;letter-spacing:-.02em;line-height:1;margin:0;}
@@ -435,7 +442,7 @@ ul,ol{list-style:none;}
      system sees EXPERIENCE followed by the skills list. Stacked, the text
      extracts in the order it is written. */
   .col2{grid-template-columns:1fr;gap:2pt;break-inside:auto;
-    border-color:#ccc;padding-block:3pt!important;margin:0!important;}
+    border-color:#ccc;padding-block:11pt!important;margin:0!important;}
   .col2__label{position:static;margin-bottom:2pt;}
   /* Single column in print, so the prose has no reason to stay at 62ch.
      Full measure turns the profile from four lines into two. */
@@ -446,11 +453,11 @@ ul,ol{list-style:none;}
   .job__org::before{content:"\00b7\00a0";}
   .prose p,.lead{margin-block:0 4pt;}
   .lead{font-size:11pt;line-height:1.3;}
-  .job{page-break-inside:avoid;margin:0 0 3pt!important;padding:0!important;}
+  .job{page-break-inside:avoid;margin:0 0 7.5pt!important;padding:0!important;}
   .job__role{font-size:10.6pt;font-stretch:100%;letter-spacing:-.015em;}
   .job__bullets{margin:2pt 0 0;}
-  .job__bullets li{margin:0 0 0.7pt;}
-  .list-2{gap:3pt 14pt!important;}
+  .job__bullets li{margin:0 0 1.7pt;}
+  .list-2{gap:8pt 14pt!important;}
   .list-2 li{margin:0;}
   /* Craft and Software are single words and run four-up; Recognition lines
      are long sentences and stay two-up so they do not wrap to three lines. */
