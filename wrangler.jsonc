@@ -1,0 +1,10 @@
+{
+  // Static site: no build step, no Worker code. The whole repo root is the
+  // asset directory, and anything unmatched falls through to our own 404.
+  "name": "nazarsementsov",
+  "compatibility_date": "2026-09-21",
+  "assets": {
+    "directory": "./",
+    "not_found_handling": "404-page"
+  }
+}
