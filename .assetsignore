@@ -1,0 +1,8 @@
+# Pointing the asset directory at the repo root means wrangler would upload
+# git's internals too, and a pack file is far over the 25 MiB asset limit.
+.git
+.gitignore
+.assetsignore
+wrangler.jsonc
+node_modules
+README.md
