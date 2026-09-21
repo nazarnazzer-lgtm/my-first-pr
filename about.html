@@ -94,26 +94,33 @@
            pour sits in it, keyed to the shop in the photograph above. -->
       <div class="about-foot">
         <figure class="brew" data-reveal>
-          <svg viewBox="0 0 132 148" role="img" aria-label="A cup of coffee being poured"
-               fill="none" stroke="currentColor" stroke-width="1.4"
+          <svg viewBox="20 0 112 148" role="img" aria-label="A cup of coffee being poured"
+               fill="none" stroke="currentColor"
                stroke-linecap="round" stroke-linejoin="round">
             <defs>
               <clipPath id="brewCup">
                 <path d="M32 64h64l-6.5 48.5A11 11 0 0 1 78.6 122H49.4a11 11 0 0 1-10.9-9.5L32 64Z"/>
               </clipPath>
+              <!-- Crema on top, espresso at the bottom. The gradient rides the
+                   rect, so the light band stays on the surface as it fills. -->
+              <linearGradient id="brewCoffee" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#C98A4B"/>
+                <stop offset=".16" stop-color="#8A5626"/>
+                <stop offset="1" stop-color="#3A2010"/>
+              </linearGradient>
             </defs>
             <path class="brew__steam brew__steam--a" d="M55 40c-5-6 5-11 0-17"/>
             <path class="brew__steam brew__steam--b" d="M69 38c-5-6 5-11 0-17"/>
             <line class="brew__stream" x1="64" y1="2" x2="64" y2="62"/>
             <g clip-path="url(#brewCup)">
               <rect class="brew__liquid" x="30" y="60" width="68" height="66"
-                    fill="currentColor" stroke="none"/>
+                    fill="url(#brewCoffee)" stroke="none"/>
             </g>
             <path d="M32 64h64l-6.5 48.5A11 11 0 0 1 78.6 122H49.4a11 11 0 0 1-10.9-9.5L32 64Z"/>
             <path d="M96 74h7a13 13 0 0 1 0 26h-4.5"/>
             <line x1="22" y1="130" x2="110" y2="130"/>
           </svg>
-          <figcaption class="meta">Most mornings, next door at La&nbsp;Cabra.</figcaption>
+          <figcaption class="meta">Most mornings at La&nbsp;Cabra.</figcaption>
         </figure>
 
         <figure class="figure about-offset" data-reveal>
