@@ -11,13 +11,13 @@
      three below. Nothing else needs to change. -------------- */
 
   /* LIGHT (active) */
-  --paper:      #F2F0EA;          /* warm off-white background       */
-  --ink:        #14130F;          /* warm off-black text             */
+  --paper:      #EDEDED;          /* neutral grey background         */
+  --ink:        #121212;          /* neutral off-black text          */
   --accent:     #FF3B14;          /* signal colour. Change me first. */
 
   /* DARK (inactive. Swap the comment markers to use)
-  --paper:      #0C0C0B;
-  --ink:        #EDEAE2;
+  --paper:      #0E0E0E;
+  --ink:        #E8E8E8;
   --accent:     #FF4A26;
   */
 
@@ -727,8 +727,8 @@ p,.prose p,dd,li{text-wrap:pretty;}
    Put it on a section when the work wants a black ground.
    ----------------------------------------------------------- */
 .on-dark{
-  --paper:#0C0C0B;
-  --ink:#EDEAE2;
+  --paper:#0E0E0E;
+  --ink:#E8E8E8;
   --accent:#FF4A26;
   background:var(--paper);
   color:var(--ink);
@@ -902,8 +902,8 @@ p,.prose p,dd,li{text-wrap:pretty;}
    the black reads as a deliberate band rather than a theme.
    ----------------------------------------------------------- */
 .hero--dark{
-  --paper:#0C0C0B;
-  --ink:#EDEAE2;
+  --paper:#0E0E0E;
+  --ink:#E8E8E8;
   --accent:#FF4A26;
   color:var(--ink);
   position:relative;
