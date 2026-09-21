@@ -48,17 +48,19 @@
   <div class="col2">
     <p class="meta col2__label">Profile</p>
     <div>
-      <!-- Quick facts. The things a recruiter scans for first -->
-      <dl class="case-meta" data-reveal style="margin-top:0">
-        <div><dt class="meta">From</dt><dd>Moscow, Russia</dd></div>
-        <div><dt class="meta">Based</dt><dd>New York City</dd></div>
-        <div><dt class="meta">Education</dt><dd>BFA Advertising &amp; Branding, SCAD</dd></div>
-        <div><dt class="meta">Focus</dt><dd>Art Direction · Brand · Campaign</dd></div>
-      </dl>
-
-      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:clamp(20px,4vw,48px);align-items:start">
-        <img width="727" height="1080" src="assets/about/portrait-02.jpg"
-             alt="Nazar Sementsov" loading="lazy" data-mask style="width:100%">
+      <div class="about-grid">
+        <!-- The portrait rail carries the quick facts. On its own the picture
+             ran out a third of the way down the text and left a dead column. -->
+        <div class="about-side">
+          <img width="727" height="1080" src="assets/about/portrait-02.jpg"
+               alt="Nazar Sementsov" loading="lazy" data-mask>
+          <dl class="case-meta case-meta--stack" data-reveal>
+            <div><dt class="meta">From</dt><dd>Moscow, Russia</dd></div>
+            <div><dt class="meta">Based</dt><dd>New York City</dd></div>
+            <div><dt class="meta">Education</dt><dd>BFA Advertising &amp; Branding, SCAD</dd></div>
+            <div><dt class="meta">Focus</dt><dd>Art Direction · Brand · Campaign</dd></div>
+          </dl>
+        </div>
         <div class="prose" data-reveal data-reveal-delay="80">
           <p class="lead" data-split>I'm an art director building brand systems and
           campaigns across culture, fashion and the public sector.</p>

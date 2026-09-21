@@ -39,7 +39,9 @@
 </section>
 
 <div class="wrap">
-  <figure class="figure film--bleed film--hero" data-reveal>
+  <!-- Capped to the source width: past ~1680 the bleed was asking a 1500px
+       screenshot to cover the viewport and it went soft. -->
+  <figure class="figure film--bleed film--hero" data-reveal style="max-width:min(1500px,100%);margin-inline:auto">
     <img width="1500" height="844" src="assets/sawdust/slide-22.jpg"
          alt="Season 12 lobby screen" loading="lazy" data-mask>
     <figcaption class="meta">Lobby screen. The season lockup, run alongside the artist.</figcaption>

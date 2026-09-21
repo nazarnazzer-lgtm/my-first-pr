@@ -422,7 +422,11 @@ ul,ol{list-style:none;}
   .page-head{padding:0 0 10pt!important;margin:0!important;}
   .page-title{font-size:21pt;font-stretch:100%;letter-spacing:-.02em;line-height:1;margin:0;}
   .meta{letter-spacing:.05em;font-size:6.8pt;}
-  .col2{grid-template-columns:7.8rem 1fr;gap:9pt;page-break-inside:avoid;
+  /* Experience is taller than a sheet of paper, so asking the whole block to
+     stay together only pushed it onto a fresh page and then split it anyway,
+     leaving page one three-quarters empty. Let sections flow; the units that
+     must not break are the individual jobs. */
+  .col2{grid-template-columns:7.8rem 1fr;gap:9pt;break-inside:auto;
     border-color:#ccc;padding-block:7pt!important;margin:0!important;}
   .col2__label{position:static;}
   .prose p,.lead{margin-block:0 4pt;}
@@ -649,6 +653,34 @@ p,.prose p,dd,li{text-wrap:pretty;}
 .held__note{opacity:.62;margin:0;}
 
 /* ---- 25. About portraits ---- */
+/* About: the portrait and the quick facts share one rail. The picture alone
+   is roughly two thirds the height of the text beside it, so the column used
+   to empty out halfway down; the facts finish it and read as a spec sheet. */
+.about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);
+  gap:clamp(20px,4vw,56px);align-items:start;}
+/* Capped on the rail rather than the image, so the facts keep the photo's
+   right edge. Left to grow the portrait outran the text beside it, which only
+   gets shorter as its column widens. */
+.about-side{display:flex;flex-direction:column;gap:clamp(20px,3.5vh,36px);
+  max-width:380px;}
+.about-side img{width:100%;}
+
+/* One fact per row at full rail width, so a value like
+   "Art Direction · Brand · Campaign" is never broken across two lines. */
+.case-meta--stack{grid-template-columns:1fr;gap:0 clamp(20px,3vw,40px);
+  padding-block:0;border-block:0;margin-bottom:0;
+  border-bottom:1px solid var(--line);}
+.case-meta--stack > div{padding-block:.85rem;border-top:1px solid var(--line);}
+
+/* Below this the rail is too narrow to hold a line of that length, so the
+   two columns stack and the facts spread instead. */
+@media (max-width:1000px){
+  .about-grid{grid-template-columns:1fr;gap:clamp(24px,5vh,44px);}
+  .about-side{max-width:none;}
+  .about-side img{max-width:min(100%,360px);}
+  .case-meta--stack{grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));}
+}
+
 .about-offset{width:min(46%,420px);margin:clamp(30px,6vh,70px) 0 0 auto;}
 @media (max-width:760px){.about-offset{width:min(78%,340px);margin-inline:auto 0;}}
 
