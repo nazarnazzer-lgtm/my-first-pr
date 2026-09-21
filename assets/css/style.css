@@ -627,6 +627,12 @@ p,.prose p,dd,li{text-wrap:pretty;}
 /* ---- 23. CYCLING CARD PREVIEW ---------------------------- */
 /* A card that turns over a few frames of the work instead of holding
    one still, so a season reads as a season from the gallery. */
+/* The Folksbiene card rotates the identity options rather than a photograph.
+   Marks have to be contained, not cropped, and want the page's paper behind
+   them instead of the panel grey a photo sits on. */
+.card__media--logo{background:#fff;}
+.slides.slides--logo img{object-fit:contain;padding:clamp(18px,8%,48px);}
+
 .slides{position:relative;width:100%;height:100%;}
 .slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   opacity:0;transition:opacity .85s var(--ease);}
