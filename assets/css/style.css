@@ -713,6 +713,47 @@ p,.prose p,dd,li{text-wrap:pretty;}
   .case-meta--stack{grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));}
 }
 
+/* The offset portrait is right-aligned and leaves a long empty run beside it.
+   A drawn pour lives there, sized small so it reads as a margin note rather
+   than an illustration competing with the photographs. */
+.about-foot{display:grid;grid-template-columns:1fr auto;
+  gap:clamp(20px,5vw,72px);align-items:end;}
+.about-foot .about-offset{width:min(100%,420px);margin:clamp(30px,6vh,70px) 0 0 0;}
+.brew{margin:0 0 clamp(6px,2vh,24px);width:min(100%,190px);color:var(--muted);}
+.brew svg{width:100%;height:auto;display:block;overflow:visible;}
+.brew figcaption{margin-top:1rem;max-width:28ch;}
+.brew__liquid{opacity:.22;transform:translateY(58px);}
+.brew__stream{stroke-dasharray:5 9;opacity:0;}
+.brew__steam{opacity:0;}
+
+/* Gated on motion-ready so it never runs for reduced-motion visitors, and the
+   cup simply sits there full. */
+.motion-ready .brew__liquid{animation:brew-fill 8s var(--ease) infinite;}
+.motion-ready .brew__stream{animation:brew-pour 8s linear infinite, brew-flow .6s linear infinite;}
+.motion-ready .brew__steam--a{animation:brew-steam 8s ease-out infinite;}
+.motion-ready .brew__steam--b{animation:brew-steam 8s ease-out infinite .5s;}
+
+@keyframes brew-fill{
+  0%,10%{transform:translateY(58px);}
+  46%{transform:translateY(8px);}
+  86%{transform:translateY(8px);}
+  100%{transform:translateY(58px);}
+}
+@keyframes brew-pour{
+  0%,7%{opacity:0;} 11%,42%{opacity:1;} 48%,100%{opacity:0;}
+}
+@keyframes brew-flow{to{stroke-dashoffset:-14;}}
+@keyframes brew-steam{
+  0%,50%{opacity:0;transform:translateY(5px);}
+  64%{opacity:.55;}
+  88%{opacity:0;transform:translateY(-9px);}
+  100%{opacity:0;transform:translateY(-9px);}
+}
+@media (max-width:760px){
+  .about-foot{grid-template-columns:1fr;justify-items:end;}
+  .brew{justify-self:start;}
+}
+
 .about-offset{width:min(46%,420px);margin:clamp(30px,6vh,70px) 0 0 auto;}
 @media (max-width:760px){.about-offset{width:min(78%,340px);margin-inline:auto 0;}}
 
