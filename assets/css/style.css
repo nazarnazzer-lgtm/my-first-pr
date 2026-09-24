@@ -225,6 +225,17 @@ ul,ol{list-style:none;}
   font-family:var(--mono);font-size:var(--fs-meta);letter-spacing:.14em;
   color:var(--paper);mix-blend-mode:difference;
 }
+/* Award mark in the opposite corner to the index. `.card__media img` is
+   (0,1,1) and would otherwise force this to object-fit:cover and scale it
+   with the photo on hover, so both are overridden at higher specificity. */
+.card__media .card__award{
+  position:absolute;top:14px;right:14px;z-index:2;
+  width:clamp(54px,7.5vw,78px);height:auto;
+  object-fit:contain;transform:none;
+  box-shadow:0 2px 16px color-mix(in srgb, #000 22%, transparent);
+}
+.card:hover .card__media .card__award{transform:none;}
+
 .card__body{padding-top:1rem;display:flex;flex-direction:column;gap:.35rem;}
 /* The title sits on a flex row with the year. Archivo is wider than
    Inter Tight at the same size, so the title needs min-width:0 to be
@@ -415,6 +426,16 @@ ul,ol{list-style:none;}
 .foot-cta:hover{color:var(--accent);}
 .foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2rem;margin-top:clamp(40px,7vh,88px);}
 .foot-links{display:flex;flex-wrap:wrap;gap:1.4rem;}
+/* Badge beside the citation rather than floated in the text, so the mark
+   and the names it belongs to read as one unit. */
+.award-block{display:grid;grid-template-columns:auto minmax(0,1fr);
+  gap:clamp(20px,4vw,56px);align-items:center;}
+.award-block__mark{width:min(38vw,190px);height:auto;}
+@media (max-width:700px){
+  .award-block{grid-template-columns:1fr;gap:clamp(16px,3vh,28px);}
+  .award-block__mark{width:min(48vw,150px);}
+}
+
 .foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--line-2);}
 
 /* ---- 15. PRINT (resume → clean PDF via Cmd+P) ------------ */
