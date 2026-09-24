@@ -764,13 +764,16 @@ p,.prose p,dd,li{text-wrap:pretty;}
 .brew svg{width:100%;height:auto;display:block;overflow:visible;stroke-width:.55;}
 .brew figcaption{margin-top:1rem;max-width:28ch;}
 .brew__liquid{transform:translateY(58px);}
-.brew__stream{stroke:#7A4A22;stroke-width:1.1;stroke-dasharray:6 5;opacity:0;}
+/* Scales down from the spout, so the stream falls rather than appearing
+   whole. fill-box keeps the origin on the shape, not the viewBox. */
+.brew__stream{transform-box:fill-box;transform-origin:top center;
+  transform:scaleY(0);opacity:0;}
 .brew__steam{opacity:0;}
 
 /* Gated on motion-ready so it never runs for reduced-motion visitors, and the
    cup simply sits there full. */
 .motion-ready .brew__liquid{animation:brew-fill 8s var(--ease) infinite;}
-.motion-ready .brew__stream{animation:brew-pour 8s linear infinite, brew-flow .6s linear infinite;}
+.motion-ready .brew__stream{animation:brew-pour 8s var(--ease) infinite;}
 .motion-ready .brew__steam--a{animation:brew-steam 8s ease-out infinite;}
 .motion-ready .brew__steam--b{animation:brew-steam 8s ease-out infinite .5s;}
 
@@ -780,10 +783,14 @@ p,.prose p,dd,li{text-wrap:pretty;}
   86%{transform:translateY(8px);}
   100%{transform:translateY(58px);}
 }
+/* Falls at 8%, lands just as the cup starts filling, holds while it fills,
+   then stops. Paired with brew-fill, which runs 10% to 46%. */
 @keyframes brew-pour{
-  0%,7%{opacity:0;} 11%,42%{opacity:1;} 48%,100%{opacity:0;}
+  0%,7%   {transform:scaleY(0);opacity:0;}
+  8%      {transform:scaleY(0);opacity:1;}
+  15%,44% {transform:scaleY(1);opacity:1;}
+  47%,100%{transform:scaleY(1);opacity:0;}
 }
-@keyframes brew-flow{to{stroke-dashoffset:-11;}}
 @keyframes brew-steam{
   0%,50%{opacity:0;transform:translateY(5px);}
   64%{opacity:.55;}
