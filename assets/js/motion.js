@@ -26,10 +26,22 @@
       var nodes = [], n;
       while ((n = walker.nextNode())) { if (n.textContent.trim()) nodes.push(n); }
       for (var k = nodes.length - 1; k >= 0; k--) {
-        var t = nodes[k].textContent.replace(/\s+$/, '');
+        var raw = nodes[k].textContent;
+        // Keep whatever trailed. Writing the trimmed string back was eating
+        // the space in front of an inline element, so "Award <span>2026" and
+        // "Heinz <span>(spec)" rendered with the two run together.
+        var tail = (raw.match(/\s+$/) || [''])[0];
+        var t = raw.slice(0, raw.length - tail.length);
         var i = t.lastIndexOf(' ');
         if (i > 0) {                       // bind here and stop
-          nodes[k].textContent = t.slice(0, i) + '\u00A0' + t.slice(i + 1);
+          nodes[k].textContent = t.slice(0, i) + '\u00A0' + t.slice(i + 1) + tail;
+          return;
+        }
+        // A lone word ahead of an inline element (a year, a tag) has nothing
+        // to bind to in its own node, so bind it across to the word before.
+        if (k > 0 && /\s$/.test(nodes[k - 1].textContent)) {
+          nodes[k - 1].textContent =
+            nodes[k - 1].textContent.replace(/\s+$/, '\u00A0');
           return;
         }
       }
