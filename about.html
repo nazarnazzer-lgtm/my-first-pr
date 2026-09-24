@@ -96,37 +96,35 @@
            pour sits in it, keyed to the shop in the photograph above. -->
       <div class="about-foot">
         <figure class="brew" data-reveal>
-          <svg viewBox="20 0 112 148" role="img" aria-label="A cup of coffee being poured"
-               fill="none" stroke="currentColor"
-               stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="20 0 112 148" role="img" aria-label="Coffee beans dropping">
             <defs>
-              <clipPath id="brewCup">
-                <path d="M32 64h64l-6.5 48.5A11 11 0 0 1 78.6 122H49.4a11 11 0 0 1-10.9-9.5L32 64Z"/>
-              </clipPath>
-              <!-- Crema on top, espresso at the bottom. The gradient rides the
-                   rect, so the light band stays on the surface as it fills. -->
-              <linearGradient id="brewCoffee" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#C98A4B"/>
-                <stop offset=".16" stop-color="#8A5626"/>
-                <stop offset="1" stop-color="#3A2010"/>
+              <linearGradient id="beanFill" x1="0" y1="0" x2=".85" y2="1">
+                <stop offset="0" stop-color="#815026"/>
+                <stop offset=".55" stop-color="#5A3317"/>
+                <stop offset="1" stop-color="#36200F"/>
               </linearGradient>
-              <linearGradient id="brewPour" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#8A5626"/>
-                <stop offset=".55" stop-color="#6B3E1E"/>
-                <stop offset="1" stop-color="#573116"/>
-              </linearGradient>
+              <g id="cbean">
+                <ellipse rx="6.6" ry="9.2" fill="url(#beanFill)"/>
+                <path d="M0 -7.8 C-2.1 -3.6 -2.1 3.6 0 7.8"
+                      fill="none" stroke="#2A1809" stroke-width="1.05" opacity=".5"/>
+              </g>
             </defs>
-            <path class="brew__steam brew__steam--a" d="M55 40c-5-6 5-11 0-17"/>
-            <path class="brew__steam brew__steam--b" d="M69 38c-5-6 5-11 0-17"/>
-            <path class="brew__stream" fill="url(#brewPour)" stroke="none"
-                  d="M62.9 1 C62.5 20 61.9 42 61.7 63 L66.3 63 C66.1 42 65.5 20 65.1 1 Z"/>
-            <g clip-path="url(#brewCup)">
-              <rect class="brew__liquid" x="30" y="60" width="68" height="66"
-                    fill="url(#brewCoffee)" stroke="none"/>
+
+            <g transform="translate(46 0)"><g class="bean bean--a"><use href="#cbean"/></g></g>
+            <g transform="translate(70 0)"><g class="bean bean--b"><use href="#cbean"/></g></g>
+            <g transform="translate(96 0)"><g class="bean bean--c"><use href="#cbean"/></g></g>
+            <g transform="translate(112 0)"><g class="bean bean--d"><use href="#cbean"/></g></g>
+            <g transform="translate(58 0)"><g class="bean bean--e"><use href="#cbean"/></g></g>
+
+            <!-- Drawn after the falling beans, so one arriving passes behind the
+                 pile instead of fading out as a ghost above it. -->
+            <g class="bean-rest">
+              <g transform="translate(62 128) rotate(-74)"><use href="#cbean"/></g>
+              <g transform="translate(76 131) rotate(14)"><use href="#cbean"/></g>
+              <g transform="translate(89 127) rotate(-32)"><use href="#cbean"/></g>
             </g>
-            <path d="M32 64h64l-6.5 48.5A11 11 0 0 1 78.6 122H49.4a11 11 0 0 1-10.9-9.5L32 64Z"/>
-            <path d="M96 74h7a13 13 0 0 1 0 26h-4.5"/>
-            <line x1="22" y1="130" x2="110" y2="130"/>
+            <line x1="30" y1="139" x2="122" y2="139"
+                  stroke="currentColor" stroke-width=".7" stroke-linecap="round"/>
           </svg>
           <figcaption class="meta">Most mornings at La&nbsp;Cabra.</figcaption>
         </figure>
