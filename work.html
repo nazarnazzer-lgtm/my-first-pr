@@ -85,9 +85,15 @@
     </article>
     <article class="card" data-tags="scad product industrial branding identity social accessibility award" data-reveal>
       <a href="project-nr560.html">
-        <div class="card__media" data-mask>
+        <div class="card__media card__media--wide" data-mask>
           <span class="card__idx">02</span>
-          <img width="1200" height="900" src="assets/nr560/card.jpg" alt="The NR-560 powered adult changing table" loading="eager">
+          <!-- The badge sits outside .slides so the slideshow does not cycle it. -->
+          <div class="slides" data-slideshow>
+            <img width="1200" height="900" src="assets/nr560/card-1.jpg" alt="The NR-560 powered adult changing table" loading="eager" class="on">
+            <img width="1200" height="900" src="assets/nr560/card-2.jpg" alt="The NR-560 raised, in a daylit room" loading="lazy">
+            <img width="1200" height="900" src="assets/nr560/card-3.jpg" alt="Detail of the slide-out storage surface" loading="lazy">
+            <img width="1200" height="900" src="assets/nr560/card-4.jpg" alt="The NR-560 seen from the side" loading="lazy">
+          </div>
           <img class="card__award" width="360" height="312" src="assets/nr560/award-badge.png" alt="European Product Design Award 2026 winner" loading="eager">
         </div>
         <div class="card__body">
@@ -231,7 +237,7 @@
       <span class="meta">Brand Direction, Campaign</span>
       <span class="meta">2026</span>
     </a>
-    <a class="index-row" href="project-nr560.html" data-tags="scad product industrial branding identity social accessibility award" data-preview="assets/nr560/card.jpg">
+    <a class="index-row" href="project-nr560.html" data-tags="scad product industrial branding identity social accessibility award" data-preview="assets/nr560/card-1.jpg">
       <span class="meta">02</span>
       <span class="index-row__title">NR-560</span>
       <span class="meta">SCAD</span>
