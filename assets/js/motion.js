@@ -13,7 +13,6 @@
     imageReveal:  true,   // images wipe open instead of appearing
     parallax:     true,   // large editorial images drift as you scroll
     magnetic:     true,   // buttons lean toward the cursor
-    pixelReveal:  true,   // images resolve out of coarse blocks
     pageCut:      true,   // pages cut to black and back on navigation
     speed:        1.3     // 1 = as tuned. 1.4 = slower, 0.7 = snappier
   };
@@ -206,103 +205,60 @@
     }
   }
 
-  /* ---- 6. Pixel resolve ---------------------------------- 
-     Images arrive as coarse blocks and sharpen in a few discrete
-     steps. Cheap, because the intermediate frames are tiny: a
-     90px-wide PNG blown up by the browser with image-rendering
-     set to pixelated, which keeps the block edges hard. No DOM is
-     added and nothing is positioned, so grid figures are safe. */
-  if (MOTION.pixelReveal && 'IntersectionObserver' in window) {
-    var PX_STEPS = [4, 8, 15, 28, 52, 96];     // blocks across, coarse to fine
-    var PX_HOLD  = 125 * MOTION.speed;         // ms a step is held
+  /* ---- 6. Cut to dark between pages ----------------------
+     Opacity on a promoted layer and nothing else, so the fade stays on the
+     compositor. The earlier version blurred the whole viewport through a
+     backdrop-filter, which is what made it stutter.
 
-    var pxFrame = function (img, cols) {
-      var c = document.createElement('canvas');
-      c.width  = cols;
-      c.height = Math.max(2, Math.round(cols * img.naturalHeight / img.naturalWidth));
-      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-      return c.toDataURL();
-    };
-
-    var pxRun = function (img) {
-      // naturalWidth changes as the src is swapped, so every frame is built
-      // before the first swap.
-      var real = img.currentSrc || img.src, frames;
-      try { frames = PX_STEPS.map(function (n) { return pxFrame(img, n); }); }
-      catch (err) { img.classList.add('px-done'); return; }   // tainted canvas
-      var i = 0;
-      img.classList.add('px-run');
-      (function step() {
-        if (i < frames.length) { img.src = frames[i++]; setTimeout(step, PX_HOLD); }
-        else {
-          img.src = real;                      // already in memory cache
-          img.classList.remove('px-run');
-          img.classList.add('px-done');
-        }
-      })();
-    };
-
-    // Anything the wipe was covering that is actually an image; videos keep
-    // the wipe, since there is no frame to sample until they play.
-    document.querySelectorAll('[data-mask]').forEach(function (host) {
-      var img = host.tagName === 'IMG' ? host : host.querySelector('img');
-      if (!img) return;
-      // Slideshow frames are opacity-driven, and .px-done{opacity:1} outranks
-      // .slides img{opacity:0}, which would pin the first frame on and stop
-      // the rotation. Those keep the wipe.
-      if (img.closest('.slides')) return;
-      host.classList.add('px-host');
-      img.setAttribute('data-px', '');
-    });
-
-    var pxSeen = new WeakSet();
-    var pxObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting || pxSeen.has(e.target)) return;
-        pxSeen.add(e.target);
-        pxObs.unobserve(e.target);
-        var img = e.target;
-        // Staggered within a row so a grid does not resolve in lockstep.
-        var wait = (e.target.closest('.card') ? 1 : 0) *
-                   (Array.prototype.indexOf.call(
-                      document.querySelectorAll('.card'), e.target.closest('.card')) % 3) * 110;
-        var go = function () { setTimeout(function () { pxRun(img); }, wait); };
-        if (img.complete && img.naturalWidth) go();
-        else img.addEventListener('load', go, { once: true });
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -4% 0px' });
-
-    document.querySelectorAll('img[data-px]').forEach(function (i) { pxObs.observe(i); });
-  }
-
-  /* ---- 7. Cut to dark between pages ----------------------
-     The overlay is created by JS and sits at opacity 0, so with JS off or
-     broken there is nothing to get stuck behind. Arrival plays as a plain
-     CSS animation that needs no class removed afterwards; only the leave
-     needs a class, and the navigation is on a timer that always fires. */
+     The gap that actually reads as lag is between the screen going black and
+     the next page painting, so internal links are prefetched on hover and the
+     black is only held for as long as the fade needs. */
   if (MOTION.pageCut) {
     var cut = document.createElement('div');
     cut.className = 'page-cut';
+    cut.innerHTML = '<span class="page-cut__n" aria-hidden="true">N</span>';
     document.body.appendChild(cut);
+
+    var LEAVE = 340;                          // fade out, then go
+    var primed = {};
+    var prime = function (href) {             // warm the next page on hover
+      if (primed[href]) return;
+      primed[href] = 1;
+      var l = document.createElement('link');
+      l.rel = 'prefetch'; l.href = href; l.as = 'document';
+      document.head.appendChild(l);
+    };
+
+    var pageHref = function (a) {
+      if (!a || a.hasAttribute('download')) return null;
+      if (a.target && a.target !== '_self') return null;
+      var url;
+      try { url = new URL(a.getAttribute('href'), location.href); } catch (err) { return null; }
+      if (url.origin !== location.origin) return null;              // offsite
+      if (url.pathname === location.pathname) return null;          // anchor or self
+      if (!/(^\/$|\.html?$|\/$)/.test(url.pathname)) return null;   // pdf, image, asset
+      return url.href;
+    };
+
+    document.addEventListener('mouseover', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      var href = pageHref(a);
+      if (href) prime(href);
+    }, { passive: true });
 
     var leaving = false;
     document.addEventListener('click', function (e) {
       if (leaving || e.defaultPrevented || e.button !== 0) return;
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      var a = e.target.closest ? e.target.closest('a[href]') : null;
-      if (!a || a.hasAttribute('download')) return;
-      if (a.target && a.target !== '_self') return;
-
-      var url;
-      try { url = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
-      if (url.origin !== location.origin) return;                 // offsite
-      if (url.pathname === location.pathname) return;             // anchor or self
-      if (!/(^\/$|\.html?$|\/$)/.test(url.pathname)) return;      // pdf, image, asset
+      var href = pageHref(e.target.closest ? e.target.closest('a[href]') : null);
+      if (!href) return;
 
       e.preventDefault();
       leaving = true;
+      // Lenis keeps running its rAF through the fade and competes for frames.
+      if (window.__lenis && window.__lenis.stop) window.__lenis.stop();
       document.documentElement.classList.add('is-leaving');
-      setTimeout(function () { location.href = url.href; }, 560 * MOTION.speed);
+      setTimeout(function () { location.href = href; }, LEAVE);
     });
 
     // Coming back through history can restore a page mid-fade.
@@ -310,6 +266,7 @@
       if (ev.persisted) {
         leaving = false;
         document.documentElement.classList.remove('is-leaving');
+        if (window.__lenis && window.__lenis.start) window.__lenis.start();
       }
     });
   }

@@ -464,8 +464,6 @@ ul,ol{list-style:none;}
 @page{size:Letter;margin:.4in;}
 @media print{
   .site-head,.site-foot,.marquee,.no-print{display:none!important;}
-  /* A reveal that starts at opacity:0 must never reach paper. */
-  img[data-px]{opacity:1!important;image-rendering:auto!important;}
   .print-only{display:inline!important;}
   :root{--gutter:0;}
   body{background:#fff;color:#000;font-size:10.15pt;line-height:1.33;}
@@ -510,21 +508,40 @@ ul,ol{list-style:none;}
   a{text-decoration:none;color:#000;}
 }
 
-/* Cut to dark. Base is transparent, so an overlay left behind by a failed
-   script is inert rather than a black screen. The arrival plays once with no
-   fill, landing back on that transparent base without JS touching it. */
+/* Cut to dark. Opacity only, on a promoted layer, so the whole thing stays on
+   the compositor: a backdrop-filter here blurred the entire viewport every
+   frame and was the source of the stutter.
+
+   Base is transparent and the arrival is a plain animation with no fill, so
+   an overlay left behind by a failed script is inert rather than a black
+   screen, and nothing has to be cleaned up by JS. The N matches the tab icon:
+   Archivo 800 at 104% width, the same letter-spacing and the same two greys. */
 .page-cut{
-  position:fixed;inset:0;z-index:200;
-  background:color-mix(in srgb, #0A0A0A 94%, transparent);
-  backdrop-filter:blur(26px) saturate(.6);
-  -webkit-backdrop-filter:blur(26px) saturate(.6);
+  position:fixed;inset:0;z-index:200;background:#0E0E0E;
+  display:grid;place-items:center;
   pointer-events:none;opacity:0;
-  animation:cut-in 1.05s cubic-bezier(.22,.61,.36,1);
+  will-change:opacity;transform:translateZ(0);
+  animation:cut-in .54s cubic-bezier(.33,1,.68,1);
+}
+.page-cut__n{
+  font-family:var(--display);font-weight:800;font-stretch:104%;
+  font-size:clamp(3.4rem,11vw,8rem);line-height:1;letter-spacing:-.03em;
+  color:#EDEDED;
+  opacity:0;transform:scale(.92);
+  will-change:opacity,transform;
+  animation:cut-n .54s cubic-bezier(.33,1,.68,1);
 }
 @keyframes cut-in{from{opacity:1;}to{opacity:0;}}
+@keyframes cut-n{from{opacity:1;transform:scale(1);}to{opacity:0;transform:scale(1.05);}}
+
 .is-leaving .page-cut{
   animation:none;opacity:1;
-  transition:opacity .72s cubic-bezier(.4,0,.2,1);
+  transition:opacity .3s cubic-bezier(.4,0,1,1);
+}
+.is-leaving .page-cut__n{
+  animation:none;opacity:1;transform:scale(1);
+  transition:opacity .25s .03s cubic-bezier(.4,0,1,1),
+             transform .4s cubic-bezier(.33,1,.68,1);
 }
 @media (prefers-reduced-motion:reduce){
   .page-cut{display:none!important;}
@@ -560,16 +577,6 @@ ul,ol{list-style:none;}
   transform:scale(1.14);transition:transform 2.1s cubic-bezier(.16,1,.3,1);
 }
 .motion-ready [data-mask]:not(.card__media).m-in img{transform:none;}
-
-/* Pixel resolve. Images sharpen out of blocks instead of wiping open, so the
-   clip and the scale are dropped for any frame the reveal has taken over.
-   image-rendering keeps the intermediate frames hard-edged rather than
-   letting the browser smooth them back into a blur. */
-.motion-ready .px-host{clip-path:none!important;}
-.motion-ready .px-host:not(.card__media) img{transform:none!important;}
-.motion-ready img[data-px]{opacity:0;}
-.motion-ready img[data-px].px-run{opacity:1;image-rendering:pixelated;}
-.motion-ready img[data-px].px-done{opacity:1;transition:opacity .28s linear;}
 
 /* Parallax frame: the image is oversized so it can drift inside */
 .motion-ready [data-parallax]{overflow:hidden;}
