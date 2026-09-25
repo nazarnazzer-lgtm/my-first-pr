@@ -798,7 +798,14 @@ p,.prose p,dd,li{text-wrap:pretty;}
    right edge. Left to grow the portrait outran the text beside it, which only
    gets shorter as its column widens. */
 .about-side{display:flex;flex-direction:column;gap:clamp(20px,3.5vh,36px);
-  max-width:380px;}
+  max-width:440px;}
+/* Both frames are 721x1080, so the columns divide evenly and the two
+   pictures line up top and bottom without any cropping. */
+.about-pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1.1vw,14px);}
+.about-pair img{width:100%;}
+/* Second column only. Spanning both read as captioning the pair, and the
+   left frame has nothing to do with the coffee shop. */
+.about-pair figcaption{grid-column:2;margin-top:.55rem;}
 .about-side img{width:100%;}
 
 /* One fact per row at full rail width, so a value like
@@ -816,53 +823,6 @@ p,.prose p,dd,li{text-wrap:pretty;}
   .about-side img{max-width:min(100%,360px);}
   .case-meta--stack{grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));}
 }
-
-/* The offset portrait is right-aligned and leaves a long empty run beside it.
-   A drawn pour lives there, sized small so it reads as a margin note rather
-   than an illustration competing with the photographs. */
-/* The portrait column is held at a definite 420px. As an `auto` track it took
-   its max-content width instead, blowing the picture up to its intrinsic size
-   and squeezing the pour into whatever was left. */
-/* The portrait track is capped by percentage as well as pixels. As a flat
-   minmax(0,420px) it claimed its full width first and left the animation
-   column 99px at around 900px wide. */
-.about-foot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,min(420px,45%));
-  gap:clamp(20px,5vw,72px);align-items:end;}
-.about-foot .about-offset{width:100%;margin:clamp(30px,6vh,70px) 0 0 auto;}
-.brew{margin:0 0 clamp(6px,2vh,24px);width:min(100%,480px);justify-self:start;
-  color:var(--muted);}
-/* Clipped, so a bean enters and leaves at the frame edge instead of drifting
-   over the paragraph above it. */
-.brew svg{width:100%;height:auto;display:block;overflow:hidden;}
-
-/* The still, for reduced motion and for JS off: beans caught mid-fall above
-   the pile rather than five invisible elements and a heap. */
-.bean--a{transform:translateY(34px) rotate(112deg);}
-.bean--b{transform:translateY(72px) rotate(-38deg);}
-.bean--c{transform:translateY(16px) rotate(46deg);}
-.bean--d{transform:translateY(94px) rotate(190deg);}
-.bean--e{transform:translateY(54px) rotate(-96deg);}
-
-/* Coprime durations, so the loop never visibly resynchronises. */
-.motion-ready .bean{opacity:0;animation:bean-drop 5.4s linear infinite;}
-.motion-ready .bean--b{animation-duration:6.6s;animation-delay:-2.2s;}
-.motion-ready .bean--c{animation-duration:4.8s;animation-delay:-3.7s;}
-.motion-ready .bean--d{animation-duration:7.1s;animation-delay:-1.1s;}
-.motion-ready .bean--e{animation-duration:6.0s;animation-delay:-4.6s;}
-
-@keyframes bean-drop{
-  0%     {transform:translateY(-22px) rotate(-14deg);opacity:0;}
-  6%     {opacity:1;}
-  94%    {opacity:1;}
-  100%   {transform:translateY(131px) rotate(286deg);opacity:0;}
-}
-@media (max-width:760px){
-  .about-foot{grid-template-columns:1fr;justify-items:end;}
-  .brew{justify-self:start;}
-}
-
-.about-offset{width:min(46%,420px);margin:clamp(30px,6vh,70px) 0 0 auto;}
-@media (max-width:760px){.about-offset{width:min(78%,340px);margin-inline:auto 0;}}
 
 /* ---- 26. DISPLAY TIER -------------------------------------
    Archivo carries a width axis, so the wide-heavy setting is a

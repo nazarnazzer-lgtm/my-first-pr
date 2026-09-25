@@ -58,8 +58,13 @@
         <!-- The portrait rail carries the quick facts. On its own the picture
              ran out a third of the way down the text and left a dead column. -->
         <div class="about-side">
-          <img width="727" height="1080" src="assets/about/portrait-02.jpg"
-               alt="Nazar Sementsov" loading="lazy" data-mask>
+          <figure class="about-pair" data-reveal>
+            <img width="721" height="1080" src="assets/about/portrait-02.jpg"
+                 alt="Nazar Sementsov" loading="lazy" data-mask>
+            <img width="721" height="1080" src="assets/about/portrait-03.jpg"
+                 alt="Nazar Sementsov outside La Cabra" loading="lazy" data-mask>
+            <figcaption class="meta">Most mornings at La&nbsp;Cabra.</figcaption>
+          </figure>
           <dl class="case-meta case-meta--stack" data-reveal>
             <div><dt class="meta">From</dt><dd>Moscow, Russia</dd></div>
             <div><dt class="meta">Based</dt><dd>New York City</dd></div>
@@ -92,47 +97,6 @@
         </div>
       </div>
 
-      <!-- The offset portrait leaves a long empty run to its left. A drawn
-           pour sits in it, keyed to the shop in the photograph above. -->
-      <div class="about-foot">
-        <figure class="brew" data-reveal>
-          <svg viewBox="20 0 112 148" role="img" aria-label="Coffee beans dropping">
-            <defs>
-              <linearGradient id="beanFill" x1="0" y1="0" x2=".85" y2="1">
-                <stop offset="0" stop-color="#815026"/>
-                <stop offset=".55" stop-color="#5A3317"/>
-                <stop offset="1" stop-color="#36200F"/>
-              </linearGradient>
-              <g id="cbean">
-                <ellipse rx="6.6" ry="9.2" fill="url(#beanFill)"/>
-                <path d="M0 -7.8 C-2.1 -3.6 -2.1 3.6 0 7.8"
-                      fill="none" stroke="#2A1809" stroke-width="1.05" opacity=".5"/>
-              </g>
-            </defs>
-
-            <g transform="translate(46 0)"><g class="bean bean--a"><use href="#cbean"/></g></g>
-            <g transform="translate(70 0)"><g class="bean bean--b"><use href="#cbean"/></g></g>
-            <g transform="translate(96 0)"><g class="bean bean--c"><use href="#cbean"/></g></g>
-            <g transform="translate(112 0)"><g class="bean bean--d"><use href="#cbean"/></g></g>
-            <g transform="translate(58 0)"><g class="bean bean--e"><use href="#cbean"/></g></g>
-
-            <!-- Drawn after the falling beans, so one arriving passes behind the
-                 pile instead of fading out as a ghost above it. -->
-            <g class="bean-rest">
-              <g transform="translate(62 128) rotate(-74)"><use href="#cbean"/></g>
-              <g transform="translate(76 131) rotate(14)"><use href="#cbean"/></g>
-              <g transform="translate(89 127) rotate(-32)"><use href="#cbean"/></g>
-            </g>
-            <line x1="30" y1="139" x2="122" y2="139"
-                  stroke="currentColor" stroke-width=".7" stroke-linecap="round"/>
-          </svg>
-          <figcaption class="meta">Most mornings at La&nbsp;Cabra.</figcaption>
-        </figure>
-
-        <figure class="figure about-offset" data-reveal>
-          <img width="721" height="1088" src="assets/about/portrait-03.jpg"
-               alt="Nazar Sementsov" loading="lazy" data-mask>
-        </figure>
       </div>
     </div>
   </div>
