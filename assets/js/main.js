@@ -127,7 +127,10 @@
     });
   });
 
-  /* ---- 5. Cursor-follow preview on the index list -------- */
+  /* ---- 5. Flying preview on the index list --------------- */
+  /* The panel trails the cursor rather than tracking it, and banks into
+     the direction of travel. Both come out of the same lerp: the residual
+     between where it is and where it is going IS the velocity. */
   var rows = document.querySelectorAll('[data-preview]');
   var canHover = window.matchMedia('(hover: hover) and (min-width: 901px)').matches;
   if (rows.length && canHover && !reduced) {
@@ -136,24 +139,49 @@
     pv.innerHTML = '<img alt="" src="' + rows[0].getAttribute('data-preview') + '">';
     document.body.appendChild(pv);
     var pvImg = pv.querySelector('img');
-    var x = 0, y = 0, raf = null;
 
-    var move = function () {
-      pv.style.transform = 'translate(' + x + 'px,' + y + 'px) translate(-50%,-50%)' +
-        (pv.classList.contains('is-on') ? ' scale(1)' : ' scale(.9)');
-      raf = null;
+    var tx = window.innerWidth / 2, ty = window.innerHeight / 2;   // where the cursor is
+    var px = tx, py = ty;                                          // where the panel is
+    var vx = 0, on = false, raf = null;
+
+    var frame = function () {
+      var nx = px + (tx - px) * 0.11;
+      var ny = py + (ty - py) * 0.11;
+      vx = vx * 0.86 + (nx - px) * 0.14;
+      px = nx; py = ny;
+      var tilt = Math.max(-13, Math.min(13, vx * 1.1));
+      pv.style.transform =
+        'translate3d(' + px.toFixed(1) + 'px,' + py.toFixed(1) + 'px,0)' +
+        ' translate(-50%,-50%) rotate(' + tilt.toFixed(2) + 'deg)' +
+        ' scale(' + (on ? 1 : 0.82) + ')';
+      // keep going while it is still catching up, then stop burning frames
+      if (on || Math.abs(tx - px) > 0.4 || Math.abs(ty - py) > 0.4 || Math.abs(vx) > 0.05) {
+        raf = requestAnimationFrame(frame);
+      } else { raf = null; }
     };
+    var kick = function () { if (!raf) raf = requestAnimationFrame(frame); };
 
     rows.forEach(function (row) {
       row.addEventListener('mouseenter', function () {
-        pvImg.src = row.getAttribute('data-preview');
-        pv.classList.add('is-on');
+        var src = row.getAttribute('data-preview');
+        if (pvImg.getAttribute('src') !== src) {
+          // decode first, so the swap never shows a half-painted frame
+          pv.classList.add('is-swapping');
+          var next = new Image();
+          next.onload = next.onerror = function () {
+            pvImg.src = src;
+            pv.classList.remove('is-swapping');
+          };
+          next.src = src;
+        }
+        on = true; pv.classList.add('is-on'); kick();
       });
-      row.addEventListener('mouseleave', function () { pv.classList.remove('is-on'); });
+      row.addEventListener('mouseleave', function () {
+        on = false; pv.classList.remove('is-on'); kick();
+      });
     });
     document.addEventListener('mousemove', function (e) {
-      x = e.clientX + 150; y = e.clientY;
-      if (!raf) raf = requestAnimationFrame(move);
+      tx = e.clientX + 170; ty = e.clientY; kick();
     }, { passive: true });
   }
 

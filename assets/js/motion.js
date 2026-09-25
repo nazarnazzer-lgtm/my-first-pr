@@ -14,7 +14,8 @@
     parallax:     true,   // large editorial images drift as you scroll
     magnetic:     true,   // buttons lean toward the cursor
     pixelReveal:  true,   // images resolve out of coarse blocks
-    speed:        1       // 1 = as tuned. 1.4 = slower, 0.7 = snappier
+    pageCut:      true,   // pages cut to black and back on navigation
+    speed:        1.3     // 1 = as tuned. 1.4 = slower, 0.7 = snappier
   };
 
   /* ---- Widows ------------------------------------------- 
@@ -212,8 +213,8 @@
      set to pixelated, which keeps the block edges hard. No DOM is
      added and nothing is positioned, so grid figures are safe. */
   if (MOTION.pixelReveal && 'IntersectionObserver' in window) {
-    var PX_STEPS = [7, 13, 24, 44, 82];        // blocks across, coarse to fine
-    var PX_HOLD  = 95 * MOTION.speed;          // ms a step is held
+    var PX_STEPS = [4, 8, 15, 28, 52, 96];     // blocks across, coarse to fine
+    var PX_HOLD  = 125 * MOTION.speed;         // ms a step is held
 
     var pxFrame = function (img, cols) {
       var c = document.createElement('canvas');
@@ -272,6 +273,45 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -4% 0px' });
 
     document.querySelectorAll('img[data-px]').forEach(function (i) { pxObs.observe(i); });
+  }
+
+  /* ---- 7. Cut to dark between pages ----------------------
+     The overlay is created by JS and sits at opacity 0, so with JS off or
+     broken there is nothing to get stuck behind. Arrival plays as a plain
+     CSS animation that needs no class removed afterwards; only the leave
+     needs a class, and the navigation is on a timer that always fires. */
+  if (MOTION.pageCut) {
+    var cut = document.createElement('div');
+    cut.className = 'page-cut';
+    document.body.appendChild(cut);
+
+    var leaving = false;
+    document.addEventListener('click', function (e) {
+      if (leaving || e.defaultPrevented || e.button !== 0) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest ? e.target.closest('a[href]') : null;
+      if (!a || a.hasAttribute('download')) return;
+      if (a.target && a.target !== '_self') return;
+
+      var url;
+      try { url = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+      if (url.origin !== location.origin) return;                 // offsite
+      if (url.pathname === location.pathname) return;             // anchor or self
+      if (!/(^\/$|\.html?$|\/$)/.test(url.pathname)) return;      // pdf, image, asset
+
+      e.preventDefault();
+      leaving = true;
+      document.documentElement.classList.add('is-leaving');
+      setTimeout(function () { location.href = url.href; }, 560 * MOTION.speed);
+    });
+
+    // Coming back through history can restore a page mid-fade.
+    window.addEventListener('pageshow', function (ev) {
+      if (ev.persisted) {
+        leaving = false;
+        document.documentElement.classList.remove('is-leaving');
+      }
+    });
   }
 
   /* ---- 5. Magnetic buttons ------------------------------ */
