@@ -525,10 +525,10 @@ ul,ol{list-style:none;}
   display:grid;place-items:center;
   pointer-events:none;opacity:0;
   transform:translateZ(0);
-  animation:cut-in 2.2s cubic-bezier(.16,1,.3,1);
+  animation:cut-in 1.85s cubic-bezier(.16,1,.3,1);
 }
 @keyframes cut-in{
-  0%,60%{opacity:1;}
+  0%,62%{opacity:1;}
   100%  {opacity:0;}
 }
 .page-cut__n{
@@ -536,12 +536,12 @@ ul,ol{list-style:none;}
   font-size:clamp(3.4rem,11vw,8rem);line-height:1;letter-spacing:-.03em;
   color:#EDEDED;
   opacity:0;transform:translateZ(0) scale(.94);
-  animation:cut-n 2.2s cubic-bezier(.16,1,.3,1);
+  animation:cut-n 1.85s cubic-bezier(.16,1,.3,1);
 }
 @keyframes cut-n{
   0%      {opacity:0;transform:translateZ(0) scale(.94);}
-  8%      {opacity:1;transform:translateZ(0) scale(1);}
-  60%     {opacity:1;transform:translateZ(0) scale(1);}
+  7%      {opacity:1;transform:translateZ(0) scale(1);}
+  62%     {opacity:1;transform:translateZ(0) scale(1);}
   84%,100%{opacity:0;transform:translateZ(0) scale(1.03);}
 }
 
@@ -549,12 +549,12 @@ ul,ol{list-style:none;}
    compositor layer costs memory for the life of the page. */
 .is-leaving .page-cut{
   animation:none;opacity:1;
-  transition:opacity .34s cubic-bezier(.16,1,.3,1);
+  transition:opacity .28s cubic-bezier(.16,1,.3,1);
 }
 .is-leaving .page-cut__n{
   animation:none;opacity:1;transform:translateZ(0) scale(1);
-  transition:opacity .28s .05s cubic-bezier(.16,1,.3,1),
-             transform .46s cubic-bezier(.16,1,.3,1);
+  transition:opacity .24s .04s cubic-bezier(.16,1,.3,1),
+             transform .4s cubic-bezier(.16,1,.3,1);
 }
 @media (prefers-reduced-motion:reduce){
   .page-cut{display:none!important;}

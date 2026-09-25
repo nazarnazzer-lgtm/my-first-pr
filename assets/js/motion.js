@@ -14,7 +14,7 @@
     parallax:     true,   // large editorial images drift as you scroll
     magnetic:     true,   // buttons lean toward the cursor
     pageCut:      true,   // pages cut to black and back on navigation
-    speed:        1.3     // 1 = as tuned. 1.4 = slower, 0.7 = snappier
+    speed:        1.15    // 1 = as tuned. 1.4 = slower, 0.7 = snappier
   };
 
   /* ---- Widows ------------------------------------------- 
@@ -64,10 +64,11 @@
   if (MOTION.smoothScroll && window.Lenis) {
     root.style.scrollBehavior = 'auto';       // Lenis owns scrolling now
     var lenis = new window.Lenis({
-      duration: 0.85 * MOTION.speed,          // deliberately quicker than
-                                              // the 1.2 default: a recruiter
-                                              // skimming should never feel
-                                              // like they are fighting it
+      // Deliberately NOT multiplied by MOTION.speed. How cinematic the
+      // reveals are and how responsive the wheel feels are different
+      // questions, and tying them together pushed this to 1.1s, which is
+      // past the 1.2 default and reads as judder on every page you land on.
+      duration: 0.7,
       easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
       smoothWheel: true,
       touchMultiplier: 1.8
@@ -219,7 +220,7 @@
     cut.innerHTML = '<span class="page-cut__n" aria-hidden="true">N</span>';
     document.body.appendChild(cut);
 
-    var LEAVE = 380;                          // fade out, then go
+    var LEAVE = 290;                          // fade out, then go
     var primed = {};
     var prime = function (href) {             // warm the next page on hover
       if (primed[href]) return;
