@@ -512,36 +512,49 @@ ul,ol{list-style:none;}
    the compositor: a backdrop-filter here blurred the entire viewport every
    frame and was the source of the stutter.
 
-   Base is transparent and the arrival is a plain animation with no fill, so
-   an overlay left behind by a failed script is inert rather than a black
-   screen, and nothing has to be cleaned up by JS. The N matches the tab icon:
-   Archivo 800 at 104% width, the same letter-spacing and the same two greys. */
+   The arrival is one long animation with no fill, so an overlay left behind by
+   a failed script is inert rather than a black screen and nothing has to be
+   cleaned up by JS. Holding the black through the first second is not only a
+   longer look at the mark: the reveals underneath run on their own timers, so
+   by the time it lifts the page has already settled instead of popping in.
+
+   The N matches the tab icon: Archivo 800 at 104% width, same letter-spacing,
+   same two greys. */
 .page-cut{
   position:fixed;inset:0;z-index:200;background:#0E0E0E;
   display:grid;place-items:center;
   pointer-events:none;opacity:0;
-  will-change:opacity;transform:translateZ(0);
-  animation:cut-in .54s cubic-bezier(.33,1,.68,1);
+  transform:translateZ(0);
+  animation:cut-in 2.2s cubic-bezier(.16,1,.3,1);
+}
+@keyframes cut-in{
+  0%,60%{opacity:1;}
+  100%  {opacity:0;}
 }
 .page-cut__n{
   font-family:var(--display);font-weight:800;font-stretch:104%;
   font-size:clamp(3.4rem,11vw,8rem);line-height:1;letter-spacing:-.03em;
   color:#EDEDED;
-  opacity:0;transform:scale(.92);
-  will-change:opacity,transform;
-  animation:cut-n .54s cubic-bezier(.33,1,.68,1);
+  opacity:0;transform:translateZ(0) scale(.94);
+  animation:cut-n 2.2s cubic-bezier(.16,1,.3,1);
 }
-@keyframes cut-in{from{opacity:1;}to{opacity:0;}}
-@keyframes cut-n{from{opacity:1;transform:scale(1);}to{opacity:0;transform:scale(1.05);}}
+@keyframes cut-n{
+  0%      {opacity:0;transform:translateZ(0) scale(.94);}
+  8%      {opacity:1;transform:translateZ(0) scale(1);}
+  60%     {opacity:1;transform:translateZ(0) scale(1);}
+  84%,100%{opacity:0;transform:translateZ(0) scale(1.03);}
+}
 
+/* will-change only while it is actually moving: a permanent full-viewport
+   compositor layer costs memory for the life of the page. */
 .is-leaving .page-cut{
   animation:none;opacity:1;
-  transition:opacity .3s cubic-bezier(.4,0,1,1);
+  transition:opacity .34s cubic-bezier(.16,1,.3,1);
 }
 .is-leaving .page-cut__n{
-  animation:none;opacity:1;transform:scale(1);
-  transition:opacity .25s .03s cubic-bezier(.4,0,1,1),
-             transform .4s cubic-bezier(.33,1,.68,1);
+  animation:none;opacity:1;transform:translateZ(0) scale(1);
+  transition:opacity .28s .05s cubic-bezier(.16,1,.3,1),
+             transform .46s cubic-bezier(.16,1,.3,1);
 }
 @media (prefers-reduced-motion:reduce){
   .page-cut{display:none!important;}

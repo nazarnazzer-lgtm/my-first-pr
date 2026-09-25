@@ -219,7 +219,7 @@
     cut.innerHTML = '<span class="page-cut__n" aria-hidden="true">N</span>';
     document.body.appendChild(cut);
 
-    var LEAVE = 340;                          // fade out, then go
+    var LEAVE = 380;                          // fade out, then go
     var primed = {};
     var prime = function (href) {             // warm the next page on hover
       if (primed[href]) return;
