@@ -803,9 +803,6 @@ p,.prose p,dd,li{text-wrap:pretty;}
    pictures line up top and bottom without any cropping. */
 .about-pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1.1vw,14px);}
 .about-pair img{width:100%;}
-/* Second column only. Spanning both read as captioning the pair, and the
-   left frame has nothing to do with the coffee shop. */
-.about-pair figcaption{grid-column:2;margin-top:.55rem;}
 .about-side img{width:100%;}
 
 /* One fact per row at full rail width, so a value like
