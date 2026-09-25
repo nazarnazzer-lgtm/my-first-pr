@@ -17,6 +17,24 @@
     speed:        1.15    // 1 = as tuned. 1.4 = slower, 0.7 = snappier
   };
 
+  /* A switch for judging feel, because feel cannot be measured from here.
+       ?motion=noscroll   native scrolling, everything else intact
+       ?motion=off        no motion layer at all
+       ?motion=on         back to normal
+     The choice is remembered, otherwise you would have to re-add the
+     parameter on every page and a transition is the thing being judged. */
+  try {
+    var _q = new URLSearchParams(location.search).get('motion');
+    if (_q) localStorage.setItem('nz-motion', _q);
+    var _pick = _q || localStorage.getItem('nz-motion');
+    if (_pick === 'on') { localStorage.removeItem('nz-motion'); }
+    else if (_pick === 'off') {
+      Object.keys(MOTION).forEach(function (k) {
+        if (typeof MOTION[k] === 'boolean') MOTION[k] = false;
+      });
+    } else if (_pick === 'noscroll') { MOTION.smoothScroll = false; }
+  } catch (e) {}
+
   /* ---- Widows ------------------------------------------- 
      Binds the last two words of a block so one can never be left alone
      on a final line. Runs before anything else, and before the word
