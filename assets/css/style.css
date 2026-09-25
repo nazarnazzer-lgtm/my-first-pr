@@ -534,7 +534,7 @@ body::after{
 body::before{
   content:"";
   background:#0E0E0E;
-  animation:cut-in 1.85s cubic-bezier(.16,1,.3,1);
+  animation:cut-in 1.45s cubic-bezier(.16,1,.3,1);
 }
 body::after{
   content:"N";z-index:201;
@@ -542,22 +542,24 @@ body::after{
   font-family:var(--display);font-weight:800;font-stretch:104%;
   font-size:clamp(3.4rem,11vw,8rem);line-height:1;letter-spacing:-.03em;
   color:#EDEDED;
-  animation:cut-n 1.85s cubic-bezier(.16,1,.3,1);
+  transform:translateZ(0) scale(1);
+  animation:cut-n 1.45s cubic-bezier(.16,1,.3,1);
 }
 @keyframes cut-in{
-  0%,62%{opacity:1;}
+  0%,60%{opacity:1;}
   100%  {opacity:0;}
 }
+/* Starts at full, exactly like the panel. Ramping in from 0 meant the mark
+   blinked at every navigation: the outgoing page held it at 1, then the new
+   document restarted the fade and took 130ms to get back there. */
 @keyframes cut-n{
-  0%      {opacity:0;transform:translateZ(0) scale(.94);}
-  7%      {opacity:1;transform:translateZ(0) scale(1);}
-  62%     {opacity:1;transform:translateZ(0) scale(1);}
-  84%,100%{opacity:0;transform:translateZ(0) scale(1.03);}
+  0%,60%  {opacity:1;transform:translateZ(0) scale(1);}
+  82%,100%{opacity:0;transform:translateZ(0) scale(1.03);}
 }
 
 .is-leaving body::before{
   animation:none;opacity:1;
-  transition:opacity .28s cubic-bezier(.16,1,.3,1);
+  transition:opacity .24s cubic-bezier(.16,1,.3,1);
 }
 .is-leaving body::after{
   animation:none;opacity:1;transform:translateZ(0) scale(1);
