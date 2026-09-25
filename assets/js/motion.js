@@ -233,11 +233,6 @@
      the next page painting, so internal links are prefetched on hover and the
      black is only held for as long as the fade needs. */
   if (MOTION.pageCut) {
-    var cut = document.createElement('div');
-    cut.className = 'page-cut';
-    cut.innerHTML = '<span class="page-cut__n" aria-hidden="true">N</span>';
-    document.body.appendChild(cut);
-
     var LEAVE = 290;                          // fade out, then go
     var primed = {};
     var prime = function (href) {             // warm the next page on hover

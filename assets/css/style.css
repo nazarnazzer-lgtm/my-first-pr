@@ -508,35 +508,45 @@ ul,ol{list-style:none;}
   a{text-decoration:none;color:#000;}
 }
 
-/* Cut to dark. Opacity only, on a promoted layer, so the whole thing stays on
-   the compositor: a backdrop-filter here blurred the entire viewport every
-   frame and was the source of the stutter.
+/* Cut to dark.
 
-   The arrival is one long animation with no fill, so an overlay left behind by
-   a failed script is inert rather than a black screen and nothing has to be
-   cleaned up by JS. Holding the black through the first second is not only a
-   longer look at the mark: the reveals underneath run on their own timers, so
-   by the time it lifts the page has already settled instead of popping in.
+   These are pseudo-elements rather than a div the script appends, and that
+   is the whole point. A JS-created overlay cannot exist until the script
+   runs, and the script runs at the end of the body: the browser had already
+   parsed, laid out and PAINTED the arriving page before anything covered it,
+   so every navigation showed one full frame of the new page mid-transition.
+   A pseudo-element is in the stylesheet, which is render-blocking, so it is
+   there for paint number one.
 
+   Nothing to clean up either: the arrival is an animation with no fill, so it
+   lands back on opacity 0 by itself and a page with broken JS is never stuck
+   behind a black screen.
+
+   ::before is the panel, ::after the mark, so the two can move separately.
    The N matches the tab icon: Archivo 800 at 104% width, same letter-spacing,
    same two greys. */
-.page-cut{
-  position:fixed;inset:0;z-index:200;background:#0E0E0E;
-  display:grid;place-items:center;
+body::before,
+body::after{
+  position:fixed;inset:0;z-index:200;
   pointer-events:none;opacity:0;
   transform:translateZ(0);
+}
+body::before{
+  content:"";
+  background:#0E0E0E;
   animation:cut-in 1.85s cubic-bezier(.16,1,.3,1);
+}
+body::after{
+  content:"N";z-index:201;
+  display:grid;place-items:center;
+  font-family:var(--display);font-weight:800;font-stretch:104%;
+  font-size:clamp(3.4rem,11vw,8rem);line-height:1;letter-spacing:-.03em;
+  color:#EDEDED;
+  animation:cut-n 1.85s cubic-bezier(.16,1,.3,1);
 }
 @keyframes cut-in{
   0%,62%{opacity:1;}
   100%  {opacity:0;}
-}
-.page-cut__n{
-  font-family:var(--display);font-weight:800;font-stretch:104%;
-  font-size:clamp(3.4rem,11vw,8rem);line-height:1;letter-spacing:-.03em;
-  color:#EDEDED;
-  opacity:0;transform:translateZ(0) scale(.94);
-  animation:cut-n 1.85s cubic-bezier(.16,1,.3,1);
 }
 @keyframes cut-n{
   0%      {opacity:0;transform:translateZ(0) scale(.94);}
@@ -545,19 +555,17 @@ ul,ol{list-style:none;}
   84%,100%{opacity:0;transform:translateZ(0) scale(1.03);}
 }
 
-/* will-change only while it is actually moving: a permanent full-viewport
-   compositor layer costs memory for the life of the page. */
-.is-leaving .page-cut{
+.is-leaving body::before{
   animation:none;opacity:1;
   transition:opacity .28s cubic-bezier(.16,1,.3,1);
 }
-.is-leaving .page-cut__n{
+.is-leaving body::after{
   animation:none;opacity:1;transform:translateZ(0) scale(1);
   transition:opacity .24s .04s cubic-bezier(.16,1,.3,1),
              transform .4s cubic-bezier(.16,1,.3,1);
 }
 @media (prefers-reduced-motion:reduce){
-  .page-cut{display:none!important;}
+  body::before,body::after{display:none!important;}
 }
 
 /* ---- 16. MOTION ------------------------------------------
