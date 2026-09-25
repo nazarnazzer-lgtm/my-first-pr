@@ -13,6 +13,7 @@
     imageReveal:  true,   // images wipe open instead of appearing
     parallax:     true,   // large editorial images drift as you scroll
     magnetic:     true,   // buttons lean toward the cursor
+    pixelReveal:  true,   // images resolve out of coarse blocks
     speed:        1       // 1 = as tuned. 1.4 = slower, 0.7 = snappier
   };
 
@@ -202,6 +203,75 @@
       window.addEventListener('resize', onScroll);
       apply();
     }
+  }
+
+  /* ---- 6. Pixel resolve ---------------------------------- 
+     Images arrive as coarse blocks and sharpen in a few discrete
+     steps. Cheap, because the intermediate frames are tiny: a
+     90px-wide PNG blown up by the browser with image-rendering
+     set to pixelated, which keeps the block edges hard. No DOM is
+     added and nothing is positioned, so grid figures are safe. */
+  if (MOTION.pixelReveal && 'IntersectionObserver' in window) {
+    var PX_STEPS = [7, 13, 24, 44, 82];        // blocks across, coarse to fine
+    var PX_HOLD  = 95 * MOTION.speed;          // ms a step is held
+
+    var pxFrame = function (img, cols) {
+      var c = document.createElement('canvas');
+      c.width  = cols;
+      c.height = Math.max(2, Math.round(cols * img.naturalHeight / img.naturalWidth));
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      return c.toDataURL();
+    };
+
+    var pxRun = function (img) {
+      // naturalWidth changes as the src is swapped, so every frame is built
+      // before the first swap.
+      var real = img.currentSrc || img.src, frames;
+      try { frames = PX_STEPS.map(function (n) { return pxFrame(img, n); }); }
+      catch (err) { img.classList.add('px-done'); return; }   // tainted canvas
+      var i = 0;
+      img.classList.add('px-run');
+      (function step() {
+        if (i < frames.length) { img.src = frames[i++]; setTimeout(step, PX_HOLD); }
+        else {
+          img.src = real;                      // already in memory cache
+          img.classList.remove('px-run');
+          img.classList.add('px-done');
+        }
+      })();
+    };
+
+    // Anything the wipe was covering that is actually an image; videos keep
+    // the wipe, since there is no frame to sample until they play.
+    document.querySelectorAll('[data-mask]').forEach(function (host) {
+      var img = host.tagName === 'IMG' ? host : host.querySelector('img');
+      if (!img) return;
+      // Slideshow frames are opacity-driven, and .px-done{opacity:1} outranks
+      // .slides img{opacity:0}, which would pin the first frame on and stop
+      // the rotation. Those keep the wipe.
+      if (img.closest('.slides')) return;
+      host.classList.add('px-host');
+      img.setAttribute('data-px', '');
+    });
+
+    var pxSeen = new WeakSet();
+    var pxObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting || pxSeen.has(e.target)) return;
+        pxSeen.add(e.target);
+        pxObs.unobserve(e.target);
+        var img = e.target;
+        // Staggered within a row so a grid does not resolve in lockstep.
+        var wait = (e.target.closest('.card') ? 1 : 0) *
+                   (Array.prototype.indexOf.call(
+                      document.querySelectorAll('.card'), e.target.closest('.card')) % 3) * 110;
+        var go = function () { setTimeout(function () { pxRun(img); }, wait); };
+        if (img.complete && img.naturalWidth) go();
+        else img.addEventListener('load', go, { once: true });
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -4% 0px' });
+
+    document.querySelectorAll('img[data-px]').forEach(function (i) { pxObs.observe(i); });
   }
 
   /* ---- 5. Magnetic buttons ------------------------------ */
