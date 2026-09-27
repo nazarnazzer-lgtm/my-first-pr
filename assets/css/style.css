@@ -672,6 +672,16 @@ body::after{
 .duo > *{margin-block:0;}
 @media (max-width:700px){.duo{grid-template-columns:1fr;}}
 
+/* The 9:16 film runs taller than the 4:5 lockup, so the right column ends
+   early. The launch stat fills that gap and bottom-aligns with the film, so
+   the row closes on one straight line instead of a ragged edge. */
+.duo__stack{display:flex;flex-direction:column;align-self:stretch;}
+.duo__stack > .figure{margin-block:0;}
+.duo__stack > .stat{margin:auto 0 0;padding-block:clamp(20px,3.2vh,38px);}
+.duo__stack > .stat .stat__fig{font-size:clamp(2.2rem,4.4vw,4rem);}
+.duo__stack > .stat .stat__note{font-size:var(--fs-body);max-width:26ch;}
+@media (max-width:700px){.duo__stack > .stat{margin-top:clamp(20px,3.4vh,34px);}}
+
 /* Video covers in the gallery tiles */
 .card__media video{width:100%;height:100%;object-fit:cover;display:block;
   transition:transform 1.1s var(--ease);}
@@ -696,7 +706,7 @@ body::after{
   border-block:1px solid var(--line);
   margin-block:clamp(30px,5vh,70px);
 }
-.stat__fig{font-size:clamp(3.2rem,8.5vw,7rem);font-weight:600;
+.stat__fig{font-size:clamp(2.7rem,7vw,5.6rem);font-weight:600;
   letter-spacing:-.05em;line-height:.85;white-space:nowrap;}
 .stat__note{font-size:var(--fs-md);line-height:1.34;letter-spacing:-.018em;
   color:var(--muted);max-width:28ch;}
