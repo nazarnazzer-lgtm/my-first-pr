@@ -186,58 +186,85 @@
   }
 
   /* ---- 6. Video: play in view, pause out, sound toggle --- */
-  // The films carry the autoplay attribute, so whatever is on screen at
-  // load starts without waiting for this file to run. Every mp4 is
-  // faststart, so preload="metadata" costs a header fetch and leaves the
-  // first frame ready — the cut in is immediate rather than a poster that
-  // sits there while the file is fetched from scratch.
+  // Every film is muted, looping and playsinline and carries the autoplay
+  // attribute, which is what the autoplay policies ask for. The rest of
+  // this exists because that on its own does not get there:
   //
-  // The observer keeps that affordable: a film starts a quarter of a
-  // viewport before it arrives and pauses the moment it leaves. A paused
-  // film still buffers a couple of seconds and then stops, so a page
-  // carrying eight of them costs a few seconds of video, not eight files.
+  //  - Safari treats the muted PROPERTY as the real signal. Every one of
+  //    these files has an audio track, and with one present the attribute
+  //    alone is often not enough, so it is set again in script.
+  //  - A rejected play() is not final. Safari refuses while it is still
+  //    short of data, so the same film is asked again as the data lands
+  //    and on a short timer after that.
+  //  - Low Power Mode and data saver refuse outright until the visitor
+  //    does something, so the first gesture is taken as permission.
+  //
+  // preload stays at metadata until a film is wanted, then goes to auto,
+  // so only the films actually scrolled to pull their weight.
   var vids = document.querySelectorAll('video[data-autoplay]');
-  var blocked = [];
-
-  function tryPlay(v) {
-    var p = v.play();
-    if (p && p.catch) {
-      p.catch(function () {
-        // Low Power Mode and data saver reject even a muted autoplay.
-        // Remember it and take the next gesture as permission.
-        if (blocked.indexOf(v) < 0) blocked.push(v);
-      });
-    }
-  }
 
   function onScreen(v) {
     var b = v.getBoundingClientRect();
     return b.top < window.innerHeight && b.bottom > 0;
   }
 
+  function attempt(v) {
+    if (!v.wantPlay) return;
+    if (!v.userSound) v.muted = true;
+    var p = v.play();
+    if (p && p.catch) { p.catch(function () {}); }
+  }
+
+  function want(v) {
+    if (v.wantPlay) { attempt(v); return; }
+    v.wantPlay = true;
+    if (v.preload !== 'auto') { v.preload = 'auto'; }
+    if (!v.wiredPlay) {
+      v.wiredPlay = true;
+      ['loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough'].forEach(function (ev) {
+        v.addEventListener(ev, function () { attempt(v); });
+      });
+    }
+    attempt(v);
+    // keep asking while the first frames arrive, then stop bothering it
+    var n = 0;
+    var t = setInterval(function () {
+      if (++n > 8 || !v.wantPlay || !v.paused) { clearInterval(t); return; }
+      attempt(v);
+    }, 400);
+  }
+
+  function rest(v) { v.wantPlay = false; v.pause(); }
+
+  function retryVisible() {
+    vids.forEach(function (v) { if (onScreen(v)) want(v); });
+  }
+
   function unlock() {
     ['pointerdown', 'touchstart', 'keydown'].forEach(function (ev) {
       window.removeEventListener(ev, unlock);
     });
-    blocked.forEach(function (v) { if (onScreen(v)) v.play().catch(function () {}); });
-    blocked.length = 0;
+    retryVisible();
   }
 
   if (vids.length) {
     if ('IntersectionObserver' in window) {
       var vio = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) { tryPlay(e.target); }
-          else { e.target.pause(); }
+          if (e.isIntersecting) { want(e.target); } else { rest(e.target); }
         });
       }, { threshold: 0, rootMargin: '25% 0px' });
       vids.forEach(function (v) { vio.observe(v); });
     } else {
-      vids.forEach(tryPlay);
+      vids.forEach(want);
     }
     ['pointerdown', 'touchstart', 'keydown'].forEach(function (ev) {
       window.addEventListener(ev, unlock, { passive: true });
     });
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) retryVisible();
+    });
+    window.addEventListener('pageshow', retryVisible);
   }
 
   document.querySelectorAll('[data-sound]').forEach(function (btn) {
@@ -245,6 +272,7 @@
       var v = btn.parentElement.querySelector('video');
       if (!v) return;
       v.muted = !v.muted;
+      v.userSound = !v.muted;          // stop the retry loop re-muting it
       btn.textContent = v.muted ? 'Sound on' : 'Sound off';
       if (!v.muted) v.play().catch(function () {});
     });
