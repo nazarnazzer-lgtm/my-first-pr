@@ -234,7 +234,14 @@
     }, 400);
   }
 
-  function rest(v) { v.wantPlay = false; v.pause(); }
+  function rest(v) {
+    v.wantPlay = false;
+    v.pause();
+    // iOS caps how many media elements may hold loaded data at once, and a
+    // page here can carry eight films. Handing the budget back on the way
+    // out keeps the ones still to come able to start.
+    if (v.preload !== 'metadata') { v.preload = 'metadata'; }
+  }
 
   function retryVisible() {
     vids.forEach(function (v) { if (onScreen(v)) want(v); });
