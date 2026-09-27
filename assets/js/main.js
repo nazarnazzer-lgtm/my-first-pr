@@ -186,17 +186,58 @@
   }
 
   /* ---- 6. Video: play in view, pause out, sound toggle --- */
-  // preload="none" keeps the page light with several films on it; the
-  // poster shows until the video is actually scrolled to.
+  // The films carry the autoplay attribute, so whatever is on screen at
+  // load starts without waiting for this file to run. Every mp4 is
+  // faststart, so preload="metadata" costs a header fetch and leaves the
+  // first frame ready — the cut in is immediate rather than a poster that
+  // sits there while the file is fetched from scratch.
+  //
+  // The observer keeps that affordable: a film starts a quarter of a
+  // viewport before it arrives and pauses the moment it leaves. A paused
+  // film still buffers a couple of seconds and then stops, so a page
+  // carrying eight of them costs a few seconds of video, not eight files.
   var vids = document.querySelectorAll('video[data-autoplay]');
-  if (vids.length && 'IntersectionObserver' in window) {
-    var vio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.play().catch(function () {}); }
-        else { e.target.pause(); }
+  var blocked = [];
+
+  function tryPlay(v) {
+    var p = v.play();
+    if (p && p.catch) {
+      p.catch(function () {
+        // Low Power Mode and data saver reject even a muted autoplay.
+        // Remember it and take the next gesture as permission.
+        if (blocked.indexOf(v) < 0) blocked.push(v);
       });
-    }, { threshold: 0.25 });
-    vids.forEach(function (v) { vio.observe(v); });
+    }
+  }
+
+  function onScreen(v) {
+    var b = v.getBoundingClientRect();
+    return b.top < window.innerHeight && b.bottom > 0;
+  }
+
+  function unlock() {
+    ['pointerdown', 'touchstart', 'keydown'].forEach(function (ev) {
+      window.removeEventListener(ev, unlock);
+    });
+    blocked.forEach(function (v) { if (onScreen(v)) v.play().catch(function () {}); });
+    blocked.length = 0;
+  }
+
+  if (vids.length) {
+    if ('IntersectionObserver' in window) {
+      var vio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { tryPlay(e.target); }
+          else { e.target.pause(); }
+        });
+      }, { threshold: 0, rootMargin: '25% 0px' });
+      vids.forEach(function (v) { vio.observe(v); });
+    } else {
+      vids.forEach(tryPlay);
+    }
+    ['pointerdown', 'touchstart', 'keydown'].forEach(function (ev) {
+      window.addEventListener(ev, unlock, { passive: true });
+    });
   }
 
   document.querySelectorAll('[data-sound]').forEach(function (btn) {
