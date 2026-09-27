@@ -116,18 +116,22 @@
     </figure>
   </div>
 
-  <figure class="film film--bleed" data-reveal>
-    <video width="1280" height="720" src="assets/magnus/02-sounds-of-new-york.mp4" poster="assets/magnus/02-sounds-of-new-york-poster.jpg"
-           muted loop playsinline preload="none" data-autoplay></video>
-    <button class="sound-btn" data-sound>Sound on</button>
-    <figcaption class="meta">Sounds of New York. The American half of the reference, stated first.</figcaption>
-  </figure>
-  <figure class="film film--inset" data-reveal>
-    <video width="1280" height="720" src="assets/magnus/05-behind-the-scenes.mp4" poster="assets/magnus/05-behind-the-scenes-poster.jpg"
-           muted loop playsinline preload="none" data-autoplay></video>
-    <button class="sound-btn" data-sound>Sound on</button>
-    <figcaption class="meta">Behind the scenes.</figcaption>
-  </figure>
+  <!-- Both are 16:9, so they pair without cropping and the chapter stops
+       spending two full-width runs on them. -->
+  <div class="film-grid" data-reveal>
+    <figure class="film">
+      <video width="1280" height="720" src="assets/magnus/02-sounds-of-new-york.mp4" poster="assets/magnus/02-sounds-of-new-york-poster.jpg"
+             muted loop playsinline preload="none" data-autoplay></video>
+      <button class="sound-btn" data-sound>Sound on</button>
+      <figcaption class="meta">Sounds of New York. The American half of the reference, stated first.</figcaption>
+    </figure>
+    <figure class="film">
+      <video width="1280" height="720" src="assets/magnus/05-behind-the-scenes.mp4" poster="assets/magnus/05-behind-the-scenes-poster.jpg"
+             muted loop playsinline preload="none" data-autoplay></video>
+      <button class="sound-btn" data-sound>Sound on</button>
+      <figcaption class="meta">Behind the scenes.</figcaption>
+    </figure>
+  </div>
 
   <div class="stat" data-reveal>
     <p class="stat__fig">+600</p>
