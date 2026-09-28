@@ -102,6 +102,7 @@
     return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null;
   }
 
+  var POOL = [], MAX = 8;
   document.querySelectorAll('[data-gl]').forEach(function (wrap) {
     var img = wrap.querySelector('img'); if (!img) return;
     var run = function () {
@@ -129,6 +130,15 @@
       var uM = gl.getUniformLocation(pr, 'm'), uH = gl.getUniformLocation(pr, 'h'),
           uA = gl.getUniformLocation(pr, 'a');
       wrap.appendChild(cv); wrap.classList.add('gl-on');
+      POOL.push({ wrap: wrap, cv: cv, gl: gl });
+      while (POOL.length > MAX) {
+        var old = POOL.shift();
+        if (old.wrap === wrap) { POOL.push(old); break; }
+        old.wrap.classList.remove('gl-on');
+        old.cv.remove();
+        var lose = old.gl.getExtension('WEBGL_lose_context');
+        if (lose) lose.loseContext();
+      }
 
       var mx = .5, my = .5, want = 0, hov = 0, t0 = performance.now(), live = false;
       function size() {
@@ -166,7 +176,15 @@
         paint();
       })();
     };
-    if (img.complete && img.naturalWidth) run();
-    else img.addEventListener('load', run, { once: true });
+    // Lazy: a tile gets a GL context the first time it is hovered, and the
+    // pool evicts the least recently used one. Browsers cap live contexts
+    // near 16 and silently drop the oldest, which would blank tiles on a
+    // gallery page carrying twenty-four of them.
+    var started = false;
+    wrap.addEventListener('pointerenter', function () {
+      if (started) return;
+      started = true;
+      if (img.complete && img.naturalWidth) run(); else img.addEventListener('load', run, { once: true });
+    }, { once: false });
   });
 })();
