@@ -13,12 +13,12 @@
   /* LIGHT (active) */
   --paper:      #EDEDED;          /* neutral grey background         */
   --ink:        #121212;          /* neutral off-black text          */
-  --accent:     #FF3B14;          /* signal colour. Change me first. */
+  --accent:     #A87400;          /* signal colour. Change me first. */
 
   /* DARK (inactive. Swap the comment markers to use)
   --paper:      #0E0E0E;
   --ink:        #E8E8E8;
-  --accent:     #FF4A26;
+  --accent:     #D4A017;
   */
 
   /* Derived. Do not edit, they follow --ink / --paper */
@@ -866,7 +866,7 @@ p,.prose p,dd,li{text-wrap:pretty;}
 .on-dark{
   --paper:#0E0E0E;
   --ink:#E8E8E8;
-  --accent:#FF4A26;
+  --accent:#D4A017;
   background:var(--paper);
   color:var(--ink);
   /* Breaks out of .wrap to the viewport edge, then puts the gutter back
@@ -1053,7 +1053,7 @@ p,.prose p,dd,li{text-wrap:pretty;}
 .hero--dark{
   --paper:#0E0E0E;
   --ink:#E8E8E8;
-  --accent:#FF4A26;
+  --accent:#D4A017;
   color:var(--ink);
   position:relative;
   padding-bottom:clamp(30px,5vh,58px);
