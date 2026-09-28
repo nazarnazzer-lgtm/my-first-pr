@@ -14,7 +14,7 @@
   <line x1="756" y1="1200" x2="1956" y2="0" stroke="#1f1d18" stroke-width="1" opacity="0.28"/>
   <line x1="933" y1="1200" x2="2133" y2="0" stroke="#1f1d18" stroke-width="1" opacity="0.28"/>
   <line x1="1111" y1="1200" x2="2311" y2="0" stroke="#1f1d18" stroke-width="1" opacity="0.28"/>
-  <rect x="480" y="360" width="640" height="480" fill="#ff3b14"/>
+  <rect x="480" y="360" width="640" height="480" fill="#A87400"/>
   <text x="64" y="1146" fill="#1f1d18" opacity="0.55"
         font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="34"
         letter-spacing="2">PLACEHOLDER 09 · REPLACE</text>

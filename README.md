@@ -95,7 +95,7 @@ Everything lives in the `:root` block at the top of `assets/css/style.css`.
 ```css
 --paper:  #F2F0EA;   /* background     */
 --ink:    #14130F;   /* text           */
---accent: #FF3B14;   /* the one signal colour, change this first */
+--accent: #A87400;   /* the one signal colour, change this first */
 ```
 
 The site is a single light palette by design, one background means every

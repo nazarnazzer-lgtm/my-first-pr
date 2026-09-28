@@ -14,7 +14,7 @@
   <line x1="-33" y1="1500" x2="1467" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
   <line x1="100" y1="1500" x2="1600" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
   <line x1="233" y1="1500" x2="1733" y2="0" stroke="#14130f" stroke-width="1" opacity="0.28"/>
-  <rect x="360" y="450" width="480" height="600" fill="#ff3b14"/>
+  <rect x="360" y="450" width="480" height="600" fill="#A87400"/>
   <text x="48" y="1432" fill="#14130f" opacity="0.55"
         font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="42"
         letter-spacing="2">PLACEHOLDER 03 · REPLACE</text>
