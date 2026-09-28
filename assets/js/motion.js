@@ -14,6 +14,9 @@
     parallax:     true,   // large editorial images drift as you scroll
     magnetic:     true,   // buttons lean toward the cursor
     pageCut:      true,   // pages cut to black and back on navigation
+    velocitySkew: true,   // the page leans into the direction of scroll
+    cursor:       true,   // a dot that lags the pointer and swells on links
+    heroShader:   true,   // the hero reel warps under the cursor
     speed:        1.15    // 1 = as tuned. 1.4 = slower, 0.7 = snappier
   };
 
@@ -297,4 +300,158 @@
       el.addEventListener('mouseleave', function () { el.style.transform = ''; });
     });
   }
+  /* ---- 7. Velocity skew ---------------------------------
+     The page leans into the direction of travel and settles when you
+     stop. It goes on <main>, never on <body>: a transform makes the
+     element a containing block, which would strand the fixed header,
+     the flying preview and the page-cut overlay. */
+  if (MOTION.velocitySkew) {
+    var mainEl = document.querySelector('main');
+    if (mainEl) {
+      mainEl.style.willChange = 'transform';
+      mainEl.style.transformOrigin = '50% 0';
+      var lastY = window.scrollY, svel = 0, running = false;
+      function lean() {
+        var y = window.scrollY, d = y - lastY; lastY = y;
+        svel += (d - svel) * 0.14;
+        if (Math.abs(svel) < 0.01) svel = 0;
+        var deg = Math.max(-6, Math.min(6, svel * 0.26));
+        mainEl.style.transform = deg ? 'skewY(' + deg.toFixed(2) + 'deg)' : '';
+        // Settle, then stop asking for frames. A page that is not being
+        // scrolled should not hold the main thread awake for a transform
+        // that is already none — it costs battery for nothing.
+        if (svel === 0 && d === 0) { running = false; return; }
+        requestAnimationFrame(lean);
+      }
+      window.addEventListener('scroll', function () {
+        if (!running) { running = true; requestAnimationFrame(lean); }
+      }, { passive: true });
+    }
+  }
+
+  /* ---- 8. Cursor ----------------------------------------
+     A dot that trails the pointer, swells over anything clickable and
+     names itself over media. The pointer velocity it tracks is read by
+     the hero shader below, so this runs whenever hover is available. */
+  var pv = { x: 0, y: 0, speed: 0 }, cxp = 0, cyp = 0;
+  if (canHover) {
+    var dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    dot.innerHTML = '<span></span>';
+    if (MOTION.cursor) document.body.appendChild(dot);
+    cxp = window.innerWidth / 2; cyp = window.innerHeight / 2;
+    var txp = cxp, typ = cyp, pxp = cxp, pyp = cyp;
+    window.addEventListener('pointermove', function (e) {
+      txp = e.clientX; typ = e.clientY;
+    }, { passive: true });
+    (function ring() {
+      requestAnimationFrame(ring);
+      cxp += (txp - cxp) * 0.18; cyp += (typ - cyp) * 0.18;
+      pv.x = txp - pxp; pv.y = typ - pyp;
+      pv.speed += (Math.min(1, Math.sqrt(pv.x * pv.x + pv.y * pv.y) / 34) - pv.speed) * 0.12;
+      pxp = txp; pyp = typ;
+      if (MOTION.cursor) {
+        dot.style.transform = 'translate3d(' + cxp.toFixed(1) + 'px,' +
+          cyp.toFixed(1) + 'px,0) translate(-50%,-50%)';
+      }
+    })();
+    if (MOTION.cursor) {
+      document.querySelectorAll('a,button,[data-cursor]').forEach(function (el) {
+        var label = el.getAttribute('data-cursor') || '';
+        el.addEventListener('pointerenter', function () {
+          dot.classList.add('on');
+          dot.classList.toggle('lbl', !!label);
+          dot.firstChild.textContent = label;
+        });
+        el.addEventListener('pointerleave', function () {
+          dot.classList.remove('on', 'lbl');
+          dot.firstChild.textContent = '';
+        });
+      });
+    }
+  }
+
+  /* ---- 9. Hero reel shader ------------------------------
+     The one WebGL moment on the site, and deliberately on the reel
+     rather than on any project image: the reel is a teaser, so warping
+     it costs the work nothing. Raw WebGL, one quad, one context. */
+  if (MOTION.heroShader && canHover) (function () {
+    var wrap = document.querySelector('[data-gl-hero]');
+    if (!wrap) return;
+    var vid = wrap.querySelector('video');
+    if (!vid) return;
+    var cv = document.createElement('canvas');
+    cv.className = 'hero-gl';
+    var gl = cv.getContext('webgl', { antialias: false, alpha: false });
+    if (!gl) return;
+    function sh(t, src) {
+      var o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o);
+      return gl.getShaderParameter(o, gl.COMPILE_STATUS) ? o : null;
+    }
+    var vsh = sh(gl.VERTEX_SHADER,
+      'attribute vec2 p;varying vec2 v;' +
+      'void main(){v=vec2(p.x*.5+.5,.5-p.y*.5);gl_Position=vec4(p,0.,1.);}');
+    var fsh = sh(gl.FRAGMENT_SHADER, [
+      'precision mediump float;varying vec2 v;uniform sampler2D t;',
+      'uniform vec2 m;uniform vec2 vel;uniform float sp;uniform float a;',
+      'void main(){',
+      ' vec2 uv=v;',
+      ' float d=distance(uv,m);',
+      ' float f=exp(-d*3.4);',
+      ' uv+=vel*f*0.10;',
+      ' uv.y+=sin(uv.x*11.0-a*2.2)*f*sp*0.020;',
+      ' uv.x+=cos(uv.y*9.0-a*1.7)*f*sp*0.014;',
+      ' float s=f*sp*0.010;',
+      ' vec4 c;',
+      ' c.r=texture2D(t,uv+vec2(s,0.)).r;',
+      ' c.g=texture2D(t,uv).g;',
+      ' c.b=texture2D(t,uv-vec2(s,0.)).b;',
+      ' c.a=1.0;gl_FragColor=c;}'
+    ].join(''));
+    if (!vsh || !fsh) return;
+    var pr = gl.createProgram();
+    gl.attachShader(pr, vsh); gl.attachShader(pr, fsh); gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
+    gl.useProgram(pr);
+    var bf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, bf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+    var lp = gl.getAttribLocation(pr, 'p');
+    gl.enableVertexAttribArray(lp); gl.vertexAttribPointer(lp, 2, gl.FLOAT, false, 0, 0);
+    var tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    var uM = gl.getUniformLocation(pr, 'm'), uV = gl.getUniformLocation(pr, 'vel'),
+        uS = gl.getUniformLocation(pr, 'sp'), uA = gl.getUniformLocation(pr, 'a');
+    var ready = false, t0 = performance.now(), live = true;
+    function size() {
+      var r = wrap.getBoundingClientRect(),
+          dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.max(1, Math.round(r.width * dpr));
+      cv.height = Math.max(1, Math.round(r.height * dpr));
+      gl.viewport(0, 0, cv.width, cv.height);
+    }
+    window.addEventListener('resize', size, { passive: true });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { live = es[0].isIntersecting; }).observe(wrap);
+    }
+    (function frame() {
+      requestAnimationFrame(frame);
+      if (!live || vid.readyState < 2) return;
+      if (!ready) {
+        wrap.appendChild(cv); wrap.classList.add('hero-gl-on'); size(); ready = true;
+      }
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, vid);
+      var r = wrap.getBoundingClientRect();
+      gl.uniform2f(uM,
+        Math.max(-0.6, Math.min(1.6, (cxp - r.left) / r.width)),
+        Math.max(-0.6, Math.min(1.6, (cyp - r.top) / r.height)));
+      gl.uniform2f(uV, Math.max(-1, Math.min(1, pv.x / 90)),
+                       Math.max(-1, Math.min(1, pv.y / 90)));
+      gl.uniform1f(uS, pv.speed);
+      gl.uniform1f(uA, (performance.now() - t0) / 1000);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    })();
+  })();
+
 })();

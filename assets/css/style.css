@@ -1077,3 +1077,41 @@ p,.prose p,dd,li{text-wrap:pretty;}
 @media (max-width:520px){
   .sheet-panels{grid-template-columns:1fr;max-width:340px;margin-inline:auto;}
 }
+
+/* ===== Cursor and the one hero shader =========================
+   Both are desktop-only by nature and both drop out entirely under
+   reduced motion. The native cursor is left visible on purpose: the
+   dot reads as an accent on top of it rather than replacing a control
+   people rely on.
+   ----------------------------------------------------------- */
+.cursor-dot{
+  position:fixed;top:0;left:0;z-index:150;pointer-events:none;
+  width:10px;height:10px;border-radius:100px;
+  background:var(--accent);
+  display:grid;place-items:center;
+  transition:width .36s var(--ease), height .36s var(--ease),
+             background .26s var(--ease);
+}
+.cursor-dot.on{
+  width:40px;height:40px;
+  background:color-mix(in srgb, var(--accent) 42%, transparent);
+}
+.cursor-dot.lbl{width:82px;height:82px;background:var(--accent);}
+.cursor-dot span{
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--paper);
+  opacity:0;transition:opacity .2s var(--ease);
+}
+.cursor-dot.lbl span{opacity:1;}
+
+/* The canvas takes the reel's place once it has a frame to show, so the
+   video stays visible until then and the swap is never a blank box. */
+.hero-gl{position:absolute;inset:0;width:100%;height:100%;display:block;}
+.hero-reel.hero-gl-on video{visibility:hidden;}
+
+@media (pointer:coarse){.cursor-dot{display:none;}}
+@media (prefers-reduced-motion:reduce){
+  .cursor-dot{display:none!important;}
+  .hero-gl{display:none!important;}
+  .hero-reel.hero-gl-on video{visibility:visible;}
+}
