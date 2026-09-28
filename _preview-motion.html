@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Motion preview</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="_lab/motion-lab.css">
+<script>document.documentElement.classList.add("js","motion-ready");</script>
+<style>
+  .lab-note{font-family:var(--mono);font-size:var(--fs-meta);text-transform:uppercase;
+    letter-spacing:.14em;color:var(--accent);margin:0 0 .6rem;}
+  .lab-sec{padding-block:clamp(60px,12vh,150px);border-top:1px solid var(--line);}
+  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,28px);}
+  .tiles [data-gl]{aspect-ratio:4/5;}
+  .tiles img{width:100%;height:100%;object-fit:cover;display:block;}
+  @media(max-width:700px){.tiles{grid-template-columns:1fr;}}
+</style></head>
+<body>
+<div data-skew>
+<section class="wrap lab-sec" style="border-top:0">
+  <p class="lab-note">A — character reveal</p>
+  <h1 class="page-title" data-chars>Nazar Sementsov</h1>
+  <p class="lead" style="margin-top:1.4rem">Each letter rises from its own mask on a stagger.
+  The site currently does this a word at a time; this is the finer grain.</p>
+</section>
+
+<section class="wrap lab-sec">
+  <p class="lab-note">D — WebGL hover displacement</p>
+  <p class="lead" style="margin-bottom:2rem">Hover a tile. The cursor warps the sample
+  coordinates and splits the channels as it passes. Raw WebGL, no scene library.</p>
+  <div class="tiles">
+    <a href="#" data-gl data-cursor="View"><img src="assets/magnus/08a-jacket-on-figure.jpg" alt=""></a>
+    <a href="#" data-gl data-cursor="View"><img src="assets/magnus/17a-garden-look.jpg" alt=""></a>
+    <a href="#" data-gl data-cursor="View"><img src="assets/soundcloud/ar-corner.jpg" alt=""></a>
+    <a href="#" data-gl data-cursor="View"><img src="assets/magnus/06-ginkgo-2026-lockup.jpg" alt=""></a>
+  </div>
+</section>
+
+<section class="wrap lab-sec">
+  <p class="lab-note">B — scroll-velocity skew · C — custom cursor</p>
+  <h2 class="sec-title" data-chars>Scroll and watch the lean</h2>
+  <p class="lead" style="margin-top:1.4rem">The whole column leans into the direction of
+  travel and settles. The cursor is a dot that lags the pointer, swells over
+  <a href="#">any link</a>, and becomes a word over media.</p>
+  <p class="lead" style="margin-top:1rem">Pointer-fine only, and every effect here drops
+  out under reduced motion.</p>
+</section>
+
+<section class="wrap lab-sec" style="padding-bottom:40vh">
+  <h2 class="sec-title" data-chars>End of the lab</h2>
+</section>
+</div>
+<script src="assets/js/lenis.min.js"></script>
+<script>
+  if (window.Lenis && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var l = new Lenis({ duration: 0.7 });
+    (function r(t){ l.raf(t); requestAnimationFrame(r); })(0);
+  }
+</script>
+<script src="_lab/motion-lab.js"></script>
+</body></html>
