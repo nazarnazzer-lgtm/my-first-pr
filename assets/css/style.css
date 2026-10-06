@@ -1091,3 +1091,10 @@ p,.prose p,dd,li{text-wrap:pretty;}
 }
 .proto iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;}
 .proto + .meta{margin-top:-.4rem;}
+
+/* Pairs of hand-cropped screenshots never share a ratio, and repainting
+   their backgrounds to force a match damages the photography. The pair is
+   given one ratio instead and the browser covers to it, so every source
+   file stays exactly as it was scanned. Scoped: ordinary figure--two
+   elsewhere is untouched. */
+.figure--even img{aspect-ratio:var(--ar);object-fit:cover;width:100%;height:auto;}
