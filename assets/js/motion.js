@@ -51,9 +51,13 @@
         // "Heinz <span>(spec)" rendered with the two run together.
         var tail = (raw.match(/\s+$/) || [''])[0];
         var t = raw.slice(0, raw.length - tail.length);
-        var i = t.lastIndexOf(' ');
-        if (i > 0) {                       // bind here and stop
-          nodes[k].textContent = t.slice(0, i) + '\u00A0' + t.slice(i + 1) + tail;
+        // Match the whole run, not one space. The source wraps its copy, so
+        // the gap before a final word is often a newline plus indent; taking
+        // only the last space left the rest in place, and an NBSP beside a
+        // collapsed space renders as two.
+        var m = t.match(/\s+(\S+)$/);
+        if (m && m.index > 0) {            // bind here and stop
+          nodes[k].textContent = t.slice(0, m.index) + '\u00A0' + m[1] + tail;
           return;
         }
         // A lone word ahead of an inline element (a year, a tag) has nothing
