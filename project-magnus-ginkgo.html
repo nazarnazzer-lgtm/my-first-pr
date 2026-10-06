@@ -45,17 +45,7 @@
 </section>
 
 <div class="wrap">
-  <!-- The reel leads. It is 9:16, so it is held to a column width rather
-       than bled: a full-bleed vertical would run past two viewport heights
-       and push everything else off the first screen. -->
-  <figure class="film film--reel" data-reveal>
-    <video width="720" height="1280" src="assets/magnus/18-hikari-reel.mp4"
-           poster="assets/magnus/18-hikari-reel-poster.jpg"
-           autoplay muted loop playsinline preload="metadata" data-autoplay></video>
-    <button class="sound-btn" data-sound>Sound on</button>
-  </figure>
-
-  <!-- Then the collection teaser, landscape, edge to edge. -->
+  <!-- Hero: the collection teaser, landscape, edge to edge. -->
   <figure class="film film--bleed film--hero" data-reveal>
     <video width="1280" height="720" src="assets/magnus/03-ginkgo-teaser.mp4" poster="assets/magnus/03-ginkgo-teaser-poster.jpg"
            autoplay muted loop playsinline preload="metadata" data-autoplay></video>
@@ -94,8 +84,14 @@
 
   <div class="col2">
     <p class="meta col2__label">The idea</p>
-    <div data-reveal>
+    <div data-reveal class="idea-row">
       <p class="case-idea" data-split>Tokyo's tree already grows in New York.</p>
+      <figure class="film film--idea">
+        <video width="720" height="1280" src="assets/magnus/18-hikari-reel.mp4"
+               poster="assets/magnus/18-hikari-reel-poster.jpg"
+               autoplay muted loop playsinline preload="metadata" data-autoplay></video>
+        <button class="sound-btn" data-sound>Sound on</button>
+      </figure>
     </div>
   </div>
 

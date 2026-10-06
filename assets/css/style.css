@@ -1100,6 +1100,14 @@ p,.prose p,dd,li{text-wrap:pretty;}
 .figure--even img{aspect-ratio:var(--ar);object-fit:contain;
   background:var(--bg,transparent);width:100%;height:auto;}
 
-/* A 9:16 reel held to a readable column. Bled full width it would stand
-   over two viewport heights tall and bury the rest of the page. */
-.film--reel{max-width:min(430px,100%);margin-inline:auto;}
+/* The idea line wraps to two lines and leaves the rest of its column
+   empty. The reel sits in that space instead: 9:16, so it is sized by
+   width and stacks under the line once the column is too narrow to
+   carry both. */
+.idea-row{display:grid;grid-template-columns:minmax(0,1fr) auto;
+  gap:clamp(22px,3.5vw,54px);align-items:start;}
+.film--idea{margin:0;width:clamp(148px,15vw,208px);}
+@media (max-width:820px){
+  .idea-row{grid-template-columns:1fr;}
+  .film--idea{width:min(208px,58%);}
+}
