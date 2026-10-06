@@ -1097,4 +1097,9 @@ p,.prose p,dd,li{text-wrap:pretty;}
    given one ratio instead and the browser covers to it, so every source
    file stays exactly as it was scanned. Scoped: ordinary figure--two
    elsewhere is untouched. */
-.figure--even img{aspect-ratio:var(--ar);object-fit:cover;width:100%;height:auto;}
+.figure--even img{aspect-ratio:var(--ar);object-fit:contain;
+  background:var(--bg,transparent);width:100%;height:auto;}
+
+/* A 9:16 reel held to a readable column. Bled full width it would stand
+   over two viewport heights tall and bury the rest of the page. */
+.film--reel{max-width:min(430px,100%);margin-inline:auto;}
