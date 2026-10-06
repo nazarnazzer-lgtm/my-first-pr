@@ -1107,7 +1107,22 @@ p,.prose p,dd,li{text-wrap:pretty;}
 .idea-row{display:grid;grid-template-columns:minmax(0,1fr) auto;
   gap:clamp(22px,3.5vw,54px);align-items:start;}
 .film--idea{margin:0;width:clamp(148px,15vw,208px);}
+/* A tall vertical reel in here sat in a well of its own: the section's
+   padding above it and that padding plus the stat's margin below, which
+   read as a stack of dead space rather than as rhythm. On .col2--reel the
+   film runs rule to rule instead, and the label and the line beside it
+   carry the padding themselves so nothing touches the border. */
+.col2--reel{padding-block:0;}
+.col2--reel .col2__label,
+.col2--reel .case-idea{padding-top:clamp(34px,6vh,72px);}
+.col2--reel + .stat{margin-top:0;}
 @media (max-width:820px){
   .idea-row{grid-template-columns:1fr;}
   .film--idea{width:min(208px,58%);}
+  /* Stacked, the film cannot span the band, so the section's own padding
+     comes back. The stat's margin stays off: stacked on top of that padding
+     it put twice as much air under the film as over the label. */
+  .col2--reel{padding-block:clamp(34px,6vh,72px);}
+  .col2--reel .col2__label,
+  .col2--reel .case-idea{padding-top:0;}
 }
